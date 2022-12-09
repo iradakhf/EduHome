@@ -15,6 +15,11 @@ namespace EduHome.DAL
         }
         public DbSet<Settings> Settings { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<CourseTag> CourseTags { get; set; }
 
     }
 }

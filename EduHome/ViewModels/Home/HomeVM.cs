@@ -9,5 +9,7 @@ namespace EduHome.ViewModels.Home
     public class HomeVM
     {
         public IEnumerable<Slider> Sliders{ get; set; }
+        public IEnumerable<Course> Courses { get; set; }
+
     }
 }

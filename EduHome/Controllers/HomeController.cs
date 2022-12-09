@@ -22,8 +22,18 @@ namespace EduHome.Controllers
         {
             HomeVM homeVM = new HomeVM
             {
-                Sliders = await _context.Sliders.Where(s => s.IsDeleted == false).ToListAsync()
+                Sliders = await _context.Sliders.Where(s => s.IsDeleted == false).ToListAsync(),
+                Courses = await _context.Courses.Where(c=>c.IsDeleted==false).ToListAsync(),
+
             };
+            if(homeVM.Sliders==null && homeVM.Sliders.Count() < 0)
+            {
+                return BadRequest();
+            }
+            if (homeVM.Courses == null && homeVM.Courses.Count() < 0)
+            {
+                return BadRequest();
+            }
             return View(homeVM);
         }
     }

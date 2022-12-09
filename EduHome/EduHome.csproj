@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20221209163144_AddedDescriptionToCategory.cs" />
+    <Compile Remove="Migrations\20221209163144_AddedDescriptionToCategory.Designer.cs" />
+    <Compile Remove="Migrations\20221209190403_CreatedFeatureTable.cs" />
+    <Compile Remove="Migrations\20221209190403_CreatedFeatureTable.Designer.cs" />
+    <Compile Remove="Migrations\20221209190457_CreatedFeatureTable.cs" />
+    <Compile Remove="Migrations\20221209190457_CreatedFeatureTable.Designer.cs" />
+    <Compile Remove="Migrations\20221209194111_addedManyToManyBetweenTAgAndCourse.cs" />
+    <Compile Remove="Migrations\20221209194111_addedManyToManyBetweenTAgAndCourse.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.31">

@@ -8,8 +8,13 @@ namespace EduHome.Controllers
 {
     public class CourseController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            return View();
+        }
+        public async Task<IActionResult> Detail(int? id)
+        {
+
             return View();
         }
     }
