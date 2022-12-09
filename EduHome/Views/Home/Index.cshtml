@@ -1,4 +1,4 @@
-﻿
+﻿@model HomeVM
 @{
     ViewData["Title"] = "Index";
 }
@@ -6,8 +6,10 @@
 <!-- Background Area Start -->
 <section id="slider-container" class="slider-area two">
     <div class="slider-owl owl-theme owl-carousel">
+        @foreach (Slider item in Model.Sliders)
+        {
         <!-- Start Slingle Slide -->
-        <div class="single-slide item" style="background-image: url(img/slider/slider2.jpg)">
+        <div class="single-slide item" style="background-image: url(img/slider/@item.Image)">
             <!-- Start Slider Content -->
             <div class="slider-content-area">
                 <div class="container">
@@ -15,9 +17,9 @@
                         <div class="col-md-10 col-md-offset-1">
                             <div class="slide-content-wrapper">
                                 <div class="slide-content text-center">
-                                    <h2>EDUCATION MAKES HUMANITY </h2>
-                                    <p>I must explain to you how all this mistaken idea of denouncing pleasure and prsing pain was born and I will give you a complete account of the system  </p>
-                                    <a class="default-btn" href="about.html">Learn more</a>
+                                    <h2>@item.Title </h2>
+                                    <p>@item.Description</p>
+                                    <a class="default-btn" @item.Link>Learn more</a>
                                 </div>
                             </div>
                         </div>
@@ -27,48 +29,8 @@
             <!-- Start Slider Content -->
         </div>
         <!-- End Slingle Slide -->
-        <!-- Start Slingle Slide -->
-        <div class="single-slide item" style="background-image: url(img/slider/slider3.jpg)">
-            <!-- Start Slider Content -->
-            <div class="slider-content-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="slide-content-wrapper">
-                                <div class="slide-content text-center">
-                                    <h2>EDUCATION MAKES HUMANITY </h2>
-                                    <p>I must explain to you how all this mistaken idea of denouncing pleasure and prsing pain was born and I will give you a complete account of the system  </p>
-                                    <a class="default-btn" href="about.html">Learn more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Start Slider Content -->
-        </div>
-        <!-- End Slingle Slide -->
-        <!-- Start Slingle Slide -->
-        <div class="single-slide item" style="background-image: url(img/slider/slider1.jpg)">
-            <!-- Start Slider Content -->
-            <div class="slider-content-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="slide-content-wrapper">
-                                <div class="slide-content text-center">
-                                    <h2>EDUCATION MAKES HUMANITY </h2>
-                                    <p>I must explain to you how all this mistaken idea of denouncing pleasure and prsing pain was born and I will give you a complete account of the system  </p>
-                                    <a class="default-btn" href="about.html">Learn more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Start Slider Content -->
-        </div>
-        <!-- End Slingle Slide -->
+
+        }
     </div>
 </section>
 <!-- Background Area End -->
@@ -418,34 +380,3 @@
     </div>
 </div>
 <!-- Blog Area End -->
-<!-- Subscribe Start -->
-<div class="subscribe-area pt-60 pb-70">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="subscribe-content section-title text-center">
-                    <h2>subscribe our newsletter</h2>
-                    <p>I must explain to you how all this mistaken idea </p>
-                </div>
-                <div class="newsletter-form mc_embed_signup">
-                    <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                        <div id="mc_embed_signup_scroll" class="mc-form">
-                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
-                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                            <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                            <button id="mc-embedded-subscribe" class="default-btn" type="submit" name="subscribe"><span>subscribe</span></button>
-                        </div>
-                    </form>
-                    <!-- mailchimp-alerts Start -->
-                    <div class="mailchimp-alerts">
-                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                    </div>
-                    <!-- mailchimp-alerts end -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Subscribe End -->

@@ -14,5 +14,7 @@ namespace EduHome.DAL
 
         }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EduHome.DAL;
 using EduHome.Models;
+using EduHome.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,8 +20,11 @@ namespace EduHome.Controllers
         }
         public async Task<IActionResult> Index()
         {
-          
-            return View();
+            HomeVM homeVM = new HomeVM
+            {
+                Sliders = await _context.Sliders.Where(s => s.IsDeleted == false).ToListAsync()
+            };
+            return View(homeVM);
         }
     }
 }

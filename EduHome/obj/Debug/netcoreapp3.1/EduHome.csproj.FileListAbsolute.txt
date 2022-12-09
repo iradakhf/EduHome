@@ -145,3 +145,9 @@ C:\Users\irade\source\repos\EduHome\EduHome\bin\Debug\netcoreapp3.1\tr\Microsoft
 C:\Users\irade\source\repos\EduHome\EduHome\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\irade\source\repos\EduHome\EduHome\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\About\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Course\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Event\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Index.cshtml.g.cs
