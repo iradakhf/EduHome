@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Settings>
 @{
     ViewData["Title"] = "Index";
 }
@@ -41,8 +41,7 @@
                         </div>
                         <div class="contact-add">
                             <h3>address</h3>
-                            <p>135, First Lane, City Street</p>
-                            <p>New Yourk City, USA</p>
+                            <p>@Html.Raw(Model.FirstOrDefault(s => s.Key == "Address").Value)</p>
                         </div>
                     </div>
                     <div class="single-contact mb-65">
@@ -50,9 +49,8 @@
                             <img src="~/img/contact/contact2.png" alt="contact">
                         </div>
                         <div class="contact-add">
-                            <h3>address</h3>
-                            <p>135, First Lane, City Street</p>
-                            <p>New Yourk City, USA</p>
+                            <h3>Phone</h3>
+                            <p>@Model.FirstOrDefault(s => s.Key == "CallCenter").Value</p>
                         </div>
                     </div>
                     <div class="single-contact">
@@ -61,8 +59,8 @@
                         </div>
                         <div class="contact-add">
                             <h3>address</h3>
-                            <p>135, First Lane, City Street</p>
-                            <p>New Yourk City, USA</p>
+                            <p>@Model.FirstOrDefault(s => s.Key == "Email").Value</p>
+
                         </div>
                     </div>
                 </div>

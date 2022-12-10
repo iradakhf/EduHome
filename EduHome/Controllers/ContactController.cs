@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EduHome.DAL;
+using EduHome.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +11,15 @@ namespace EduHome.Controllers
 {
     public class ContactController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _context;
+        public ContactController(AppDbContext context)
         {
-            return View();
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<Settings> settings = await _context.Settings.Where(s => s.IsDeleted == false).ToListAsync();
+            return View(settings);
         }
     }
 }

@@ -47,8 +47,8 @@
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="header-top-right text-right">
                             <ul>
-                                <li><a href="login.html">login</a></li>
-                                <li><a href="signup.html">signup</a></li>
+                                <li><a asp-controller="login">login</a></li>
+                                <li><a asp-controller="signup">signup</a></li>
                             </ul>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-6">
                         <div class="logo">
-                            <a href="index.html"><img src="~/img/logo/@settings.FirstOrDefault(s=>s.Key=="Logo").Value" alt="eduhome" /></a>
+                            <a asp-controller="home"><img src="~/img/logo/@settings.FirstOrDefault(s=>s.Key=="Logo").Value" alt="eduhome" /></a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-6">
@@ -164,7 +164,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="single-widget pr-60">
                             <div class="footer-logo pb-25">
-                                <a href="index.html"><img src="~/img/logo/@settings.FirstOrDefault(s=>s.Key=="Logo").Value" alt="eduhome"></a>
+                                <a asp-controller="home"><img src="~/img/logo/@settings.FirstOrDefault(s=>s.Key=="Logo").Value" alt="eduhome"></a>
                             </div>
                             <p>@settings.FirstOrDefault(s=>s.Key== "Description").Value</p>
                             <div class="footer-social">
@@ -193,11 +193,11 @@
                         <div class="single-widget">
                             <h3>useful links</h3>
                             <ul>
-                                <li><a href="course.html">our courses</a></li>
-                                <li><a href="about.html">about us</a></li>
-                                <li><a href="teacher.html">teachers &amp; faculty</a></li>
+                                <li><a asp-controller="course">our courses</a></li>
+                                <li><a asp-controller="about">about us</a></li>
+                                <li><a asp-controller="teacher">teachers &amp; faculty</a></li>
                                 <li><a href="#">teams &amp; conditions</a></li>
-                                <li><a href="event.html">our events</a></li>
+                                <li><a asp-controller="event">our events</a></li>
                             </ul>
                         </div>
                     </div>
