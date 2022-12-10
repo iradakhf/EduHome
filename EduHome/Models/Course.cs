@@ -25,9 +25,6 @@ namespace EduHome.Models
         [StringLength(1000)]
         public string Certification { get; set; }
 
-        [StringLength(1000)]
-        public string LeaveAReply { get; set; }
-
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
