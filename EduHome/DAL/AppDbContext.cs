@@ -24,5 +24,10 @@ namespace EduHome.DAL
         public DbSet<Skill> Skills { get; set; }
         public DbSet<TeacherSkill> TeacherSkills { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
+        public DbSet<EventSpeaker> EventSpeakers { get; set; }
+
+
+
     }
 }

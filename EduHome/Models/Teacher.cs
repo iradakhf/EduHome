@@ -14,6 +14,8 @@ namespace EduHome.Models
         [StringLength(255)]
         public string Surname { get; set; }
 
+        [StringLength(50)]
+        public string Image { get; set; }
         [StringLength(255)]
         public string Profession { get; set; }
 

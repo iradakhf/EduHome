@@ -10,9 +10,12 @@ namespace EduHome.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        [StringLength(50)]
+        public string Image { get; set; }
+
         public DateTime Date { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
 
         [StringLength(100)]
         public string Venue { get; set; }
