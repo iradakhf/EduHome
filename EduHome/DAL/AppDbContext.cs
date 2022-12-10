@@ -29,5 +29,7 @@ namespace EduHome.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<NoticeBoard> NoticeBoards { get; set; }
+        public DbSet<AboutEduHome> AboutEduHomes { get; set; }
+
     }
 }
