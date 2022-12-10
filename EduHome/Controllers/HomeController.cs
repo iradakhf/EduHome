@@ -38,6 +38,26 @@ namespace EduHome.Controllers
             {
                 return BadRequest();
             }
+            if (homeVM.Blogs == null && homeVM.Blogs.Count() < 0)
+            {
+                return BadRequest();
+            }
+            if (homeVM.Events == null && homeVM.Events.Count() < 0)
+            {
+                return BadRequest();
+            }
+            if (homeVM.NoticeBoards == null && homeVM.NoticeBoards.Count() < 0)
+            {
+                return BadRequest();
+            }
+            if (homeVM.AboutEduHomes == null && homeVM.AboutEduHomes.Count() < 0)
+            {
+                return BadRequest();
+            }
+            if (homeVM.Testimonials == null && homeVM.Testimonials.Count() < 0)
+            {
+                return BadRequest();
+            }
             return View(homeVM);
         }
     }
