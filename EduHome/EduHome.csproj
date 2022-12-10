@@ -15,6 +15,12 @@
     <Compile Remove="Migrations\20221209194111_addedManyToManyBetweenTAgAndCourse.Designer.cs" />
     <Compile Remove="Migrations\20221210084752_CreatedSkillTable.cs" />
     <Compile Remove="Migrations\20221210084752_CreatedSkillTable.Designer.cs" />
+    <Compile Remove="Migrations\20221210104303_buj.cs" />
+    <Compile Remove="Migrations\20221210104303_buj.Designer.cs" />
+    <Compile Remove="Migrations\20221210122418_CreatedTestimonialTable.cs" />
+    <Compile Remove="Migrations\20221210122418_CreatedTestimonialTable.Designer.cs" />
+    <Compile Remove="Migrations\20221210125320_CreatedNoticeBoardTable.cs" />
+    <Compile Remove="Migrations\20221210125320_CreatedNoticeBoardTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

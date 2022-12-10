@@ -26,8 +26,8 @@ namespace EduHome.DAL
         public DbSet<Event> Events { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<EventSpeaker> EventSpeakers { get; set; }
-
-
-
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<NoticeBoard> NoticeBoards { get; set; }
     }
 }
