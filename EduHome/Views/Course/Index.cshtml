@@ -4,21 +4,7 @@
 }
 
 <!-- Banner Area Start -->
-<div class="banner-area-wrapper">
-    <div class="banner-area text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="banner-content-wrapper">
-                        <div class="banner-content">
-                            <h2>courses</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@(await Html.PartialAsync("_BannerPartial", "course")))
 <!-- Banner Area End -->
 <!-- Course Start -->
 <div class="course-area pt-150 pb-150">
@@ -38,27 +24,10 @@
         </div>
         <div class="row">
             @foreach (Course course in Model)
-	{
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-course mb-70">
-                    <div class="course-img">
-                        <a asp-controller="course" asp-action="detail">
-                            <img src="~/img/course/@course.Image" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a asp-controller="course" asp-action="detail">@course.Name</a></h3>
-                        <p>@course.Description.Substring(0,80)</p>
-                        <a class="default-btn" asp-controller="course" asp-action="detail">read more</a>
-                    </div>
-                </div>
-            </div>
-		 
-	}
-          
+            {
+                @(await Html.PartialAsync("_CoursePartial", course))
+            }
+
         </div>
     </div>
 </div>

@@ -151,3 +151,12 @@ C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Index.cshtml.g.cs
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LeaveReplyPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CoursePartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BlogPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_EventPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BannerPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TeacherPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_NoticePartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AboutPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TestimonialPartial.cshtml.g.cs

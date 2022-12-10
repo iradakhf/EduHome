@@ -1,0 +1,13 @@
+﻿@model IEnumerable<AboutEduHome>
+<div class="col-md-6 col-sm-6">
+    <div class="about-content">
+        <h2>@Html.Raw(Model.FirstOrDefault(a => a.Key == "Title").Value)</h2>
+        <p>@Model.FirstOrDefault(a => a.Key == "Description").Value</p>
+        <a class="default-btn" href="@Model.FirstOrDefault(a=>a.Key == "Link").Value">buy now</a>
+    </div>
+</div>
+<div class="col-md-6 col-sm-6">
+    <div class="about-img">
+        <img src="~/img/about/@Model.FirstOrDefault(a=>a.Key=="Image").Value" alt="about">
+    </div>
+</div>

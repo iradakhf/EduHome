@@ -52,24 +52,7 @@
             @foreach (Course course in Model.Courses.Take(3))
             {
 
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single-course">
-                        <div class="course-img">
-                            <a asp-controller="course" asp-action="detail" asp-route-id="@course.Id">
-                                <img src="~/img/course/@course.Image" alt="course">
-                                <div class="course-hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-content">
-                            <h3><a asp-controller="course" asp-action="detail">@course.Name</a></h3>
-                            <p>@course.Description.Substring(0, 50)</p>
-                            <a class="default-btn" asp-controller="course" asp-action="detail" asp-route-id="@course.Id">read more</a>
-                        </div>
-                    </div>
-                </div>
-
+                @(await Html.PartialAsync("_CoursePartial", course))
             }
 
         </div>
@@ -77,60 +60,13 @@
 </div>
 <!-- Courses Area End -->
 <!-- Notice Start -->
-<section class="notice-area two three pt-140 pb-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="notice-right-wrapper mb-25 pb-25">
-                    <h3>TAKE A VIDEO TOUR</h3>
-                    <div class="notice-video">
-                        <div class="video-icon video-hover">
-                            <a class="video-popup" href="@foreach (NoticeBoard notice1 in Model.NoticeBoards.Take(1))
-                            {
-                                @notice1.VideoLink
-	                         }">
-                                <i class="zmdi zmdi-play"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="notice-left-wrapper">
-                    <h3>notice board</h3>
-                    <div class="notice-left">
-                        @foreach (NoticeBoard notice in Model.NoticeBoards)
-                        {
-                            <div class="single-notice-left mb-23 pb-20">
-                                <h4>@notice.Date.ToString("dd, MMMM yyyy")</h4>
-                                <p>@notice.Text</p>
-                            </div>
-
-                        }
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@(await Html.PartialAsync("_NoticePartial", Model.NoticeBoards))
 <!-- Notice End -->
 <!-- About Start -->
 <div class="about-area pb-135 pt-130 bg-light">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <div class="about-content">
-                    <h2>@Html.Raw(Model.AboutEduHomes.FirstOrDefault(a => a.Key == "Title").Value)</h2>
-                    <p>@Model.AboutEduHomes.FirstOrDefault(a => a.Key == "Description").Value</p>
-                    <a class="default-btn" href="@Model.AboutEduHomes.FirstOrDefault(a=>a.Key == "Link").Value">buy now</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="about-img">
-                    <img src="~/img/about/@Model.AboutEduHomes.FirstOrDefault(a=>a.Key=="Image").Value" alt="about">
-                </div>
-            </div>
+           @(await Html.PartialAsync("_AboutPartial", Model.AboutEduHomes))
         </div>
     </div>
 </div>
@@ -149,32 +85,7 @@
         <div class="row">
             @foreach (Event event1 in Model.Events.Take(3))
             {
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single-event mb-35">
-                        <div class="event-img">
-                            <a asp-controller="event" asp-action="detail">
-                                <img src="~/img/event/@event1.Image" alt="event">
-                                <div class="course-hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                            <div class="event-date">
-                                <h3>@(event1.Date.ToString("dd  MMM")) </h3>
-                            </div>
-                        </div>
-                        <div class="event-content text-left">
-                            <h4><a asp-controller="event" asp-action="detail">ADVANCE PHP WORKSHOP</a></h4>
-                            <ul>
-                                <li><span>time:</span> @event1.StartTime - @event1.EndTime</li>
-                                <li><span>venue</span> @event1.Venue</li>
-                            </ul>
-                            <div class="event-content-right">
-                                <a class="default-btn" asp-controller="event" asp-action="detail">join now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @(await Html.PartialAsync("_EventPartial", event1))
             }
 
         </div>
@@ -189,21 +100,7 @@
             <div class="testimonial-owl owl-theme owl-carousel">
                 @foreach (Testimonial testimonial in Model.Testimonials)
                 {
-                    <div class="col-md-8 col-md-offset-2 col-sm-12">
-                        <div class="single-testimonial">
-                            <div class="testimonial-info">
-                                <div class="testimonial-img">
-                                    <img src="~/img/testimonial/@testimonial.Image" alt="testimonial">
-                                </div>
-                                <div class="testimonial-content">
-                                    <p>@testimonial.Description</p>
-                                    <h4>@testimonial.Author</h4>
-                                    <h5>@testimonial.AuthorPosition</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                  @(await Html.PartialAsync("_TestimonialPartial", testimonial))
                 }
             </div>
         </div>
@@ -224,26 +121,7 @@
         <div class="row">
             @foreach (Blog item in Model.Blogs.Take(3))
             {
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single-blog">
-                        <div class="blog-img">
-                            <a asp-controller="blog" asp-action="detail"><img src="~/img/blog/@item.Image" alt="blog"></a>
-                            <div class="blog-hover">
-                                <a asp-controller="blog" asp-action="detail"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-top">
-                                <p>By @item.Author  /  @item.Date.ToString("MMMM dd, yyyy")  /  <i class="fa fa-comments-o"></i> 4</p>
-                            </div>
-                            <div class="blog-bottom">
-                                <h2><a asp-controller="blog" asp-action="detail">@item.Description.Substring(0,100)</a></h2>
-                                <a asp-controller="blog" asp-action="detail">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+               @(await Html.PartialAsync("_BlogPartial", item))
             }
         </div>
     </div>
