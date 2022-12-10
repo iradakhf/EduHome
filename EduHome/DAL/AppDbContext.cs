@@ -20,6 +20,9 @@ namespace EduHome.DAL
         public DbSet<Feature> Features { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<CourseTag> CourseTags { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<TeacherSkill> TeacherSkills { get; set; }
 
     }
 }

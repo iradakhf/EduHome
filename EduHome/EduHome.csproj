@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20221209190457_CreatedFeatureTable.Designer.cs" />
     <Compile Remove="Migrations\20221209194111_addedManyToManyBetweenTAgAndCourse.cs" />
     <Compile Remove="Migrations\20221209194111_addedManyToManyBetweenTAgAndCourse.Designer.cs" />
+    <Compile Remove="Migrations\20221210084752_CreatedSkillTable.cs" />
+    <Compile Remove="Migrations\20221210084752_CreatedSkillTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
