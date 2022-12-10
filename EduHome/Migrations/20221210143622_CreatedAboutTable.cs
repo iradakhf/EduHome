@@ -20,10 +20,8 @@ namespace EduHome.Migrations
                     DeletedAt = table.Column<DateTime>(nullable: true),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: true),
-                    Image = table.Column<string>(maxLength: 80, nullable: true),
-                    Text = table.Column<string>(maxLength: 800, nullable: true),
-                    Title = table.Column<string>(maxLength: 80, nullable: true),
-                    Link = table.Column<string>(maxLength: 100, nullable: true)
+                    Key = table.Column<string>(maxLength: 500, nullable: true),
+                    Value = table.Column<string>(maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -13,8 +13,7 @@ namespace EduHome.ViewModels.Home
         public IEnumerable<NoticeBoard> NoticeBoards { get; set; }
         public IEnumerable<Event> Events { get; set; }
         public IEnumerable<Testimonial> Testimonials { get; set; }
-
-
+        public IEnumerable<AboutEduHome> AboutEduHomes { get; set; }
 
 
     }

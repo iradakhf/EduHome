@@ -47,7 +47,7 @@
         </div>
         <div class="row">
 
-            @foreach (Course course in Model.Courses.Skip(0).Take(3))
+            @foreach (Course course in Model.Courses.Take(3))
             {
 
                 <div class="col-md-4 col-sm-6 col-xs-12">
@@ -85,7 +85,11 @@
                     <h3>TAKE A VIDEO TOUR</h3>
                     <div class="notice-video">
                         <div class="video-icon video-hover">
-                            <a class="video-popup" href="">
+                            <a class="video-popup" href="@foreach (NoticeBoard notice1 in Model.NoticeBoards.Take(1))
+                            {
+                          
+                                @notice1.VideoLink
+	                         }">
                                 <i class="zmdi zmdi-play"></i>
                             </a>
                         </div>
@@ -96,30 +100,15 @@
                 <div class="notice-left-wrapper">
                     <h3>notice board</h3>
                     <div class="notice-left">
-                        <div class="single-notice-left mb-23 pb-20">
-                            <h4>5, June 2017</h4>
-                            <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                        </div>
-                        <div class="single-notice-left hidden-sm mb-23 pb-20">
-                            <h4>4, June 2017</h4>
-                            <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                        </div>
-                        <div class="single-notice-left pb-70">
-                            <h4>3, June 2017</h4>
-                            <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                        </div>
-                        <div class="single-notice-left mb-23 pb-20">
-                            <h4>5, June 2017</h4>
-                            <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                        </div>
-                        <div class="single-notice-left hidden-sm mb-23 pb-20">
-                            <h4>4, June 2017</h4>
-                            <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                        </div>
-                        <div class="single-notice-left pb-70">
-                            <h4>3, June 2017</h4>
-                            <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                        </div>
+                        @foreach (NoticeBoard notice in Model.NoticeBoards)
+                        {
+                            <div class="single-notice-left mb-23 pb-20">
+                                <h4>@notice.Date</h4>
+                                <p>@notice.Text</p>
+                            </div>
+
+                        }
+
                     </div>
                 </div>
             </div>
@@ -133,7 +122,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="about-content">
-                    <h2><span>EDUHOME</span> the best education theme for you</h2>
+                    <h2>@Html.Raw(Model.AboutEduHomes)</h2>
                     <p>I must explain to you how all this mistaken idea of denouncing pleure and prsing pain was born and I will give you a complete account of the system, and expound the actual teachings  the master-builder of humanit happiness</p>
                     <p class="hidden-sm">I must explain to you how all this mistaken idea of denouncing pleure and prsing pain was born and I will give you a complete account of the system</p>
                     <a class="default-btn" href="about.html">buy now</a>
