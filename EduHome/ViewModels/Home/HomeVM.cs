@@ -14,6 +14,8 @@ namespace EduHome.ViewModels.Home
         public IEnumerable<Event> Events { get; set; }
         public IEnumerable<Testimonial> Testimonials { get; set; }
         public IEnumerable<AboutEduHome> AboutEduHomes { get; set; }
+        public IEnumerable<Blog> Blogs { get; set; }
+
 
 
     }

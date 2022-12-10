@@ -24,7 +24,11 @@ namespace EduHome.Controllers
             {
                 Sliders = await _context.Sliders.Where(s => s.IsDeleted == false).ToListAsync(),
                 Courses = await _context.Courses.Where(c=>c.IsDeleted==false).ToListAsync(),
-
+                Blogs = await _context.Blogs.Where(b=>b.IsDeleted==false).ToListAsync(),
+                Events = await _context.Events.Where(e => e.IsDeleted == false).ToListAsync(),
+                NoticeBoards = await _context.NoticeBoards.Where(n => n.IsDeleted == false).ToListAsync(),
+                AboutEduHomes = await _context.AboutEduHomes.Where(n => n.IsDeleted == false).ToListAsync(),
+                Testimonials = await _context.Testimonials.Where(n => n.IsDeleted == false).ToListAsync()
             };
             if(homeVM.Sliders==null && homeVM.Sliders.Count() < 0)
             {
