@@ -173,3 +173,9 @@ C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Blog\Default.cshtml.g.cs
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\AboutEduHome\Default.cshtml.g.cs
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CoursePartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\DashBoard\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewImports.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewStart.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Category\Index.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Category\Create.cshtml.g.cs

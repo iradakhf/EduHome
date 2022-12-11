@@ -39,7 +39,7 @@ namespace EduHome.ViewComponents
             {
                 return View("Not Found");
             }
-            return View(teachers);
+            return View(await Task.FromResult(teachers));
         }
     }
 }

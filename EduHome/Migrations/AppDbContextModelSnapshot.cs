@@ -135,6 +135,7 @@ namespace EduHome.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
@@ -869,7 +870,7 @@ namespace EduHome.Migrations
                         .IsRequired();
 
                     b.HasOne("EduHome.Models.Teacher", "Teacher")
-                        .WithMany()
+                        .WithMany("TeacherSkills")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

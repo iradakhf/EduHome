@@ -23,7 +23,7 @@ namespace EduHome.ViewComponents
             {
                 return View("Not Found");
             }
-            return View(noticeBoards);
+            return View(await Task.FromResult(noticeBoards));
         }
     }
 }

@@ -24,7 +24,7 @@ namespace EduHome.ViewComponents
             {
                 return View("Not Found");
             }
-            return View(about);
+            return View(await Task.FromResult(about));
         } 
     }
 }
