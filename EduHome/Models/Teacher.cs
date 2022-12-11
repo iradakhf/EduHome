@@ -55,5 +55,7 @@ namespace EduHome.Models
         [StringLength(255)]
         public string TwitterUrl { get; set; }
 
+        public IEnumerable<TeacherSkill> TeacherSkills { get; set; }
+
     }
 }

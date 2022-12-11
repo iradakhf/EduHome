@@ -23,6 +23,7 @@ namespace EduHome.Controllers
             IEnumerable<TeacherVM> teachers = await _context.Teachers
                 .Where(a => a.IsDeleted == false)
                 .Select(t=> new TeacherVM { 
+                    Id = t.Id,
                   Image = t.Image,
                   Name = t.Name,
                   Profession = t.Profession,
@@ -46,7 +47,9 @@ namespace EduHome.Controllers
             {
                 return BadRequest();
             }
-            Teacher teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.IsDeleted == false && t.Id == id);
+            Teacher teacher = await _context.Teachers.Include(T=>T.TeacherSkills)
+                .ThenInclude(t=>t.Skill)
+                .FirstOrDefaultAsync(t => t.IsDeleted == false && t.Id == id);
 
             if (teacher == null)
             {
