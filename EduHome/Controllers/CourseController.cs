@@ -19,19 +19,7 @@ namespace EduHome.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<CourseVM> courses = await _context.Courses.Where(c=>c.IsDeleted==false)
-                .Select(c=> new CourseVM { 
-                  Name = c.Name,
-                  Image = c.Image,
-                  Description = c.Description,
-                    Id = c.Id
-                })
-                .ToListAsync();
-            if (courses == null && courses.Count() < 0)
-            {
-                return BadRequest();
-            }
-            return View(courses);
+            return View();
         }
         public async Task<IActionResult> Detail(int? id)
         {

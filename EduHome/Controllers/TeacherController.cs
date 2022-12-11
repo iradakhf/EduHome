@@ -20,26 +20,7 @@ namespace EduHome.Controllers
         public async Task<IActionResult> Index()
         {
 
-            IEnumerable<TeacherVM> teachers = await _context.Teachers
-                .Where(a => a.IsDeleted == false)
-                .Select(t=> new TeacherVM { 
-                    Id = t.Id,
-                  Image = t.Image,
-                  Name = t.Name,
-                  Profession = t.Profession,
-                  Surname = t.Surname,
-                  TwitterUrl = t.TwitterUrl,
-                  FacebookUrl = t.FacebookUrl,
-                  VUrl = t.VUrl,
-                  PinterestUrl = t.PinterestUrl
-                })
-                .ToListAsync();
-
-            if (teachers == null && teachers.Count() < 0)
-            {
-                return NotFound();
-            }
-            return View(teachers);
+            return View();
         }
         public async Task<IActionResult> Detail(int? id)
         {

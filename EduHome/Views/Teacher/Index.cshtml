@@ -7,16 +7,5 @@
 @(await Html.PartialAsync("_BannerPartial", "our teachers")))
 <!-- Banner Area End -->
 <!-- Teacher Start -->
-<div class="teacher-area pb-150">
-    <div class="container">
-        <div class="row mt-100">
-            @foreach (TeacherVM teacher in Model)
-            {
-                @(await Html.PartialAsync("_TeacherPartial", teacher))
-            }
-
-        </div>
-    </div>
-</div>
-
+@await Component.InvokeAsync("Teacher")
 <!-- Teacher End -->

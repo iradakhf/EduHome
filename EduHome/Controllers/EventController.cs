@@ -18,12 +18,7 @@ namespace EduHome.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Event> events = await _context.Events.Where(c => c.IsDeleted == false).ToListAsync();
-            if (events == null && events.Count() < 0)
-            {
-                return NotFound();
-            }
-            return View(events);
+            return View();
         }
         public async Task<IActionResult> Detail(int? id)
         {

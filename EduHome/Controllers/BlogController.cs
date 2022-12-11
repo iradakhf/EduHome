@@ -18,14 +18,7 @@ namespace EduHome.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
-            IEnumerable<Blog> blogs = await _context.Blogs.Where(a => a.IsDeleted == false).ToListAsync();
-
-            if (blogs == null && blogs.Count() < 0)
-            {
-                return NotFound();
-            }
-            return View(blogs);
+            return View();
         }
         public async Task<IActionResult> Detail(int? id)
         {

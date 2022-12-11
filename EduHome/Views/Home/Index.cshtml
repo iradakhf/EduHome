@@ -1,36 +1,11 @@
-﻿@model HomeVM
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 <!-- Background Area Start -->
 <section id="slider-container" class="slider-area three">
     <div class="slider-owl owl-theme owl-carousel">
         <!-- Start Slingle Slide -->
-        @foreach (Slider item in Model.Sliders)
-        {
-            <!-- Start Slingle Slide -->
-            <div class="single-slide item" style="background-image: url(img/slider/@item.Image)">
-                <!-- Start Slider Content -->
-                <div class="slider-content-area">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="slide-content-wrapper">
-                                    <div class="slide-content text-center">
-                                        <h2>@item.Title </h2>
-                                        <p>@item.Description</p>
-                                        <a class="default-btn" @item.Link>Learn more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Start Slider Content -->
-            </div>
-            <!-- End Slingle Slide -->
-
-        }
+     @await Component.InvokeAsync("Slider")
 
         <!-- End Slingle Slide -->
 
@@ -49,24 +24,21 @@
             </div>
         </div>
         <div class="row">
-            @foreach (CourseVM course in Model.CourseVMs.Take(3))
-            {
-
-                @(await Html.PartialAsync("_CoursePartial", course))
-            }
+                @(await Component.InvokeAsync("Course"))
+           
 
         </div>
     </div>
 </div>
 <!-- Courses Area End -->
 <!-- Notice Start -->
-@(await Html.PartialAsync("_NoticePartial", Model.NoticeBoards))
+@(await Component.InvokeAsync("NoticeBoard"))
 <!-- Notice End -->
 <!-- About Start -->
 <div class="about-area pb-135 pt-130 bg-light">
     <div class="container">
         <div class="row">
-           @(await Html.PartialAsync("_AboutPartial", Model.AboutEduHomes))
+            @(await Component.InvokeAsync("AboutEduHome"))
         </div>
     </div>
 </div>
@@ -83,10 +55,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach (Event event1 in Model.Events.Take(3))
-            {
-                @(await Html.PartialAsync("_EventPartial", event1))
-            }
+          @await Component.InvokeAsync("Event")
 
         </div>
     </div>
@@ -98,10 +67,7 @@
         <div class="row">
 
             <div class="testimonial-owl owl-theme owl-carousel">
-                @foreach (Testimonial testimonial in Model.Testimonials)
-                {
-                  @(await Html.PartialAsync("_TestimonialPartial", testimonial))
-                }
+              @await Component.InvokeAsync("Testimonial")
             </div>
         </div>
     </div>
@@ -119,10 +85,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach (Blog item in Model.Blogs.Take(3))
-            {
-               @(await Html.PartialAsync("_BlogPartial", item))
-            }
+          @await Component.InvokeAsync("Blog") 
         </div>
     </div>
 </div>

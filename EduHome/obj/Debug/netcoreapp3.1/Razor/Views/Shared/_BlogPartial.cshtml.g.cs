@@ -35,34 +35,20 @@ using EduHome.Interfaces;
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
-using EduHome.ViewModels.Home;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 6 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
-using EduHome.ViewModels.About;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 7 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
 using EduHome.ViewModels.CourseV;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
+#line 6 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
 using EduHome.ViewModels.TeacherV;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"260d9ffa82d89575654397d3c23f1e0318882050", @"/Views/Shared/_BlogPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7366eda26205bcaa08020aa7c190fabcf3432c4c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7ced9a56986c14ae55d1ea705227f90140542bac", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__BlogPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Blog>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("alt", new global::Microsoft.AspNetCore.Html.HtmlString("blog"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -94,8 +80,8 @@ using EduHome.ViewModels.TeacherV;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"col-md-4 col-sm-6 col-xs-12 mb-125\">\r\n    <div class=\"single-blog\">\r\n        <div class=\"blog-img\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e03188820505226", async() => {
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "260d9ffa82d89575654397d3c23f1e03188820505442", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e03188820504861", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "260d9ffa82d89575654397d3c23f1e03188820505077", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -149,7 +135,7 @@ AddHtmlAttributeValue("", 229, Model.Image, 229, 12, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            <div class=\"blog-hover\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e03188820509203", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e03188820508838", async() => {
                 WriteLiteral("<i class=\"fa fa-link\"></i>");
             }
             );
@@ -198,7 +184,7 @@ AddHtmlAttributeValue("", 229, Model.Image, 229, 12, false);
 #line hidden
 #nullable disable
             WriteLiteral("  /  <i class=\"fa fa-comments-o\"></i> 4</p>\r\n            </div>\r\n            <div class=\"blog-bottom\">\r\n                <h2>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e031888205012380", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e031888205012015", async() => {
 #nullable restore
 #line 15 "C:\Users\irade\source\repos\EduHome\EduHome\Views\Shared\_BlogPartial.cshtml"
                                                                                      Write(Model.Description.Substring(0, 100));
@@ -237,7 +223,7 @@ AddHtmlAttributeValue("", 229, Model.Image, 229, 12, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</h2>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e031888205015030", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "260d9ffa82d89575654397d3c23f1e031888205014665", async() => {
                 WriteLiteral("read more");
             }
             );

@@ -25,12 +25,8 @@
             </div>
         </div>
         <div class="row">
-            @foreach (CourseVM course in Model)
-            {
-                @(await Html.PartialAsync("_CoursePartial", course))
-            }
-
-        </div>
+                @(await Component.InvokeAsync("Course"))
+           </div>
     </div>
 </div>
 <!-- Course End -->

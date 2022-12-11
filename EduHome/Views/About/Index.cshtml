@@ -1,5 +1,4 @@
-﻿@model AboutVM
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
@@ -11,8 +10,8 @@
 <div class="about-area pb-135 pt-130">
     <div class="container">
         <div class="row">
-@(await Html.PartialAsync("_AboutPartial", Model.AboutEduHomes))
-         
+            @(await Component.InvokeAsync("AboutEduHome"))
+
         </div>
     </div>
 </div>
@@ -30,11 +29,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach (TeacherVM teacher in Model.Teachers.Take(4))
-            {
-                @(await Html.PartialAsync("_TeacherPartial", teacher))
-
-            }
+            @await Component.InvokeAsync("Teacher")
 
         </div>
     </div>
@@ -45,16 +40,12 @@
     <div class="container">
         <div class="row">
             <div class="testimonial-owl owl-theme owl-carousel">
-                @foreach (Testimonial testimonial in Model.Testimonials)
-                {
-                    @(await Html.PartialAsync("_TestimonialPartial", testimonial))
-
-                }
+                @await Component.InvokeAsync("Testimonial")
             </div>
         </div>
     </div>
 </div>
 <!-- Testimonial Area End -->
 <!-- Notice Start -->
-@(await Html.PartialAsync("_NoticePartial", Model.NoticeBoards))
+@await Component.InvokeAsync("NoticeBoard")
 <!-- Notice End -->

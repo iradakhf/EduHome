@@ -18,11 +18,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach (Blog item in Model)
-            {
-                @(await Html.PartialAsync("_BlogPartial", item))
-
-            }
+           @await Component.InvokeAsync("Blog")
         </div>
     </div>
 </div>

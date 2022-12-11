@@ -11,11 +11,7 @@
 <div class="event-area three text-center pt-150 pb-150">
     <div class="container">
         <div class="row">
-            @foreach (Event event1 in Model)
-            {
-                @(await Html.PartialAsync("_EventPartial", event1))
-            }
-
+           @await Component.InvokeAsync("Event") 
 
         </div>
     </div>
