@@ -23,10 +23,23 @@ namespace EduHome.Controllers
 
             if (blogs == null && blogs.Count() < 0)
             {
-                return BadRequest();
+                return NotFound();
             }
             return View(blogs);
         }
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.IsDeleted == false && b.Id == id);
 
+            if (blog == null)
+            {
+                return NotFound();
+            }
+            return View(blog);
+        }
     }
 }

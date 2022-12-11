@@ -21,9 +21,23 @@ namespace EduHome.Controllers
             IEnumerable<Event> events = await _context.Events.Where(c => c.IsDeleted == false).ToListAsync();
             if (events == null && events.Count() < 0)
             {
-                return BadRequest();
+                return NotFound();
             }
             return View(events);
+        }
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Event event1 = await _context.Events.FirstOrDefaultAsync(e => e.IsDeleted == false && e.Id == id);
+
+            if (event1 == null)
+            {
+                return NotFound();
+            }
+            return View(event1);
         }
 
     }

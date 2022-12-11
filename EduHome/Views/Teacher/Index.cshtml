@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Teacher>
+﻿@model IEnumerable<TeacherVM>
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,7 +10,7 @@
 <div class="teacher-area pb-150">
     <div class="container">
         <div class="row mt-100">
-            @foreach (Teacher teacher in Model)
+            @foreach (TeacherVM teacher in Model)
             {
                 @(await Html.PartialAsync("_TeacherPartial", teacher))
             }

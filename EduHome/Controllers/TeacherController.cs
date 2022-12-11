@@ -1,5 +1,6 @@
 ﻿using EduHome.DAL;
 using EduHome.Models;
+using EduHome.ViewModels.TeacherV;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,13 +20,39 @@ namespace EduHome.Controllers
         public async Task<IActionResult> Index()
         {
 
-            IEnumerable<Teacher> teachers = await _context.Teachers.Where(a => a.IsDeleted == false).ToListAsync();
+            IEnumerable<TeacherVM> teachers = await _context.Teachers
+                .Where(a => a.IsDeleted == false)
+                .Select(t=> new TeacherVM { 
+                  Image = t.Image,
+                  Name = t.Name,
+                  Profession = t.Profession,
+                  Surname = t.Surname,
+                  TwitterUrl = t.TwitterUrl,
+                  FacebookUrl = t.FacebookUrl,
+                  VUrl = t.VUrl,
+                  PinterestUrl = t.PinterestUrl
+                })
+                .ToListAsync();
 
             if (teachers == null && teachers.Count() < 0)
             {
-                return BadRequest();
+                return NotFound();
             }
             return View(teachers);
+        }
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Teacher teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.IsDeleted == false && t.Id == id);
+
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            return View(teacher);
         }
     }
 }

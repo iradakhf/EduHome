@@ -19,6 +19,10 @@ namespace EduHome.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<Settings> settings = await _context.Settings.Where(s => s.IsDeleted == false).ToListAsync();
+            if (settings == null && settings.Count() < 0)
+            {
+                return NotFound();
+            }
             return View(settings);
         }
     }

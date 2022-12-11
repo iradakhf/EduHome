@@ -2,9 +2,9 @@
 <div class="col-md-4 col-sm-6 col-xs-12 mb-125">
     <div class="single-blog">
         <div class="blog-img">
-            <a asp-controller="blog" asp-action="detail"><img src="~/img/blog/@Model.Image" alt="blog"></a>
+            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id"><img src="~/img/blog/@Model.Image" alt="blog"></a>
             <div class="blog-hover">
-                <a asp-controller="blog" asp-action="detail"><i class="fa fa-link"></i></a>
+                <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id"><i class="fa fa-link"></i></a>
             </div>
         </div>
         <div class="blog-content">
@@ -12,8 +12,8 @@
                 <p>By @Model.Author  /  @Model.Date.ToString("MMMM dd, yyyy")  /  <i class="fa fa-comments-o"></i> 4</p>
             </div>
             <div class="blog-bottom">
-                <h2><a asp-controller="blog" asp-action="detail">@Model.Description.Substring(0, 100)</a></h2>
-                <a asp-controller="blog" asp-action="detail">read more</a>
+                <h2><a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">@Model.Description.Substring(0, 100)</a></h2>
+                <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">read more</a>
             </div>
         </div>
     </div>

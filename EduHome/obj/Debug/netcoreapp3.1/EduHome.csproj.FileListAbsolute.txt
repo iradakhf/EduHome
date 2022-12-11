@@ -160,3 +160,8 @@ C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_NoticePartial.cshtml.g.cs
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AboutPartial.cshtml.g.cs
 C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TestimonialPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchPartial.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Course\Detail.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Detail.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Event\Detail.cshtml.g.cs
+C:\Users\irade\source\repos\EduHome\EduHome\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Detail.cshtml.g.cs

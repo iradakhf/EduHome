@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach (Teacher teacher in Model.Teachers.Take(4))
+            @foreach (TeacherVM teacher in Model.Teachers.Take(4))
             {
                 @(await Html.PartialAsync("_TeacherPartial", teacher))
 

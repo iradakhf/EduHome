@@ -32,5 +32,7 @@ namespace EduHome.Models
         public int? FeatureId { get; set; }
         public Feature Feature { get; set; }
 
+        public int? TeacherId { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }

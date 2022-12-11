@@ -47,8 +47,22 @@ using EduHome.ViewModels.About;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 7 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
+using EduHome.ViewModels.CourseV;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Users\irade\source\repos\EduHome\EduHome\Views\_ViewImports.cshtml"
+using EduHome.ViewModels.TeacherV;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d310c7d7353c3ca2ab612d9d5bc3fc613b66cd6f", @"/Views/Shared/_NoticePartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0bf5770131ee9c292e31dc80bb3ec7dfa82de597", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7366eda26205bcaa08020aa7c190fabcf3432c4c", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__NoticePartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<NoticeBoard>>
     {
         #pragma warning disable 1998

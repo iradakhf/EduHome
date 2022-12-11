@@ -1,5 +1,6 @@
 ﻿using EduHome.DAL;
 using EduHome.Models;
+using EduHome.ViewModels.CourseV;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,14 @@ namespace EduHome.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Course> courses = await _context.Courses.Where(c=>c.IsDeleted==false).ToListAsync();
+            IEnumerable<CourseVM> courses = await _context.Courses.Where(c=>c.IsDeleted==false)
+                .Select(c=> new CourseVM { 
+                  Name = c.Name,
+                  Image = c.Image,
+                  Description = c.Description,
+                    Id = c.Id
+                })
+                .ToListAsync();
             if (courses == null && courses.Count() < 0)
             {
                 return BadRequest();
@@ -27,8 +35,32 @@ namespace EduHome.Controllers
         }
         public async Task<IActionResult> Detail(int? id)
         {
+            if (id==null)
+            {
+                return BadRequest();
+            }
+            Course course = await _context.Courses.Include(c=>c.Feature).FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+               
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
 
-            return View();
+        public async Task<IActionResult> Search(string text)
+        {
+            IEnumerable<CourseVM> courses = await _context.Courses.Where(c => c.IsDeleted == false
+            && c.Name.ToLower().Contains(text.ToLower())
+            || c.Category.Name.ToLower().Contains(text.ToLower())
+            || c.About.Contains(text.ToLower())
+            || c.Description.Contains(text.ToLower())
+            ).Skip(2).Take(5).Select(c => new CourseVM {
+                Name = c.Name,
+                Image = c.Image
+            }).ToListAsync();
+
+            return PartialView("_SearchPartial",courses);
         }
     }
 }
