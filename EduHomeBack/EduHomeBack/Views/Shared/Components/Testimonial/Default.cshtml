@@ -1,0 +1,5 @@
+﻿@model IEnumerable<Testimonial>
+@foreach (Testimonial testimonial in Model)
+{
+    @(await Html.PartialAsync("_TestimonialPartial", testimonial))
+}

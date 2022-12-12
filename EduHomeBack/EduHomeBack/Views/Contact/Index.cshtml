@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Settings>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Banner Area Start -->
+@(await Html.PartialAsync("_BannerPartial", "contact")))
+<!-- Banner Area End -->
+<!-- Contact Start -->
+<div class="map-area">
+    <!-- google-map-area start -->
+    <div class="google-map-area">
+        <!--  Map Section -->
+        <div id="contacts" class="map-area">
+            <div id="googleMap" style="width:100%;height:440px;"></div>
+        </div>
+    </div>
+</div>
+<div class="contact-area pt-150 pb-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="contact-contents text-center">
+                    <div class="single-contact mb-65">
+                        <div class="contact-icon">
+                            <img src="~/img/contact/contact1.png" alt="contact">
+                        </div>
+                        <div class="contact-add">
+                            <h3>address</h3>
+                            <p>@Html.Raw(Model.FirstOrDefault(s => s.Key == "Address").Value)</p>
+                        </div>
+                    </div>
+                    <div class="single-contact mb-65">
+                        <div class="contact-icon">
+                            <img src="~/img/contact/contact2.png" alt="contact">
+                        </div>
+                        <div class="contact-add">
+                            <h3>Phone</h3>
+                            <p>@Model.FirstOrDefault(s => s.Key == "CallCenter").Value</p>
+                        </div>
+                    </div>
+                    <div class="single-contact">
+                        <div class="contact-icon">
+                            <img src="~/img/contact/contact3.png" alt="contact">
+                        </div>
+                        <div class="contact-add">
+                            <h3>address</h3>
+                            <p>@Model.FirstOrDefault(s => s.Key == "Email").Value</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="reply-area">
+                    <h3>LEAVE A message</h3>
+                    @(await Html.PartialAsync("_LeaveReplyPartial"))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->

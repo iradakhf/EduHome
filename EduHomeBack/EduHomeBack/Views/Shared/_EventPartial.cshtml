@@ -1,0 +1,26 @@
+﻿@model Event
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="single-event mb-35">
+        <div class="event-img">
+            <a asp-controller="event" asp-action="detail" asp-route-id="@Model.Id">
+                <img src="~/img/event/@Model.Image" alt="event">
+                <div class="course-hover">
+                    <i class="fa fa-link"></i>
+                </div>
+            </a>
+            <div class="event-date">
+                <h3>@(Model.Date.ToString("dd  MMM")) </h3>
+            </div>
+        </div>
+        <div class="event-content text-left">
+            <h4><a asp-controller="event" asp-action="detail" asp-route-id="@Model.Id">ADVANCE PHP WORKSHOP</a></h4>
+            <ul>
+                <li><span>time:</span> @Model.StartTime - @Model.EndTime</li>
+                <li><span>venue</span> @Model.Venue</li>
+            </ul>
+            <div class="event-content-right">
+                <a class="default-btn" asp-controller="event" asp-action="detail" asp-route-id="@Model.Id">join now</a>
+            </div>
+        </div>
+    </div>
+</div>
