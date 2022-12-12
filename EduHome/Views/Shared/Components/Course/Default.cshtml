@@ -1,6 +1,0 @@
-﻿@model IEnumerable<CourseVM>
-@foreach (CourseVM course in Model.Take(3))
-{
-    @await Html.PartialAsync("_CoursePartial",course);
- 
-}
