@@ -1,0 +1,9 @@
+﻿@model IEnumerable<EventVM>
+@foreach (EventVM eventVM in Model)
+{
+    <li width="50">
+        <img width="100" src="~/img/event/@eventVM.Image" alt="Alternate Text" />
+        <a href="#">@eventVM.Name</a>
+    </li>
+
+}

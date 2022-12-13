@@ -17,7 +17,10 @@ namespace EduHomeBack.Models
         [StringLength(50)]
         public string Image { get; set; }
 
-        [StringLength(250)]
-        public string Position { get; set; }
+
+
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
+
     }
 }

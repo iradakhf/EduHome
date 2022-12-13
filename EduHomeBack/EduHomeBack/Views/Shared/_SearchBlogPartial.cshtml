@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BlogVM>
+@foreach (BlogVM blog1 in Model)
+{
+    <li width="50">
+                <img width="100" src="~/img/blog/@blog1.Image" alt="Alternate Text" />
+                <a href="#">@blog1.Title</a>
+    </li>
+
+}

@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Models;
+using EduHomeBack.ViewModels.EventV;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,14 +27,47 @@ namespace EduHomeBack.Controllers
             {
                 return BadRequest();
             }
-            Event event1 = await _context.Events.FirstOrDefaultAsync(e => e.IsDeleted == false && e.Id == id);
+            EventVM eventVM = new EventVM
+            {
+                Blogs = await _context.Blogs
+                 .Where(b => b.IsDeleted == false).ToListAsync(),
+                Events = await _context.Events.Where(b => b.IsDeleted == false).Include(e=>e.Category).ToListAsync(),
+                Categories = await _context.Categories.Include(c=>c.Events)
+                 .Where(c => c.IsDeleted == false && 
+                 c.Events.Any(e=>e.CategoryId == c.Id)).ToListAsync(),
+                Event = await _context.Events.FirstOrDefaultAsync(b => b.IsDeleted == false && b.Id == id),
+                Tags = await _context.Tags.Where(t => t.IsDeleted == false)
+                .Include(t => t.EventTags)
+                .ThenInclude(t => t.Event)
+                 .Where(t => t.IsDeleted == false &&
+                 t.EventTags.Any(e => e.TagId == t.Id)).ToListAsync(),
+          
+            };
 
-            if (event1 == null)
+            if (eventVM == null)
             {
                 return NotFound();
             }
-            return View(event1);
+            return View(eventVM);
         }
+        public async Task<IActionResult> Search(string text)
+        {
+            if (text == null)
+            {
+                return View();
+            }
+            IEnumerable<EventVM> eventVMs = await _context.Events.Where(e => e.IsDeleted == false
+            && e.Name.ToLower().Contains(text.ToLower())
+            || e.Description.Contains(text.ToLower())
+            ).Take(5).Select(e => new EventVM
+            {
+                Name = e.Name,
+                Description = e.Description,
+                Image = e.Image
+            }).ToListAsync();
 
+
+            return PartialView("_SearchEventPartial", eventVMs);
+        }
     }
 }

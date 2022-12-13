@@ -13,6 +13,18 @@
     <Compile Remove="Migrations\20221212195433_CreatedTagTable.Designer.cs" />
     <Compile Remove="Migrations\20221212200015_CreatedManyToManyTableForTagsAndBlogs.cs" />
     <Compile Remove="Migrations\20221212200015_CreatedManyToManyTableForTagsAndBlogs.Designer.cs" />
+    <Compile Remove="Migrations\20221213070105_AddedBannnerPropertyToBlog.cs" />
+    <Compile Remove="Migrations\20221213070105_AddedBannnerPropertyToBlog.Designer.cs" />
+    <Compile Remove="Migrations\20221213070602_AddedCommentTable.cs" />
+    <Compile Remove="Migrations\20221213070602_AddedCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20221213070711_AddedCommentTable.cs" />
+    <Compile Remove="Migrations\20221213070711_AddedCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20221213125153_CreatedCommentTab.cs" />
+    <Compile Remove="Migrations\20221213125153_CreatedCommentTab.Designer.cs" />
+    <Compile Remove="Migrations\20221213130544_removedProfessionFromTeacherTable.cs" />
+    <Compile Remove="Migrations\20221213130544_removedProfessionFromTeacherTable.Designer.cs" />
+    <Compile Remove="Migrations\20221213223832_test.cs" />
+    <Compile Remove="Migrations\20221213223832_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

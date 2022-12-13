@@ -17,8 +17,10 @@ namespace EduHomeBack.Models
         [StringLength(1000)]
         public string Description { get; set; }
 
-        [StringLength(100)]
-        public string AuthorPosition { get; set; }
+
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
+
 
     }
 }

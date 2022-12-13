@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Blog>
 
-@foreach (Blog item in Model.Take(3))
+@foreach (Blog item in Model)
 {
     @(await Html.PartialAsync("_BlogPartial", item))
 }

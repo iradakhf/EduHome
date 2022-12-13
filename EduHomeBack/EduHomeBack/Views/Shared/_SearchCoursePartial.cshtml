@@ -1,0 +1,9 @@
+﻿@model IEnumerable<CourseVM>
+@foreach (CourseVM course in Model)
+{
+    <li width="50">
+        <img width="100" src="~/img/course/@course.Image" alt="Alternate Text" />
+        <a href="#">@course.Name</a>
+    </li>
+
+}

@@ -33,6 +33,10 @@ namespace EduHomeBack.DAL
         public DbSet<NoticeBoard> NoticeBoards { get; set; }
         public DbSet<VideoTour> VideoTour { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Subscribe> Subscribe { get; set; }
+        public DbSet<Comment> Comment { get; set; }
+
+
 
     }
 }

@@ -18,14 +18,14 @@ namespace EduHome.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            IEnumerable<Testimonial> testimonials = await _context.Testimonials.Where(n => n.IsDeleted == false).ToListAsync();
+            Testimonial testimonial = await _context.Testimonials.Include(T=>T.Position).FirstOrDefaultAsync(n => n.IsDeleted == false);
 
-            if (testimonials == null && testimonials.Count() < 0)
+            if (testimonial == null)
             {
                 return View("Not Found");
             }
 
-            return View(await Task.FromResult(testimonials));
+            return View(await Task.FromResult(testimonial));
         }
 
     }

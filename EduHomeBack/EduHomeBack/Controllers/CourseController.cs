@@ -23,32 +23,44 @@ namespace EduHomeBack.Controllers
         }
         public async Task<IActionResult> Detail(int? id)
         {
-            if (id==null)
+            if (id == null)
             {
                 return BadRequest();
             }
-            Course course = await _context.Courses.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
-               
-            if (course == null)
+            CourseVM courseVM = new CourseVM
+            {
+                Blogs = await _context.Blogs
+                 .Where(b => b.IsDeleted == false).ToListAsync(),
+                Courses = await _context.Courses.Where(c => c.IsDeleted == false).Include(c => c.Category).ToListAsync(),
+                Categories = await _context.Categories.Include(c => c.Courses)
+                 .Where(c => c.IsDeleted == false &&
+                 c.Events.Any(e => e.CategoryId == c.Id)).ToListAsync(),
+                Course = await _context.Courses.FirstOrDefaultAsync(b => b.IsDeleted == false && b.Id == id),
+                Tags = await _context.Tags.Where(t => t.IsDeleted == false).Include(c => c.CourseTags)
+                .ThenInclude(t=>t.Course)
+                 .Where(t => t.IsDeleted == false &&
+                 t.CourseTags.Any(c => c.TagId == t.Id)).ToListAsync(),
+            };
+
+            if (courseVM == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(courseVM);
         }
 
         public async Task<IActionResult> Search(string text)
         {
             IEnumerable<CourseVM> courses = await _context.Courses.Where(c => c.IsDeleted == false
             && c.Name.ToLower().Contains(text.ToLower())
-            || c.Category.Name.ToLower().Contains(text.ToLower())
             || c.About.Contains(text.ToLower())
             || c.Description.Contains(text.ToLower())
-            ).Skip(2).Take(5).Select(c => new CourseVM {
+            ).Take(5).Select(c => new CourseVM {
                 Name = c.Name,
                 Image = c.Image
             }).ToListAsync();
 
-            return PartialView("_SearchPartial",courses);
+            return PartialView("_SearchCoursePartial",courses);
         }
     }
 }

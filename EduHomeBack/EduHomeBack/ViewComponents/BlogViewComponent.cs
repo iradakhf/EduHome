@@ -24,6 +24,7 @@ namespace EduHomeBack.ViewComponents
                 return View("Not Found");
             }
             return View(await Task.FromResult(blogs));
+
         }
        
     }

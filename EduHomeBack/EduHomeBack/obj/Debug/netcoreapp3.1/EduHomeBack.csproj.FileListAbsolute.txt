@@ -107,3 +107,7 @@ C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\R
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TestimonialPartial.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Detail.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Index.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\BlogBanner\Default.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchBlogPartial.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchEventPartial.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchCoursePartial.cshtml.g.cs

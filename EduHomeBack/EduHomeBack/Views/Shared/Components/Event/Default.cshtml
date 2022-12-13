@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Event>
-@foreach (Event event1 in Model.Take(3))
+@foreach (Event event1 in Model)
 {
     @(await Html.PartialAsync("_EventPartial", event1))
 }

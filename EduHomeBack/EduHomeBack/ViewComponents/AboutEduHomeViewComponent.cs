@@ -18,9 +18,9 @@ namespace EduHomeBack.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            IEnumerable<AboutEduHome> about = await _context.AboutEduHomes.Where(n => n.IsDeleted == false).ToListAsync();
+           AboutEduHome about = await _context.AboutEduHomes.FirstOrDefaultAsync(n => n.IsDeleted == false);
 
-            if (about == null && about.Count() < 0)
+            if (about == null)
             {
                 return View("Not Found");
             }

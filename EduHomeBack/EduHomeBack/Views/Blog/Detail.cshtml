@@ -1,4 +1,4 @@
-﻿@model Blog
+﻿@model BlogVM
 @{
     ViewData["Title"] = "Detail";
 }
@@ -13,12 +13,12 @@
             <div class="col-md-8">
                 <div class="blog-details">
                     <div class="blog-details-img">
-                        <img width="100%" src="~/img/blog/blog-detail.jpg" alt="blog-details">
+                        <img width="100%" src="~/img/blog/@Model.Blog.Image" alt="blog-details">
                     </div>
                     <div class="blog-details-content">
-                        <h2>@Model.Title</h2>
-                        <h6>By @Model.Author  /  @Model.Date.ToString("MMMM dd, yyyy")  /  <i class="fa fa-comments-o"></i> 4</h6>
-                        <p>@Model.Description</p>
+                        <h2>@Model.Blog.Title</h2>
+                        <h6>By @Model.Blog.Author  /  @Model.Blog.Date.ToString("MMMM dd, yyyy")  /  <i class="fa fa-comments-o"></i> 4</h6>
+                        <p>@Model.Blog.Description</p>
                     </div>
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
@@ -32,84 +32,61 @@
                         <h3>search</h3>
                         <div class="blog-search">
                             <form id="search" action="#">
-                                <input type="search" placeholder="Search..." name="search" />
-                                <button type="submit">
+                                <input id="InputBlog" type="search" placeholder="Search..." name="search" />
+                                <button id="ButtonBlog" type="submit">
                                     <span><i class="fa fa-search"></i></span>
                                 </button>
                             </form>
+                               <ul id="ListBlog" style="border: 1px solid; background-color:white; text-decoration:none; width: 100%; height: auto; position: absolute; z-index: 18;">
+                                </ul>
                         </div>
                     </div>
                     <div class="single-blog-widget mb-47">
                         <h3>categories</h3>
                         <ul>
-                            <li><a href="#">CSS Engineering (10)</a></li>
-                            <li><a href="#">Political Science (12)</a></li>
-                            <li><a href="#">Micro Biology (08)</a></li>
-                            <li><a href="#">HTML5 &amp; CSS3 (15)</a></li>
-                            <li><a href="#">Web Design (20)</a></li>
-                            <li><a href="#">PHP (23)</a></li>
+                            @foreach (Category category in Model.Categories.Take(6))
+                            {
+
+                            <li><a href="#">@category.Name (@category.Blogs.Count())</a></li>
+                            }
+                         
                         </ul>
                     </div>
-                    <div class="single-blog-widget mb-47">
-                        <div class="single-blog-banner">
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
-                            <h2>best<br> eductaion<br> theme</h2>
-                        </div>
-                    </div>
+                   
+                  @await Component.InvokeAsync("BlogBanner")
+
                     <div class="single-blog-widget mb-47">
                         <h3>latest post</h3>
                         <div class="single-post mb-30">
-                            <div class="single-post-img">
-                                <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">
-                                    <img src="~/img/post/post1.jpg" alt="post">
-                                    <div class="blog-hover">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                </a>
+                            @foreach (Blog blog in Model.Blogs.Take(3))
+                            {
+                                <div class="single-post-img">
+                                    <a asp-controller="blog" asp-action="detail" asp-route-id="@blog.Id">
+                                        <img width="100" src="~/img/blog/@blog.Image" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+               
+                                <div class="single-post-content">
+                                    <h4><a asp-controller="blog" asp-action="detail" asp-route-id="@blog.Id">English Language Course for you</a></h4>
+                                    <p>By @blog.Author  / @blog.Date.ToString("MMMM dd, yyyy")</p>
+                                </div>
+                            }
                             </div>
-                            <div class="single-post-content">
-                                <h4><a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">English Language Course for you</a></h4>
-                                <p>By Alex  /  June 20, 2017</p>
-                            </div>
-                        </div>
-                        <div class="single-post mb-30">
-                            <div class="single-post-img">
-                                <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">
-                                    <img src="~/img/post/post2.jpg" alt="post">
-                                    <div class="blog-hover">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-post-content">
-                                <h4><a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">Advance Web Design and Develop</a></h4>
-                                <p>By Alex  /  June 20, 2017</p>
-                            </div>
-                        </div>
-                        <div class="single-post">
-                            <div class="single-post-img">
-                                <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">
-                                    <img src="~/img/post/post3.jpg" alt="post">
-                                    <div class="blog-hover">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-post-content">
-                                <h4><a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">English Language Course for you</a></h4>
-                                <p>By Alex  /  June 20, 2017</p>
-                            </div>
-                        </div>
+
+                        
                     </div>
                     <div class="single-blog-widget">
                         <h3>tags</h3>
                         <div class="single-tag">
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id" class="mr-10 mb-10">course</a>
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id" class="mr-10 mb-10">education</a>
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id" class="mb-10">teachers</a>
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id" class="mr-10">learning</a>
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id" class="mr-10">university</a>
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@Model.Id">events</a>
+                            @foreach (Tag tag in Model.Tags)
+                            {
+
+                            <a asp-controller="blog" asp-action="detail" asp-route-id="@tag.Id" class="mr-10 mb-10">course</a>
+                            }
+                          
                         </div>
                     </div>
                 </div>

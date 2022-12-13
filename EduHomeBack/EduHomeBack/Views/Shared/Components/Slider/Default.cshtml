@@ -11,8 +11,8 @@
                     <div class="col-md-10 col-md-offset-1">
                         <div class="slide-content-wrapper">
                             <div class="slide-content text-center">
-                                <h2>@item.Title </h2>
-                                <p>@item.Description</p>
+                                <h2>@Html.Raw(item.Title) </h2>
+                                <p>@Html.Raw(item.Description)</p>
                                 <a class="default-btn" @item.Link>Learn more</a>
                             </div>
                         </div>

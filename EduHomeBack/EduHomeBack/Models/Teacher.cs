@@ -16,8 +16,7 @@ namespace EduHomeBack.Models
 
         [StringLength(50)]
         public string Image { get; set; }
-        [StringLength(255)]
-        public string Profession { get; set; }
+   
 
         [StringLength(500)]
         public string About { get; set; }

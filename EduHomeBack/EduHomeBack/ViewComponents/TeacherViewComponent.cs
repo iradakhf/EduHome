@@ -19,14 +19,13 @@ namespace EduHomeBack.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            IEnumerable<TeacherVM> teachers = await _context.Teachers
+            IEnumerable<TeacherVM> teachers = await _context.Teachers.Include(t=>t.Position)
                 .Where(a => a.IsDeleted == false)
                 .Select(t => new TeacherVM
                 {
                     Id = t.Id,
                     Image = t.Image,
                     Name = t.Name,
-                    Profession = t.Profession,
                     Surname = t.Surname,
                     TwitterUrl = t.TwitterUrl,
                     FacebookUrl = t.FacebookUrl,

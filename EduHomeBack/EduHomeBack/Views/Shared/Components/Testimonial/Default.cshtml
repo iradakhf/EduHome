@@ -1,5 +1,3 @@
-﻿@model IEnumerable<Testimonial>
-@foreach (Testimonial testimonial in Model)
-{
-    @(await Html.PartialAsync("_TestimonialPartial", testimonial))
-}
+﻿@model Testimonial
+
+    @(await Html.PartialAsync("_TestimonialPartial", Model))

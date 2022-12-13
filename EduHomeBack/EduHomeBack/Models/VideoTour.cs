@@ -9,6 +9,7 @@ namespace EduHomeBack.Models
     public class VideoTour : BaseEntity
     {
         [StringLength(400)]
+        [Required]
         public string VideoLink { get; set; }
     }
 }

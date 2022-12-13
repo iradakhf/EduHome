@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Models;
+using EduHomeBack.ViewComponentModel.NoticeArea;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,12 +19,17 @@ namespace EduHomeBack.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-           NoticeBoard noticeBoards = await _context.NoticeBoards.FirstOrDefaultAsync(n => n.IsDeleted == false);
-            if (noticeBoards == null)
+            NoticeAreaVM noticeArea = new NoticeAreaVM
+            {
+                noticeBoards = await _context.NoticeBoards.Where(n => n.IsDeleted == false).ToListAsync(),
+                videoTour = await _context.VideoTour.FirstOrDefaultAsync(v => v.IsDeleted == false)
+            };
+       
+            if (noticeArea == null)
             {
                 return View("Not Found");
             }
-            return View(await Task.FromResult(noticeBoards));
+            return View(await Task.FromResult(noticeArea));
         }
     }
 }
