@@ -26,6 +26,7 @@ namespace EduHomeBack.Controllers
             }
             Teacher teacher = await _context.Teachers.Include(T=>T.TeacherSkills)
                 .ThenInclude(t=>t.Skill)
+                .Include(t=>t.Position)
                 .FirstOrDefaultAsync(t => t.IsDeleted == false && t.Id == id);
 
             if (teacher == null)

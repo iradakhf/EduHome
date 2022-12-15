@@ -18,13 +18,13 @@ namespace EduHomeBack.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Settings setting = await _context.Settings.FirstOrDefaultAsync(s => s.IsDeleted == false && s.Key == "Banner");
+            Banner banner = await _context.Banners.FirstOrDefaultAsync(s => s.IsDeleted == false);
 
-            if (setting == null)
+            if (banner == null)
             {
                 return View("Not Found");
             }
-            return View(await Task.FromResult(setting));
+            return View(await Task.FromResult(banner));
         }
     }
 }

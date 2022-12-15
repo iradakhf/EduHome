@@ -36,8 +36,13 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category category)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) {
+                return View();
+            }
+            
+            if (string.IsNullOrWhiteSpace(category.Name))
             {
+                ModelState.AddModelError("Name", "the field can not be empty");
                 return View();
             }
             if (await _appDbContext.Categories.AnyAsync(c=>c.IsDeleted==false && c.Name.ToLower().Trim()==category.Name.ToLower().Trim()))
@@ -51,6 +56,62 @@ namespace EduHomeBack.Areas.Manage.Controllers
             category.CreatedAt = DateTime.UtcNow.AddHours(4);
             category.CreatedBy = "System";
             await _appDbContext.Categories.AddAsync(category);
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest("id can not be null");
+            } 
+            Category category = await _appDbContext.Categories.FirstOrDefaultAsync(c=>c.IsDeleted==false && c.Id ==id);
+            if (category == null)
+            {
+                return NotFound("category not found");
+            }
+                return View(category);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, Category category)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+
+            if (category.Id != id)
+            {
+                return BadRequest("id can not be null");
+            }
+                if (string.IsNullOrWhiteSpace(category.Name))
+            {
+                ModelState.AddModelError("Name", "Bosluq Olmamalidir");
+                return View(category);
+            }
+            Category dbCategory = await _appDbContext.Categories.FirstOrDefaultAsync(c =>c.IsDeleted==false && c.Id == id);
+
+            if (dbCategory == null) {
+                return NotFound("doesnt exist");
+            }
+            if (dbCategory.Name.Trim().ToLower()==category.Name.Trim().ToLower())
+            {
+                ModelState.AddModelError("Name", "please enter another name");
+                return View(category);
+            }
+
+            if (await _appDbContext.Categories.AnyAsync(t => t.Id != id && t.Name.ToLower().Trim() == category.Name.ToLower().Trim()))
+            {
+                ModelState.AddModelError("Name", "Already Exists");
+                return View(dbCategory);
+            }
+            dbCategory.Name = category.Name;
+            dbCategory.UpdatedAt = DateTime.UtcNow.AddHours(4);
+            dbCategory.UpdatedBy = "System";
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
