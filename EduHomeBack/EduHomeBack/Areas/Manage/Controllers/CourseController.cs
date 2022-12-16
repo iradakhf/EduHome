@@ -143,6 +143,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("TeacherId", "Teacher is not correctly chosen");
                 return View(course);
             }
+            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted == false && course.TagIds.Contains(c.Id)))
+            {
+                ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                return View(course);
+            }
             if (course.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
@@ -150,6 +155,18 @@ namespace EduHomeBack.Areas.Manage.Controllers
             }
             course.Image = course.File.CreateFile(_env, "img", "course");
             course.Name = course.Name.Trim();
+            course.About = course.About.Trim();
+            course.Assesments = course.Assesments.Trim();
+            course.Certification = course.Certification.Trim();
+            course.ClassDuration = course.ClassDuration.Trim();
+            course.Description = course.Description.Trim();
+            course.Duration = course.Duration.Trim();
+            course.Fee = course.Fee;
+            course.HowToApply = course.HowToApply.Trim();
+            course.Language = course.Language.Trim();
+            course.SkillLevel = course.SkillLevel.Trim();
+            course.Starts = course.Starts;
+            course.StudentsCount = course.StudentsCount;
             course.IsDeleted = false;
             course.CreatedAt = DateTime.UtcNow.AddHours(4);
             course.CreatedBy = "System";

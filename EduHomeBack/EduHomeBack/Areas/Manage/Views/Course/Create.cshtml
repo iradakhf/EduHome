@@ -6,7 +6,7 @@
     IEnumerable<Tag> tags = ViewBag.Tags;
     SelectList selectCategoryListItems = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
     SelectList selectTeacherListItems = new SelectList(teachers, nameof(Teacher.Id), nameof(Teacher.Name));
-    SelectList selectTagListItems = new SelectList(teachers, nameof(Tag.Id), nameof(Tag.Name));
+    SelectList selectTagListItems = new SelectList(tags, nameof(Tag.Id), nameof(Tag.Name));
 
 
 }
@@ -61,8 +61,8 @@
                 <span asp-validation-for="Fee" class="text text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="File">Hover Image File</label>
-                <input asp-for="File" class="form-control" placeholder="Hover Image File">
+                <label asp-for="File">Image File</label>
+                <input asp-for="File" class="form-control" placeholder="Image File">
                 <span asp-validation-for="File" class="text text-danger"></span>
             </div>
             <div class="form-group">

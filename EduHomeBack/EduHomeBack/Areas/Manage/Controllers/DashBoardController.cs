@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EduHomeBack.DAL;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
     public class DashBoardController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _appDbContext;
+        public DashBoardController(AppDbContext appDbContext)
         {
-            return View();
+            _appDbContext = appDbContext;
         }
+       
     }
 }

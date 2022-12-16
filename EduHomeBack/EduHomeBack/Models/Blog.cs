@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace EduHomeBack.Models
 {
@@ -25,6 +27,9 @@ namespace EduHomeBack.Models
         public Category Category { get; set; }
         public IEnumerable<BlogTag> BlogTags { get; set; }
 
-
+        [NotMapped]
+        public IEnumerable<int> TagIds { get; set; }
+        [NotMapped]
+        public IFormFile File { get; set; }
     }
 }

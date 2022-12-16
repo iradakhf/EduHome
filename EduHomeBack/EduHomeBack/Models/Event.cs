@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+
 namespace EduHomeBack.Models
 {
     public class Event : BaseEntity
@@ -14,8 +17,8 @@ namespace EduHomeBack.Models
         public string Image { get; set; }
 
         public DateTime Date { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [StringLength(100)]
         public string Venue { get; set; }
@@ -27,7 +30,12 @@ namespace EduHomeBack.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public IEnumerable<EventTag> EventTag { get; set; }
+        public IEnumerable<EventTag> EventTags { get; set; }
 
+        [NotMapped]
+        public IEnumerable<int> TagIds { get; set; }
+
+        [NotMapped]
+        public IFormFile File { get; set; }
     }
 }

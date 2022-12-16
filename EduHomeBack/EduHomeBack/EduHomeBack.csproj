@@ -25,6 +25,8 @@
     <Compile Remove="Migrations\20221213130544_removedProfessionFromTeacherTable.Designer.cs" />
     <Compile Remove="Migrations\20221213223832_test.cs" />
     <Compile Remove="Migrations\20221213223832_test.Designer.cs" />
+    <Compile Remove="Migrations\20221216171153_ChangedEventEndTimeAndStartTimeDatatypes.cs" />
+    <Compile Remove="Migrations\20221216171153_ChangedEventEndTimeAndStartTimeDatatypes.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
