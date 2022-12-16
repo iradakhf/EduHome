@@ -37,7 +37,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Create(Category category)
         {
             if (!ModelState.IsValid) {
-                return View();
+                return View(category);
             }
             
             if (string.IsNullOrWhiteSpace(category.Name))

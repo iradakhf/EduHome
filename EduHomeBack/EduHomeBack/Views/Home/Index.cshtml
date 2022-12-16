@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Index";
 }
 <!-- Background Area Start -->
@@ -38,8 +39,9 @@
 <div class="about-area pb-135 pt-130 bg-light">
     <div class="container">
         <div class="row">
-            @(await Component.InvokeAsync("AboutEduHome"))
-        </div>
+            @(await Component.InvokeAsync("About"))
+
+       </div>
     </div>
 </div>
 <!-- About End -->

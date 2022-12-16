@@ -1,0 +1,94 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "Create";
+    IEnumerable<Category> categories = ViewBag.Categories;
+    IEnumerable<Teacher> teachers = ViewBag.Teachers;
+    IEnumerable<Tag> tags = ViewBag.Tags;
+    SelectList selectCategoryListItems = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
+    SelectList selectTeacherListItems = new SelectList(teachers, nameof(Teacher.Id), nameof(Teacher.Name));
+    SelectList selectTagListItems = new SelectList(teachers, nameof(Tag.Id), nameof(Tag.Name));
+
+
+}
+
+<h1 class="h3 mb-4 text-gray-800">Create Brand</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Name">
+                <span asp-validation-for="Name" class="text text-danger"></span>
+            </div>
+           <div class="form-group">
+                <label asp-for="About">About</label>
+                <input asp-for="About" class="form-control" placeholder="About">
+                <span asp-validation-for="About" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" class="form-control" placeholder="Description">
+                <span asp-validation-for="Description" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assesments">Assesment</label>
+                <input asp-for="Assesments" class="form-control" placeholder="Assesment">
+                <span asp-validation-for="Assesments" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentsCount">StudentsCount</label>
+                <input asp-for="StudentsCount" class="form-control" placeholder="StudentsCount">
+                <span asp-validation-for="StudentsCount" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Certification">Certification</label>
+                <input asp-for="Certification" class="form-control" placeholder="IsNewArrival">
+                <span asp-validation-for="Certification" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassDuration">ClassDuration</label>
+                <input asp-for="ClassDuration" class="form-control" placeholder="ClassDuration">
+                <span asp-validation-for="ClassDuration" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration">Duration</label>
+                <input asp-for="Duration" class="form-control" placeholder="Duration">
+                <span asp-validation-for="Duration" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fee">Main Image File</label>
+                <input asp-for="Fee" class="form-control" placeholder="Fee">
+                <span asp-validation-for="Fee" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File">Hover Image File</label>
+                <input asp-for="File" class="form-control" placeholder="Hover Image File">
+                <span asp-validation-for="File" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowToApply">Product Image Files</label>
+                <input asp-for="HowToApply" class="form-control" placeholder="HowToApply">
+                <span asp-validation-for="HowToApply" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Catgeory</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="selectCategoryListItems">
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Teacher</label>
+                <select asp-for="TeacherId" class="form-control" asp-items="selectTeacherListItems">
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tag</label>
+                <select asp-for="TagIds" multiple class="form-control" asp-items="selectTagListItems">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

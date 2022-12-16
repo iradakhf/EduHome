@@ -1,4 +1,5 @@
 ﻿using EduHomeBack.DAL;
+using EduHomeBack.Models;
 using EduHomeBack.ViewModels.TeacherV;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

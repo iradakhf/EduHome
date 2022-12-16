@@ -29,9 +29,7 @@ namespace EduHomeBack.DAL
         public DbSet<Skill> Skills { get; set; }
         public DbSet<TeacherSkill> TeacherSkills { get; set; }
         public DbSet<Position> Positions { get; set; }
-     public DbSet<AboutEduHome> AboutEduHomes { get; set; }
         public DbSet<NoticeBoard> NoticeBoards { get; set; }
-        public DbSet<VideoTour> VideoTour { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Subscribe> Subscribe { get; set; }
         public DbSet<Comment> Comment { get; set; }

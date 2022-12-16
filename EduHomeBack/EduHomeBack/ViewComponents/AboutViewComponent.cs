@@ -9,22 +9,23 @@ using System.Threading.Tasks;
 
 namespace EduHomeBack.ViewComponents
 {
-    public class AboutEduHomeViewComponent : ViewComponent
+    public class AboutViewComponent : ViewComponent
     {
         private readonly AppDbContext _context;
-        public AboutEduHomeViewComponent(AppDbContext context)
+        public AboutViewComponent(AppDbContext context)
         {
             _context = context;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-           AboutEduHome about = await _context.AboutEduHomes.FirstOrDefaultAsync(n => n.IsDeleted == false);
+            IEnumerable<Settings> settings = await _context.Settings.Where(s => s.IsDeleted == false).ToListAsync();
 
-            if (about == null)
+            if (settings == null)
             {
                 return View("Not Found");
             }
-            return View(await Task.FromResult(about));
-        } 
+            return View(await Task.FromResult(settings));
+        }
     }
 }
+

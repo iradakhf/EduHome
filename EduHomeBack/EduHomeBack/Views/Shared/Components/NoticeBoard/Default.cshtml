@@ -7,7 +7,7 @@
                     <h3>TAKE A VIDEO TOUR</h3>
                     <div class="notice-video">
                         <div class="video-icon video-hover">
-                            <a class="video-popup" href="@Model.videoTour.VideoLink">
+                            <a class="video-popup" href="@Model.settings.FirstOrDefault(s => s.Key == "VideoLink").Value">
                                 <i class="zmdi zmdi-play"></i>
                             </a>
                         </div>

@@ -55,7 +55,7 @@ using EduHomeBack.ViewModels.TeacherV;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0f63c26ac127666dd544cde948d778aab2c68a62", @"/Areas/Manage/Views/Banner/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6037a4672876d22f9ba0c512dc4c225aee414337", @"/Areas/Manage/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d834d1426cb4313f9545cd3ec3fddbfd08712bf3", @"/Areas/Manage/Views/_ViewImports.cshtml")]
     public class Areas_Manage_Views_Banner_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Banner>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("width", new global::Microsoft.AspNetCore.Html.HtmlString("100"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

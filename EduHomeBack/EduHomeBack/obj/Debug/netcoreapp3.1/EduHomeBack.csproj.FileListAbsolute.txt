@@ -86,7 +86,6 @@ C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\R
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Event\Detail.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Event\Index.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\AboutEduHome\Default.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Blog\Default.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Course\Default.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Event\Default.cshtml.g.cs
@@ -187,3 +186,6 @@ C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\bin\Debug\netcoreapp3.1\z
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Banner\Index.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Banner\Update.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_ValidationPartial.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Course\Create.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Course\Index.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\About\Default.cshtml.g.cs

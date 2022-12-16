@@ -22,9 +22,11 @@ namespace EduHomeBack.ViewComponents
             NoticeAreaVM noticeArea = new NoticeAreaVM
             {
                 noticeBoards = await _context.NoticeBoards.Where(n => n.IsDeleted == false).ToListAsync(),
-                videoTour = await _context.VideoTour.FirstOrDefaultAsync(v => v.IsDeleted == false)
+                settings = await _context.Settings.Where(n => n.IsDeleted == false && n.Key=="VideoLink").ToListAsync()
+
             };
-       
+
+
             if (noticeArea == null)
             {
                 return View("Not Found");

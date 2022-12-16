@@ -53,7 +53,6 @@
     <None Include="Views\Event\Detail.cshtml" />
     <None Include="Views\Event\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Shared\Components\AboutEduHome\Default.cshtml" />
     <None Include="Views\Shared\Components\Blog\Default.cshtml" />
     <None Include="Views\Shared\Components\Course\Default.cshtml" />
     <None Include="Views\Shared\Components\Event\Default.cshtml" />

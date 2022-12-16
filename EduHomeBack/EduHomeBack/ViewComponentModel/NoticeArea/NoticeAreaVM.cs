@@ -9,7 +9,7 @@ namespace EduHomeBack.ViewComponentModel.NoticeArea
     public class NoticeAreaVM
     {
        public IEnumerable<NoticeBoard> noticeBoards { get; set; }
+        public IEnumerable<Settings> settings { get; set; }
 
-        public VideoTour videoTour { get; set; }
     }
 }
