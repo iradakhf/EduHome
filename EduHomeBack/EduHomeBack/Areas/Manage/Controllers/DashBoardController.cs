@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
@@ -11,6 +12,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
             _appDbContext = appDbContext;
         }
-       
+        public async Task<IActionResult> Index()
+        {
+
+            return View();
+        }
+
     }
 }
