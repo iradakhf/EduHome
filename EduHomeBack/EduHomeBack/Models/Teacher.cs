@@ -24,6 +24,7 @@ namespace EduHomeBack.Models
 
         [StringLength(500)]
         [Required]
+        [MinLength(100)]
         public string About { get; set; }
 
         [StringLength(255)]

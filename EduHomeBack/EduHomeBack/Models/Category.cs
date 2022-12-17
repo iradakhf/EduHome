@@ -13,13 +13,10 @@ namespace EduHomeBack.Models
         [Required]
         public string Name { get; set; }
        
-        [NotMapped]
         public IEnumerable<Blog> Blogs { get; set; }
 
-        [NotMapped]
         public IEnumerable<Event> Events { get; set; }
 
-        [NotMapped]
         public IEnumerable<Course> Courses { get; set; }
     }
 }

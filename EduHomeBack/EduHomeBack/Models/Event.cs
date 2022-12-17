@@ -29,6 +29,7 @@ namespace EduHomeBack.Models
 
         [StringLength(1000)]
         [Required]
+        [MinLength(100)]
         public string Description { get; set; }
 
 

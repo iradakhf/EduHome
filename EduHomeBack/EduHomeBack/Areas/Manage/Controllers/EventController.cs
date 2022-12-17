@@ -70,6 +70,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View(event1);
 
             }
+            if (event1.Description.Trim().Length < 80)
+            {
+                ModelState.AddModelError("Description", "the field should have more than 80 words");
+                return View(event1);
+            }
             if (string.IsNullOrWhiteSpace(event1.EndTime.ToString()))
             {
                 ModelState.AddModelError("EndTime", "the field is required");
@@ -113,8 +118,16 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
                     return View(event1);
                 }
+                EventTag eventTag = new EventTag
+                {
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    CreatedBy = "Me",
+                    IsDeleted = false,
+                    TagId = tagId
+                };
+                eventTags.Add(eventTag);
             }
-           
+            event1.EventTags = eventTags;
             
             if (event1.File == null)
             {

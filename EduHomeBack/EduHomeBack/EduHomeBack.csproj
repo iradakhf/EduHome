@@ -27,6 +27,12 @@
     <Compile Remove="Migrations\20221213223832_test.Designer.cs" />
     <Compile Remove="Migrations\20221216171153_ChangedEventEndTimeAndStartTimeDatatypes.cs" />
     <Compile Remove="Migrations\20221216171153_ChangedEventEndTimeAndStartTimeDatatypes.Designer.cs" />
+    <Compile Remove="Migrations\20221217144757_AddedSomeMinLengthToDescriptions.cs" />
+    <Compile Remove="Migrations\20221217144757_AddedSomeMinLengthToDescriptions.Designer.cs" />
+    <Compile Remove="Migrations\20221217144952_someMinLength.cs" />
+    <Compile Remove="Migrations\20221217144952_someMinLength.Designer.cs" />
+    <Compile Remove="Migrations\20221217145142_someMinLength.cs" />
+    <Compile Remove="Migrations\20221217145142_someMinLength.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

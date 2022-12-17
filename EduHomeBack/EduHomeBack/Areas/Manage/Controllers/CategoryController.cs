@@ -21,7 +21,9 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<Category> categories = await _appDbContext.Categories
-                .Include(c=>c.Courses)
+                .Include(c=>c.Blogs)
+                .Include(c => c.Events)
+                .Include(c => c.Courses)
                 .Where(c => c.IsDeleted == false).ToListAsync();
 
             return View(categories);
@@ -113,6 +115,39 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbCategory.Name = category.Name;
             dbCategory.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbCategory.UpdatedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest("id can not be null");
+
+            Category category = await _appDbContext.Categories
+               .Include(c => c.Blogs)
+               .Include(c => c.Courses)
+               .Include(c => c.Events)
+               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (category == null)
+            {
+                return NotFound("can not find category with this id");
+            }
+            if ((category.Blogs != null && category.Blogs.Count() > 0)
+                || (category.Courses != null && category.Courses.Count() > 0)
+                || (category.Events != null && category.Events.Count() > 0)
+                || (category.Blogs != null && category.Blogs.Count() > 0))
+            {
+                TempData["Error"] = $"{id} li category siline bilmez";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+            category.IsDeleted = true;
+            category.DeletedAt = DateTime.UtcNow.AddHours(4);
+            category.DeletedBy = "System";
+
+            }
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }

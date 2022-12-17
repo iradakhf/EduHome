@@ -25,6 +25,7 @@ namespace EduHomeBack.Models
 
         [Required]
         [StringLength(3000)]
+        [MinLength(100)]
         public string Description { get; set; }
 
         public int CategoryId { get; set; }

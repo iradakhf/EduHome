@@ -32,6 +32,12 @@
                             Course Count
                         </th>
                         <th>
+                            Blog Count
+                        </th>
+                        <th>
+                            Event Count
+                        </th>
+                        <th>
                             Setting
                         </th>
                     </tr>
@@ -53,6 +59,12 @@
                         </td>
                         <td>
                             @category.Courses.Count()
+                        </td>
+                        <td>
+                            @category.Blogs.Count()
+                        </td>
+                        <td>
+                            @category.Events.Count()
                         </td>
                         <td>
                             <a class="btn btn-warning" asp-area="manage" asp-controller="category" asp-action="update" asp-route-id="@category.Id">Update</a>

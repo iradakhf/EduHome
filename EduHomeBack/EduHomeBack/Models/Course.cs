@@ -15,11 +15,11 @@ namespace EduHomeBack.Models
         public string Name { get; set; }
 
         [StringLength(500)]
-        [Required]
         public string Image { get; set; }
 
         [StringLength(2500)]
         [Required]
+        [MinLength(100)]
         public string Description { get; set; }
 
         [StringLength(1000)]

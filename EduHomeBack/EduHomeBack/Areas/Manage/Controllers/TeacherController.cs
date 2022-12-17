@@ -135,14 +135,30 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View(teacher);
 
             }
+            List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
             foreach (int skillId in teacher.SkillIds)
             {
+                if (teacher.SkillIds.Where(t => t == skillId).Count() > 1)
+                {
+                    ModelState.AddModelError("SkillIds", "only one same skill can be chosen");
+                    return View(teacher);
+                }
                 if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
                 {
                     ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
                     return View(teacher);
                 }
+                TeacherSkill teacherSkill = new TeacherSkill
+                {
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    CreatedBy = "Me",
+                    IsDeleted = false,
+                    SkillId = skillId
+                };
+                teacherSkills.Add(teacherSkill);
             }
+            teacher.TeacherSkills = teacherSkills;
+
             foreach (int positionId in teacher.PositionIds)
             {
                 if (!await _appDbContext.Positions.AnyAsync(t => t.Id == positionId))
