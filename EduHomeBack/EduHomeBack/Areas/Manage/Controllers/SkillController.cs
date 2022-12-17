@@ -119,6 +119,22 @@ namespace EduHomeBack.Areas.Manage.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest("id can not be null");
 
+            Skill skill = await _appDbContext.Skills
+               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (skill == null)
+            {
+                return NotFound("can not find skill with this id");
+            }
+
+            skill.IsDeleted = true;
+            skill.DeletedAt = DateTime.UtcNow.AddHours(4);
+            skill.DeletedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

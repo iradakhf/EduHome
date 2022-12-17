@@ -1,0 +1,106 @@
+﻿@model Teacher
+@{
+    ViewData["Title"] = "Update";
+    IEnumerable<Position> positions = ViewBag.Positions;
+    IEnumerable<Skill> skills = ViewBag.Skills;
+    SelectList selectPositionListItems = new SelectList(positions, nameof(Position.Id), nameof(Position.Name));
+    SelectList selectSkillListItems = new SelectList(skills, nameof(Skill.Id), nameof(Skill.Name));
+
+}
+
+<h1 class="h3 mb-4 text-gray-800">Update Teacher</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Name">
+                <span asp-validation-for="Name" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname">Surname</label>
+                <input asp-for="Surname" class="form-control" placeholder="Enter Surname">
+                <span asp-validation-for="Surname" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="About">About</label>
+                <input asp-for="About" class="form-control" placeholder="Enter About">
+                <span asp-validation-for="About" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Degree">Degree</label>
+                <input asp-for="Degree" class="form-control" placeholder="Enter Degree">
+                <span asp-validation-for="Degree" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Experience">Experience</label>
+                <input asp-for="Experience" class="form-control" placeholder="Enter Experience">
+                <span asp-validation-for="Experience" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Faculty">Faculty</label>
+                <input asp-for="Faculty" class="form-control" placeholder="Enter Faculty">
+                <span asp-validation-for="Faculty" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacebookUrl">FacebookUrl</label>
+                <input asp-for="FacebookUrl" class="form-control" placeholder="Enter FacebookUrl">
+                <span asp-validation-for="FacebookUrl" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PinterestUrl">Faculty</label>
+                <input asp-for="PinterestUrl" class="form-control" placeholder="Enter PinterestUrl">
+                <span asp-validation-for="PinterestUrl" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VUrl">Faculty</label>
+                <input asp-for="VUrl" class="form-control" placeholder="Enter VUrl">
+                <span asp-validation-for="VUrl" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TwitterUrl">Faculty</label>
+                <input asp-for="TwitterUrl" class="form-control" placeholder="Enter TwitterUrl">
+                <span asp-validation-for="TwitterUrl" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hobbies">Hobbies</label>
+                <input asp-for="Hobbies" class="form-control" placeholder="Enter Hobbies">
+                <span asp-validation-for="Hobbies" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber">PhoneNumber</label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter PhoneNumber">
+                <span asp-validation-for="PhoneNumber" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="Enter Email">
+                <span asp-validation-for="Email" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Skype">Skype</label>
+                <input asp-for="Skype" class="form-control" placeholder="Enter Skype">
+                <span asp-validation-for="Skype" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File">Image File</label>
+                <input asp-for="File" class="form-control" placeholder="Image File">
+                <span asp-validation-for="File" class="text text-danger"></span>
+            </div>
+            <div id="parentList" class="form-group">
+                <label>Position</label>
+                <select asp-for="PositionId" class="form-control" asp-items="selectPositionListItems">
+                </select>
+            </div>
+            <div id="parentList" class="form-group">
+                <label>Skill</label>
+                <select asp-for="SkillIds" class="form-control" asp-items="selectSkillListItems">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

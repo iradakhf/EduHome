@@ -68,6 +68,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             speaker.Image = speaker.File.CreateFile(_env, "img", "speaker");
             speaker.Name = speaker.Name.Trim();
             speaker.Surname = speaker.Surname.Trim();
+            speaker.Position = speaker.Position;
             speaker.CreatedAt = DateTime.UtcNow.AddHours(4);
             speaker.CreatedBy = "System";
             await _appDbContext.Speakers.AddAsync(speaker);
@@ -134,7 +135,23 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest("id can not be null");
 
+            Speaker speaker = await _appDbContext.Speakers
+               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+          
+            if (speaker == null)
+            {
+                return NotFound("can not find speaker with this id");
+            }
+            speaker.IsDeleted = true;
+            speaker.DeletedAt = DateTime.UtcNow.AddHours(4);
+            speaker.DeletedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
     }
 }

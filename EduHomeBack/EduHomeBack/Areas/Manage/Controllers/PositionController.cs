@@ -115,5 +115,22 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest("id can not be null");
+
+            Position position = await _appDbContext.Positions
+               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (position == null)
+            {
+                return NotFound("can not find position with this id");
+            }
+
+            position.IsDeleted = true;
+            position.DeletedAt = DateTime.UtcNow.AddHours(4);
+            position.DeletedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

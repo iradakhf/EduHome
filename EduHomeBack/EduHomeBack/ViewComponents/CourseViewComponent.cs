@@ -26,7 +26,7 @@ namespace EduHomeBack.ViewComponents
                      Image = c.Image,
                      Description = c.Description,
                      Id = c.Id
-                 }).ToListAsync();
+                 }).Take(3).ToListAsync();
             return View(await Task.FromResult(CourseVMs));
         }
     }

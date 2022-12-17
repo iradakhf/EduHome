@@ -26,6 +26,7 @@ namespace EduHomeBack.Models
 
         public int PositionId { get; set; }
         public Position Position { get; set; }
+        public IEnumerable<EventSpeaker> EventSpeakers { get; set; }
 
     }
 }

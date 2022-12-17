@@ -117,5 +117,22 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest("id can not be null");
+
+            Tag tag = await _appDbContext.Tags
+               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+
+            if (tag == null)
+            {
+                return NotFound("can not find tag with this id");
+            }
+            tag.IsDeleted = true;
+            tag.DeletedAt = DateTime.UtcNow.AddHours(4);
+            tag.DeletedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

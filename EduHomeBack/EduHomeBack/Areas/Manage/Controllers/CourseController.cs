@@ -195,7 +195,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             course.IsDeleted = false;
             course.CreatedAt = DateTime.UtcNow.AddHours(4);
             course.CreatedBy = "System";
-            course.CourseTag = course.CourseTag;
+            course.CourseTags = course.CourseTags;
             course.Teacher = course.Teacher;
             course.Category = course.Category;
             await _appDbContext.Courses.AddAsync(course);
@@ -371,7 +371,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbCourse.IsDeleted = false;
             dbCourse.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbCourse.UpdatedBy = "System";
-            dbCourse.CourseTag = course.CourseTag;
+            dbCourse.CourseTags = course.CourseTags;
             dbCourse.Teacher = course.Teacher;
             dbCourse.Category = course.Category;
             await _appDbContext.Courses.AddAsync(course);
@@ -383,13 +383,14 @@ namespace EduHomeBack.Areas.Manage.Controllers
             if (id == null) return BadRequest("id can not be null");
 
             Course course = await _appDbContext.Courses
-               .Include(c => c.CourseTag)
+               .Include(c => c.CourseTags)
                .ThenInclude(b => b.Tag)
                .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
             if (course == null)
             {
                 return NotFound("can not find course with this id");
             }
+
             List<CourseTag> courseTags = new List<CourseTag>();
             foreach (int tagId in course.TagIds)
             {
@@ -405,7 +406,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     courseTags.Add(courseTag);
                 }
             }
-            course.CourseTag = courseTags;
+            course.CourseTags = courseTags;
             course.IsDeleted = true;
             course.DeletedAt = DateTime.UtcNow.AddHours(4);
             course.DeletedBy = "System";

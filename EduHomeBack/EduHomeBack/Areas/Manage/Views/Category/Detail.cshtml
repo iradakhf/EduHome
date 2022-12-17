@@ -1,0 +1,71 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Detail";
+    int counter = 1;
+}
+
+<h1 class="h3 mb-4 text-gray-800"> Category Detail</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Course
+                    </th>
+                    <th>
+                        Blog
+                    </th>
+                    <th>
+                        Event
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Model.Name
+                        </td>
+                    <td>
+                        @foreach (Course course in Model.Courses)
+                        {
+
+                            @course.Name;
+                            
+                        }
+
+                    </td>
+
+                        <td>
+                        @foreach (Blog blog in Model.Blogs)
+                        {
+                            @blog.Title;
+                            
+                    }
+                        </td>
+                            <td>
+                        @foreach (Event event1 in Model.Events)
+                        {
+                                @event1.Name;
+                        }
+                            </td>
+
+
+                    </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

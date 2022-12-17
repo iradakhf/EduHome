@@ -76,8 +76,6 @@ namespace EduHomeBack.Models
         [NotMapped]
         public List<int> TagIds { get; set; }
 
-        [NotMapped]
-        public IEnumerable<CourseTag> CourseTag { get; set; }
 
 
     }
