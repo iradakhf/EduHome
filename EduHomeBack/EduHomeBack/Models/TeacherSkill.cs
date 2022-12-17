@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EduHomeBack.Models
 {
-    public class TeacherSkill
+    public class TeacherSkill : BaseEntity
     {
         public int Id { get; set; }
 

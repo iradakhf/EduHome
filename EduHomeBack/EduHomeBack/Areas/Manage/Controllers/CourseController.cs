@@ -27,9 +27,9 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
            IEnumerable<Course> courses = await _appDbContext.Courses
                 .Include(c => c.Category)
-                .Include(c=>c.Teacher)
-                .Include(c=>c.CourseTags)
-                .ThenInclude(c=>c.Tag)
+                .Include(c => c.Teacher)
+                .Include(c => c.CourseTags)
+                .ThenInclude(c => c.Tag)
                 .Where(c => c.IsDeleted == false).ToListAsync();
 
             return View(courses);
@@ -145,9 +145,14 @@ namespace EduHomeBack.Areas.Manage.Controllers
             }
             foreach (int tagId in course.TagIds)
             {
+                if (course.TagIds.Where(t => t== tagId).Count()>1)
+                {
+                    ModelState.AddModelError("TagIds", "only one same tag can be chosen");
+                    return View(course);
+                }
                 if (!await _appDbContext.Tags.AnyAsync(t => t.IsDeleted == false && t.Id == tagId))
                 {
-                    ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                    ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
                     return View(course);
                 }
             }

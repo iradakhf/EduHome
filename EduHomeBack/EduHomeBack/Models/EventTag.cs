@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EduHomeBack.Models
 {
-    public class EventTag
+    public class EventTag : BaseEntity
     {
         public int Id { get; set; }
 

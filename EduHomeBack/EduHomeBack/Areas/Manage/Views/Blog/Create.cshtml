@@ -3,6 +3,7 @@
     ViewData["Title"] = "Create";
     IEnumerable<Category> categories = ViewBag.Categories;
     IEnumerable<Tag> tags = ViewBag.Tags;
+
     SelectList selectCategoryListItems = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
     SelectList selectTagListItems = new SelectList(tags, nameof(Tag.Id), nameof(Tag.Name));
 
@@ -39,12 +40,12 @@
                 <input asp-for="File" class="form-control" placeholder="Image File">
                 <span asp-validation-for="File" class="text text-danger"></span>
             </div>
-            <div class="form-group">
+            <div id="parentList" class="form-group">
                 <label>Catgeory</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="selectCategoryListItems">
                 </select>
             </div>
-            <div class="form-group">
+            <div id="parentList" class="form-group">
                 <label>Tag</label>
                 <select asp-for="TagIds" multiple class="form-control" asp-items="selectTagListItems">
                 </select>

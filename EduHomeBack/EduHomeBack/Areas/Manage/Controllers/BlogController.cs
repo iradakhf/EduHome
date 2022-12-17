@@ -86,9 +86,14 @@ namespace EduHomeBack.Areas.Manage.Controllers
             }
             foreach (int tagId in blog.TagIds)
             {
+                if (blog.TagIds.Where(t => t == tagId).Count() > 1)
+                {
+                    ModelState.AddModelError("TagIds", "only one same tag can be chosen");
+                    return View(blog);
+                }
                 if (!await _appDbContext.Tags.AnyAsync(t => t.Id == tagId))
                 {
-                    ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                    ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
                     return View(blog);
                 }
             }

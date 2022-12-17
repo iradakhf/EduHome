@@ -35,6 +35,7 @@ namespace EduHomeBack.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
+  
         public IEnumerable<EventTag> EventTags { get; set; }
 
         [NotMapped]
@@ -42,5 +43,8 @@ namespace EduHomeBack.Models
 
         [NotMapped]
         public IFormFile File { get; set; }
+        [NotMapped]
+        public IEnumerable<EventSpeaker> EventSpeaker { get; set; }
+
     }
 }

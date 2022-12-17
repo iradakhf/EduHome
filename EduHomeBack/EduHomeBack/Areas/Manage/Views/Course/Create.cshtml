@@ -85,17 +85,17 @@
                 <input asp-for="Language" class="form-control" placeholder="Language">
                 <span asp-validation-for="Language" class="text text-danger"></span>
             </div>
-            <div class="form-group">
+            <div id="parentList" class="form-group">
                 <label>Catgeory</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="selectCategoryListItems">
                 </select>
             </div>
-            <div class="form-group">
+            <div id="parentList" class="form-group">
                 <label>Teacher</label>
                 <select asp-for="TeacherId" class="form-control" asp-items="selectTeacherListItems">
                 </select>
             </div>
-            <div class="form-group">
+            <div id="parentList" class="form-group">
                 <label>Tag</label>
                 <select asp-for="TagIds" multiple class="form-control" asp-items="selectTagListItems">
                 </select>

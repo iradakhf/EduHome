@@ -81,63 +81,64 @@ namespace EduHomeBack.Areas.Manage.Controllers
         }
 
 
-        public async Task<IActionResult> Update(int? id)
-        {
-            if (id == null)
-            {
-                return BadRequest("id can not be null");
-            }
-            Skill skill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
-            if (skill == null)
-            {
-                return NotFound("skill not found");
-            }
-            return View(skill);
+        //public async Task<IActionResult> Update(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return BadRequest("id can not be null");
+        //    }
+        //    Skill skill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+        //    if (skill == null)
+        //    {
+        //        return NotFound("skill not found");
+        //    }
+        //    return View(skill);
 
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Skill skill)
-        {
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Update(int? id, Skill skill)
+        //{
 
-            if (!ModelState.IsValid)
-            {
-                return View(skill);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(skill);
+        //    }
 
-            if (skill.Id != id)
-            {
-                return BadRequest("id can not be null");
-            }
-            if (string.IsNullOrWhiteSpace(skill.Name))
-            {
-                ModelState.AddModelError("Name", "Bosluq Olmamalidir");
-                return View(skill);
-            }
-            Skill dbSkill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+        //    if (skill.Id != id)
+        //    {
+        //        return BadRequest("id can not be null");
+        //    }
+        //    if (string.IsNullOrWhiteSpace(skill.Name))
+        //    {
+        //        ModelState.AddModelError("Name", "Bosluq Olmamalidir");
+        //        return View(skill);
+        //    }
+        //    Skill dbSkill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
 
-            if (dbSkill == null)
-            {
-                return NotFound("doesnt exist");
-            }
-            if (dbSkill.Name.Trim().ToLower() == skill.Name.Trim().ToLower())
-            {
-                ModelState.AddModelError("Name", "please enter another name");
-                return View(skill);
-            }
+        //    if (dbSkill == null)
+        //    {
+        //        return NotFound("doesnt exist");
+        //    }
+        //    if (dbSkill.Name.Trim().ToLower() == skill.Name.Trim().ToLower())
+        //    {
+        //        ModelState.AddModelError("Name", "please enter another name");
+        //        return View(skill);
+        //    }
 
-            if (await _appDbContext.Skills.AnyAsync(t => t.Id != id && t.Name.ToLower().Trim() == skill.Name.ToLower().Trim()))
-            {
-                ModelState.AddModelError("Name", "Already Exists");
-                return View(dbSkill);
-            }
+        //    if (await _appDbContext.Skills.AnyAsync(t => t.Id != id && t.Name.ToLower().Trim() == skill.Name.ToLower().Trim()))
+        //    {
+        //        ModelState.AddModelError("Name", "Already Exists");
+        //        return View(dbSkill);
+        //    }
 
-            dbSkill.Name = skill.Name;
-            dbSkill.UpdatedAt = DateTime.UtcNow.AddHours(4);
-            dbSkill.UpdatedBy = "System";
-            await _appDbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //    dbSkill.Name = skill.Name;
+        //    teacher.Image = teacher.File.CreateFile(_env, "img", "event");
+        //    dbSkill.UpdatedAt = DateTime.UtcNow.AddHours(4);
+        //    dbSkill.UpdatedBy = "System";
+        //    await _appDbContext.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
 
     }

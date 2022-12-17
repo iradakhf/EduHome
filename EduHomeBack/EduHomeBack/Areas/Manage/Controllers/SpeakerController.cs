@@ -128,6 +128,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             }
             dbSpeaker.Name = speaker.Name;
             dbSpeaker.Surname = speaker.Surname;
+            dbSpeaker.Image = dbSpeaker.File.CreateFile(_env, "img", "teacher");
             dbSpeaker.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbSpeaker.UpdatedBy = "System";
             await _appDbContext.SaveChangesAsync();

@@ -100,14 +100,21 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(event1);
             }
+            List<EventTag> eventTags = new List<EventTag>();
             foreach (int tagId in event1.TagIds)
             {
+                if (event1.TagIds.Where(t => t == tagId).Count() > 1)
+                {
+                    ModelState.AddModelError("TagIds", "only one same tag can be chosen");
+                    return View(event1);
+                }
                 if (!await _appDbContext.Tags.AnyAsync(t =>t.IsDeleted==false && t.Id == tagId))
                 {
-                    ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                    ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
                     return View(event1);
                 }
             }
+           
             
             if (event1.File == null)
             {

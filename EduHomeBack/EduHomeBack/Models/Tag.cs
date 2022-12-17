@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduHomeBack.Models
 {
@@ -13,8 +14,11 @@ namespace EduHomeBack.Models
         public string Name { get; set; }
 
         
+
         public IEnumerable<BlogTag> BlogTags { get; set; }
+
         public IEnumerable<EventTag> EventTags { get; set; }
+
         public IEnumerable<CourseTag> CourseTags { get; set; }
 
 
