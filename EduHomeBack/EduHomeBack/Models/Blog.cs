@@ -11,15 +11,19 @@ namespace EduHomeBack.Models
     public class Blog : BaseEntity
     {
         [StringLength(100)]
+        [Required]
         public string Title { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string Author { get; set; }
+        [Required]
         public DateTime Date { get; set; }
 
         [StringLength(100)]
         public string Image { get; set; }
 
+        [Required]
         [StringLength(3000)]
         public string Description { get; set; }
 
@@ -28,7 +32,7 @@ namespace EduHomeBack.Models
         public IEnumerable<BlogTag> BlogTags { get; set; }
 
         [NotMapped]
-        public IEnumerable<int> TagIds { get; set; }
+        public List<int> TagIds { get; set; }
         [NotMapped]
         public IFormFile File { get; set; }
     }

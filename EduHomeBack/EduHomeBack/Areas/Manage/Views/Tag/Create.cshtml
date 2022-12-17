@@ -1,0 +1,21 @@
+﻿@model Tag
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="h3 mb-4 text-gray-800">Create Tag</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Name">
+                <span asp-validation-for="Name" class="text text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

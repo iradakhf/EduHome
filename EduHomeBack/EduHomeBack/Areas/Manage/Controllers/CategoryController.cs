@@ -104,7 +104,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View(category);
             }
 
-            if (await _appDbContext.Categories.AnyAsync(t => t.Id != id && t.Name.ToLower().Trim() == category.Name.ToLower().Trim()))
+            if (await _appDbContext.Categories.AnyAsync(t => t.Id != id && t.Name.ToLower().Trim() 
+            == category.Name.ToLower().Trim()))
             {
                 ModelState.AddModelError("Name", "Already Exists");
                 return View(dbCategory);

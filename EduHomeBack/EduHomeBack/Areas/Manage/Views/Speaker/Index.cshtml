@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Speaker>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 1;
+}
+<div class="row justify-content-between">
+    <div class="col-lg-2">
+        <h1 class="h3 mb-4 text-gray-800">Speaker Page</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        N:
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        FullName
+                    </th>
+                    <th>
+                        Position
+                    </th>
+                    <th>
+                        Created at
+                    </th>
+                    <th>
+                        Updated at
+                    </th>
+                    <th>
+                        Setting
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Speaker speaker in Model)
+                {
+
+                <tr>
+                    <td>
+                        @counter
+                    </td>
+                    <td>
+                        <img width="100" src="~/img/teacher/@speaker.Image" />
+                    </td>
+
+                    <td>
+                        @speaker.Name @speaker.Surname
+                    </td>
+
+                    <td>
+                        @speaker.Position
+                    </td>
+                    <td>
+                        @speaker.CreatedAt?.ToString("dd/mm/yyyy")
+                    </td>
+                    <td>
+                        @speaker.UpdatedAt?.ToString("dd/mm/yyyy")
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-area="manage" asp-controller="speaker" asp-action="update" asp-route-id="@speaker.Id">Update</a>
+
+                    </td>
+                </tr>
+                    counter++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

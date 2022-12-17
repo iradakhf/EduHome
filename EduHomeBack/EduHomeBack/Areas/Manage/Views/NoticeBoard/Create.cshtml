@@ -1,7 +1,32 @@
-﻿
+﻿@model NoticeBoard
 @{
     ViewData["Title"] = "Create";
+
 }
 
-<h1>Create</h1>
-
+<h1 class="h3 mb-4 text-gray-800">Create NoticeBoard</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Text">Text</label>
+                <input asp-for="Text" class="form-control" placeholder="Text">
+                <span asp-validation-for="Text" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date">Date</label>
+                <input type="date" asp-for="Date" class="form-control" placeholder="Date">
+                <span asp-validation-for="Date" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File">Image File</label>
+                <input asp-for="File" class="form-control" placeholder="Image File">
+                <span asp-validation-for="File" class="text text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

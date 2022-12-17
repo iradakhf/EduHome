@@ -10,20 +10,25 @@ namespace EduHomeBack.Models
 {
     public class Event : BaseEntity
     {
+        [Required]
         [StringLength(100)]
         public string Name { get; set; }
 
         [StringLength(50)]
         public string Image { get; set; }
-
+        [Required]
         public DateTime Date { get; set; }
+        [Required]
         public DateTime StartTime { get; set; }
+        [Required]
         public DateTime EndTime { get; set; }
 
         [StringLength(100)]
+        [Required]
         public string Venue { get; set; }
 
         [StringLength(1000)]
+        [Required]
         public string Description { get; set; }
 
 

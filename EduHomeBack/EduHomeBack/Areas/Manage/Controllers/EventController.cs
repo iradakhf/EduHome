@@ -89,27 +89,32 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             }
 
-            if (await _appDbContext.Events.AnyAsync(c => c.IsDeleted == false && c.Name.ToLower().Trim() == event1.Name.ToLower().Trim()))
+            if (await _appDbContext.Events.AnyAsync(c => c.IsDeleted == false && c.Name.ToLower()
+            .Trim() == event1.Name.ToLower().Trim()))
             {
                 ModelState.AddModelError("Name", "Name already exists");
                 return View(event1);
             }
-            if (!await _appDbContext.Events.AnyAsync(c => c.IsDeleted == false && c.Id == event1.CategoryId))
+            if (!await _appDbContext.Events.AnyAsync(c => c.IsDeleted == false && c.CategoryId == event1.CategoryId))
             {
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(event1);
             }
-            if (!await _appDbContext.Events.AnyAsync(c => c.IsDeleted == false && event1.TagIds.Contains(c.Id)))
+            foreach (int tagId in event1.TagIds)
             {
-                ModelState.AddModelError("TagId", "Tag is not correctly chosen");
-                return View(event1);
+                if (!await _appDbContext.Tags.AnyAsync(t =>t.IsDeleted==false && t.Id == tagId))
+                {
+                    ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                    return View(event1);
+                }
             }
+            
             if (event1.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            event1.Image = event1.File.CreateFile(_env, "img", "course");
+            event1.Image = event1.File.CreateFile(_env, "img", "event");
             event1.Name = event1.Name.Trim();
             event1.Venue = event1.Venue.Trim();
             event1.StartTime = event1.StartTime;

@@ -9,6 +9,7 @@ namespace EduHomeBack.Models
     public class Skill : BaseEntity
     {
         [StringLength(100)]
+        [Required]
         public string Name { get; set; }
     }
 }

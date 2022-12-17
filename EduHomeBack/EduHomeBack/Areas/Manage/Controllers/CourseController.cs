@@ -48,8 +48,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Course course)
         {
-            ViewBag.Category = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
-            ViewBag.Teacher = await _appDbContext.Teachers.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Categories = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Teachers = await _appDbContext.Teachers.Where(c => c.IsDeleted == false).ToListAsync();
             ViewBag.Tags = await _appDbContext.Tags.Where(c => c.IsDeleted == false).ToListAsync();
 
             if (!ModelState.IsValid)
@@ -133,21 +133,25 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Name", "Name already exists");
                 return View(course);
             }
-            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted==false && c.Id == course.CategoryId))
+            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted==false && c.CategoryId == course.CategoryId))
             {
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(course);
             }
-            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted == false && c.Id == course.TeacherId))
+            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted == false && c.TeacherId == course.TeacherId))
             {
                 ModelState.AddModelError("TeacherId", "Teacher is not correctly chosen");
                 return View(course);
             }
-            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted == false && course.TagIds.Contains(c.Id)))
+            foreach (int tagId in course.TagIds)
             {
-                ModelState.AddModelError("TagId", "Tag is not correctly chosen");
-                return View(course);
+                if (!await _appDbContext.Tags.AnyAsync(t => t.IsDeleted == false && t.Id == tagId))
+                {
+                    ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                    return View(course);
+                }
             }
+           
             if (course.File == null)
             {
                 ModelState.AddModelError("File", "File is required");

@@ -79,22 +79,25 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Title", "Title already exists");
                 return View(blog);
             }
-            if (!await _appDbContext.Blogs.AnyAsync(b => b.IsDeleted == false && b.Id == blog.CategoryId))
+            if (!await _appDbContext.Blogs.AnyAsync(b => b.IsDeleted == false && b.CategoryId == blog.CategoryId))
             {
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(blog);
             }
-            if (!await _appDbContext.Blogs.AnyAsync(b => b.IsDeleted == false && blog.TagIds.Contains(b.Id)))
+            foreach (int tagId in blog.TagIds)
             {
-                ModelState.AddModelError("TagId", "Tag is not correctly chosen");
-                return View(blog);
+                if (!await _appDbContext.Tags.AnyAsync(t => t.Id == tagId))
+                {
+                    ModelState.AddModelError("TagId", "Tag is not correctly chosen");
+                    return View(blog);
+                }
             }
             if (blog.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            blog.Image = blog.File.CreateFile(_env, "img", "course");
+            blog.Image = blog.File.CreateFile(_env, "img", "blog");
             blog.Title = blog.Title.Trim();
             blog.Author = blog.Author.Trim();
             blog.Date = blog.Date;

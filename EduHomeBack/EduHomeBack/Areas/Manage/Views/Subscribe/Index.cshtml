@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Subscribe>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 1;
+}
+<div class="row justify-content-between">
+    <div class="col-lg-2">
+        <h1 class="h3 mb-4 text-gray-800">Subscribe Page</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Subscribe subscribe in Model)
+                {
+
+                <tr>
+                    <td>
+                        @counter
+                    </td>
+                    <td>
+                        @subscribe.Email
+                    </td>
+                </tr>
+                    counter++;
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

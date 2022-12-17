@@ -11,8 +11,10 @@ namespace EduHomeBack.Models
     public class Settings : BaseEntity
     {
         [StringLength(1000)]
+        [Required]
         public string Key { get; set; }
         [StringLength(1000)]
+        [Required]
         public string Value { get; set; }
 
     }

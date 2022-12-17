@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Slider>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 1;
+}
+<div class="row justify-content-between">
+    <div class="col-lg-2">
+        <h1 class="h3 mb-4 text-gray-800">Slider Page</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Link
+                    </th>
+                    <th>
+                        Created at
+                    </th>
+                    <th>
+                        Updated at
+                    </th>
+                    <th>
+                        Setting
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Slider item in Model)
+                {
+                    <tr>
+                        <td>
+                            @counter
+                        </td>
+                        <td>
+                            <img width="100" src="~/img/slider/@item.Image" />
+                        </td>
+
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.Link
+                        </td>
+                        <td>
+                            @item.CreatedAt?.ToString("dd/mm/yyyy")
+                        </td>
+                        <td>
+                            @item.UpdatedAt?.ToString("dd/mm/yyyy")
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" asp-area="manage" asp-controller="slider" asp-action="update" asp-route-id="@item.Id">Update</a>
+
+                        </td>
+                    </tr>
+                    counter++;
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

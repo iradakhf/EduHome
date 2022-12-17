@@ -11,7 +11,7 @@
 
 }
 
-<h1 class="h3 mb-4 text-gray-800">Create Brand</h1>
+<h1 class="h3 mb-4 text-gray-800">Create Course</h1>
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <form method="post" enctype="multipart/form-data">
@@ -20,7 +20,7 @@
                 <input asp-for="Name" class="form-control" placeholder="Name">
                 <span asp-validation-for="Name" class="text text-danger"></span>
             </div>
-           <div class="form-group">
+            <div class="form-group">
                 <label asp-for="About">About</label>
                 <input asp-for="About" class="form-control" placeholder="About">
                 <span asp-validation-for="About" class="text text-danger"></span>
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Certification">Certification</label>
-                <input asp-for="Certification" class="form-control" placeholder="IsNewArrival">
+                <input asp-for="Certification" class="form-control" placeholder="Certification">
                 <span asp-validation-for="Certification" class="text text-danger"></span>
             </div>
             <div class="form-group">
@@ -56,9 +56,14 @@
                 <span asp-validation-for="Duration" class="text text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fee">Main Image File</label>
+                <label asp-for="Fee">Fee</label>
                 <input asp-for="Fee" class="form-control" placeholder="Fee">
                 <span asp-validation-for="Fee" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Starts">Starts</label>
+                <input type="time" asp-for="Starts" class="form-control" placeholder="Starts">
+                <span asp-validation-for="Starts" class="text text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="File">Image File</label>
@@ -66,9 +71,19 @@
                 <span asp-validation-for="File" class="text text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HowToApply">Product Image Files</label>
+                <label asp-for="HowToApply">HowToApply</label>
                 <input asp-for="HowToApply" class="form-control" placeholder="HowToApply">
                 <span asp-validation-for="HowToApply" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillLevel">SkillLevel</label>
+                <input asp-for="SkillLevel" class="form-control" placeholder="SkillLevel">
+                <span asp-validation-for="SkillLevel" class="text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language">Language</label>
+                <input asp-for="Language" class="form-control" placeholder="Language">
+                <span asp-validation-for="Language" class="text text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Catgeory</label>

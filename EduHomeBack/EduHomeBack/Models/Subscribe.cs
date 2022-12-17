@@ -13,5 +13,6 @@ namespace EduHomeBack.Models
         [StringLength(100)]
         [Required]
         public string Email { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

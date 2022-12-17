@@ -17,7 +17,9 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-
+                    <th>
+                        №
+                    </th>
                     <th>
                         Image
                     </th>
@@ -77,6 +79,7 @@
                             <a class="btn btn-warning" asp-area="manage" style="width: 70%; margin-bottom: 20px; background-color: green " asp-controller="event" asp-action="detail" asp-route-id="@event1.Id">Detail</a>
                         </td>
                     </tr>
+                    counter++;
                 }
 
 
