@@ -43,9 +43,12 @@ namespace EduHomeBack.Models
         public IEnumerable<int> TagIds { get; set; }
 
         [NotMapped]
+        public IEnumerable<int> SpeakerIds { get; set; }
+
+        [NotMapped]
         public IFormFile File { get; set; }
         [NotMapped]
-        public IEnumerable<EventSpeaker> EventSpeaker { get; set; }
+        public IEnumerable<EventSpeaker> EventSpeakers { get; set; }
 
     }
 }
