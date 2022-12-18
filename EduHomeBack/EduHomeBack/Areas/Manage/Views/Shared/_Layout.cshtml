@@ -45,110 +45,151 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="dashboard" asp-action="index">
-                    <span>Dashboard</span>
-                </a>
-            </li>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="dashboard" asp-action="index">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
-            <div class="sidebar-heading">
-                Category
-            </div>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Category" asp-action="index">
-                    <span>Category</span>
-                </a>
-            </li>
-            <div class="sidebar-heading">
-                Course
-            </div>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Course" asp-action="index">
-                    <span>Course</span>
-                </a>
-            </li>
-            <div class="sidebar-heading">
-                Banner
-            </div>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Banner" asp-action="index">
-                    <span>Banner</span>
-                </a>
-            </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <div class="sidebar-heading">
+                    Category
+                </div>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Category" asp-action="index">
+                        <span>Category</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <div class="sidebar-heading">
+                    Course
+                </div>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Course" asp-action="index">
+                        <span>Course</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="sidebar-heading">
+                    Banner
+                </div>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Banner" asp-action="index">
+                        <span>Banner</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Blog" asp-action="index">
+                        <span>Blog</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Event" asp-action="index">
+                        <span>Event</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="NoticeBoard" asp-action="index">
+                        <span>NoticeBoard</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Position" asp-action="index">
+                        <span>Position</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Setting" asp-action="index">
+                        <span>Setting</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Skill" asp-action="index">
+                        <span>Skill</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Slider" asp-action="index">
+                        <span>Slider</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Speaker" asp-action="index">
+                        <span>Speaker</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Subscribe" asp-action="index">
+                        <span>Subscribe</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Tag" asp-action="index">
+                        <span>Tag</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Teacher" asp-action="index">
+                        <span>Teacher</span>
+                    </a>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="Testimonial" asp-action="index">
+                        <span>Testimonial</span>
+                    </a>
+                </li>
+            }
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
 
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Blog" asp-action="index">
-                    <span>Blog</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Event" asp-action="index">
-                    <span>Event</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="NoticeBoard" asp-action="index">
-                    <span>NoticeBoard</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Position" asp-action="index">
-                    <span>Position</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Setting" asp-action="index">
-                    <span>Setting</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Skill" asp-action="index">
-                    <span>Skill</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Slider" asp-action="index">
-                    <span>Slider</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Speaker" asp-action="index">
-                    <span>Speaker</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Subscribe" asp-action="index">
-                    <span>Subscribe</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Tag" asp-action="index">
-                    <span>Tag</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Teacher" asp-action="index">
-                    <span>Teacher</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="Manage" asp-controller="Testimonial" asp-action="index">
-                    <span>Testimonial</span>
-                </a>
-            </li>
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="~/areaManage/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
-
-        </ul>
+              
+            </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">

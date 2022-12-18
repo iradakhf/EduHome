@@ -8,10 +8,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using EduHomeBack.Extension;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize]
     public class TestimonialController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -81,15 +83,13 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Description", "can not submit white space");
                 return View(dbTestimonial);
             }
-            foreach (int positionId in testimonial.PositionIds)
-            {
-                if (!await _appDbContext.Positions.AnyAsync(t =>t.IsDeleted==false && t.Id == positionId))
+            if (!await _appDbContext.Positions.AnyAsync(t =>t.IsDeleted==false && t.Id == testimonial.PositionId))
                 {
                     ModelState.AddModelError("PositionId", "Position is not correctly chosen");
                     return View(testimonial);
                 }
-            }
-           
+            
+          
             if (testimonial.File == null)
             {
                 ModelState.AddModelError("File", "File is required");

@@ -8,11 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
 
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin")]
+
     public class CourseController : Controller
     {
         private readonly AppDbContext _appDbContext;

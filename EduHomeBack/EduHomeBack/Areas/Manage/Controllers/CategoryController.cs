@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles ="SuperAdmin")]
     public class CategoryController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -133,6 +135,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             return View(category);
         }
+
 
 
         public async Task<IActionResult> Delete(int? id)

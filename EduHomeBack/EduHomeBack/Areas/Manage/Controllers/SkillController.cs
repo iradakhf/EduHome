@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize]
+
     public class SkillController : Controller
     {
         private readonly AppDbContext _appDbContext;

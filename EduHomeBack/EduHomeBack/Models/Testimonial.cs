@@ -22,8 +22,6 @@ namespace EduHomeBack.Models
         public string Description { get; set; }
         [NotMapped]
         public IFormFile File { get; set; }
-        [NotMapped]
-        public List<int> PositionIds { get; set; }
         public int PositionId { get; set; }
         public Position Position { get; set; }
 

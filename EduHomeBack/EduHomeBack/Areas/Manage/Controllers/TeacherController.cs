@@ -1,6 +1,7 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
 using EduHomeBack.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin")]
+
     public class TeacherController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -26,8 +29,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
             IEnumerable<Teacher> teachers = await _appDbContext.Teachers
                  .Include(b => b.TeacherSkills)
-                 .ThenInclude(t=>t.Skill)
-                 .Include(t=>t.Position)
+                 .ThenInclude(t => t.Skill)
+                 .Include(t => t.Position)
                  .Where(c => c.IsDeleted == false).ToListAsync();
 
             return View(teachers);
@@ -135,8 +138,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View(teacher);
 
             }
-           
-                if (teacher.TeacherSkills != null && teacher.TeacherSkills.Count() > 0)
+
+            if (teacher.TeacherSkills != null && teacher.TeacherSkills.Count() > 0)
             {
                 List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
                 foreach (int skillId in teacher.SkillIds)
@@ -167,14 +170,13 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("SkillIds", "the field is required");
                 return View(teacher);
             }
-            foreach (int positionId in teacher.PositionIds)
+
+            if (!await _appDbContext.Positions.AnyAsync(t => t.Id == teacher.PositionId))
             {
-                if (!await _appDbContext.Positions.AnyAsync(t => t.Id == positionId))
-                {
-                    ModelState.AddModelError("PositionId", "Position is not correctly chosen");
-                    return View(teacher);
-                }
+                ModelState.AddModelError("PositionId", "Position is not correctly chosen");
+                return View(teacher);
             }
+
 
             if (teacher.File == null)
             {
@@ -356,96 +358,96 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 }
                 teacher.TeacherSkills = teacherSkills;
             }
-            foreach (int positionId in teacher.PositionIds)
+
+            if (!await _appDbContext.Positions.AnyAsync(t => t.Id == teacher.PositionId))
             {
-                if (!await _appDbContext.Positions.AnyAsync(t => t.Id == positionId))
+                ModelState.AddModelError("PositionId", "Position is not correctly chosen");
+                return View(teacher);
+            }
+                if (teacher.File == null)
                 {
-                    ModelState.AddModelError("PositionId", "Position is not correctly chosen");
-                    return View(teacher);
+                    ModelState.AddModelError("File", "File is required");
+                    return View();
                 }
-            }
-            if (teacher.File == null)
-            {
-                ModelState.AddModelError("File", "File is required");
-                return View();
-            }
 
-            if (teacher.File.ContentType != "image/png")
-            {
-                ModelState.AddModelError("File", "file type should be jpeg or jpg");
-                return View();
-            }
-            if (teacher.File.Length > 40000)
-            {
-                ModelState.AddModelError("File", "file length should be less than 40k");
-                return View();
-            }
+                if (teacher.File.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                    return View();
+                }
+                if (teacher.File.Length > 40000)
+                {
+                    ModelState.AddModelError("File", "file length should be less than 40k");
+                    return View();
+                }
 
-          
-       
+
+
                 dbTeacher.Image = teacher.File.CreateFile(_env, "img", "teacher");
-   
-    
-            dbTeacher.Name = teacher.Name.Trim();
-            dbTeacher.About = teacher.About.Trim();
-            dbTeacher.Degree = teacher.Degree.Trim();
-            dbTeacher.Email = teacher.Email.Trim();
-            dbTeacher.Experience = teacher.Experience.Trim();
-            dbTeacher.FacebookUrl = teacher.FacebookUrl.Trim();
-            dbTeacher.Faculty = teacher.Faculty.Trim();
-            dbTeacher.Hobbies = teacher.Hobbies.Trim();
-            dbTeacher.PhoneNumber = teacher.PhoneNumber.Trim();
-            dbTeacher.PinterestUrl = teacher.PinterestUrl.Trim();
-            dbTeacher.Surname = teacher.Surname.Trim();
-            dbTeacher.TwitterUrl = teacher.TwitterUrl.Trim();
-            dbTeacher.VUrl = teacher.VUrl.Trim();
-            dbTeacher.PositionId = teacher.PositionId;
-            dbTeacher.TeacherSkills = teacher.TeacherSkills;
-            dbTeacher.IsDeleted = false;
-            dbTeacher.CreatedAt = DateTime.UtcNow.AddHours(4);
-            dbTeacher.CreatedBy = "System";
-            await _appDbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+
+                dbTeacher.Name = teacher.Name.Trim();
+                dbTeacher.About = teacher.About.Trim();
+                dbTeacher.Degree = teacher.Degree.Trim();
+                dbTeacher.Email = teacher.Email.Trim();
+                dbTeacher.Experience = teacher.Experience.Trim();
+                dbTeacher.FacebookUrl = teacher.FacebookUrl.Trim();
+                dbTeacher.Faculty = teacher.Faculty.Trim();
+                dbTeacher.Hobbies = teacher.Hobbies.Trim();
+                dbTeacher.PhoneNumber = teacher.PhoneNumber.Trim();
+                dbTeacher.PinterestUrl = teacher.PinterestUrl.Trim();
+                dbTeacher.Surname = teacher.Surname.Trim();
+                dbTeacher.TwitterUrl = teacher.TwitterUrl.Trim();
+                dbTeacher.VUrl = teacher.VUrl.Trim();
+                dbTeacher.PositionId = teacher.PositionId;
+                dbTeacher.TeacherSkills = teacher.TeacherSkills;
+                dbTeacher.IsDeleted = false;
+                dbTeacher.CreatedAt = DateTime.UtcNow.AddHours(4);
+                dbTeacher.CreatedBy = "System";
+                await _appDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            
         }
-        public async Task<IActionResult> Detail(int? id)
-        {
-
-            if (id == null) return BadRequest("bad request");
-
-            Teacher teacher = await _appDbContext.Teachers
-                .Include(c => c.Position)
-                .Include(c => c.TeacherSkills)
-                .ThenInclude(c=>c.Skill)
-                .Include(t=>t.Courses)
-                .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted == false);
-
-            if (teacher == null) return NotFound("can not find");
-
-            return View(teacher);
-        }
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return BadRequest("id can not be null");
-            IEnumerable<Teacher> teachers = await _appDbContext.Teachers.Where(b => b.IsDeleted == false).ToListAsync();
-            if (teachers.Count() < 7)
+            public async Task<IActionResult> Detail(int? id)
             {
+
+                if (id == null) return BadRequest("bad request");
+
+                Teacher teacher = await _appDbContext.Teachers
+                    .Include(c => c.Position)
+                    .Include(c => c.TeacherSkills)
+                    .ThenInclude(c => c.Skill)
+                    .Include(t => t.Courses)
+                    .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted == false);
+
+                if (teacher == null) return NotFound("can not find");
+
+                return View(teacher);
+            }
+            public async Task<IActionResult> Delete(int? id)
+            {
+                if (id == null) return BadRequest("id can not be null");
+                IEnumerable<Teacher> teachers = await _appDbContext.Teachers.Where(b => b.IsDeleted == false).ToListAsync();
+                if (teachers.Count() < 7)
+                {
+                    return RedirectToAction("Index");
+                }
+                Teacher teacher = await _appDbContext.Teachers
+                   .Include(c => c.TeacherSkills)
+                   .ThenInclude(b => b.Skill)
+                   .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+
+                if (teacher == null)
+                {
+                    return NotFound("can not find teacher with this id");
+                }
+
+                teacher.IsDeleted = true;
+                teacher.DeletedAt = DateTime.UtcNow.AddHours(4);
+                teacher.DeletedBy = "System";
+                await _appDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            Teacher teacher = await _appDbContext.Teachers
-               .Include(c => c.TeacherSkills)
-               .ThenInclude(b => b.Skill)
-               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
-         
-            if (teacher == null)
-            {
-                return NotFound("can not find teacher with this id");
-            }
-          
-            teacher.IsDeleted = true;
-            teacher.DeletedAt = DateTime.UtcNow.AddHours(4);
-            teacher.DeletedBy = "System";
-            await _appDbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
         }
     }
-}
+

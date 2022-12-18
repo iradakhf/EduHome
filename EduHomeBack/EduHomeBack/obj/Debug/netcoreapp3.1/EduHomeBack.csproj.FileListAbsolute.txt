@@ -227,3 +227,10 @@ C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\R
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Teacher\Detail.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Speaker\Update.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Speaker\Create.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Account\Register.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Account\Login.cshtml.g.cs

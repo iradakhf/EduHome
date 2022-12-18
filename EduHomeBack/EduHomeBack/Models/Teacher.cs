@@ -78,8 +78,6 @@ namespace EduHomeBack.Models
         public IFormFile File { get; set; }
         [NotMapped]
         public List<int> SkillIds { get; set; }
-        [NotMapped]
-        public List<int> PositionIds { get; set; }
 
         public IEnumerable<TeacherSkill> TeacherSkills { get; set; }
         public IEnumerable<Course> Courses { get; set; }

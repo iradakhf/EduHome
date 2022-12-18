@@ -8,10 +8,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using EduHomeBack.Extension;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize]
     public class BannerController : Controller
     {
         private readonly AppDbContext _appDbContext;

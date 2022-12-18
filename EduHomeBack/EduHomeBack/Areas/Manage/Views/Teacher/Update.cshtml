@@ -91,6 +91,8 @@
                 <label>Position</label>
                 <select asp-for="PositionId" class="form-control" asp-items="selectPositionListItems">
                 </select>
+                <span asp-validation-for="PositionId" class="text text-danger"></span>
+
             </div>
             <div id="parentList" class="form-group">
                 <label>Skill</label>

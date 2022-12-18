@@ -1,6 +1,7 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
 using EduHomeBack.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize]
+
     public class SliderController : Controller
     {
         private readonly AppDbContext _appDbContext;
