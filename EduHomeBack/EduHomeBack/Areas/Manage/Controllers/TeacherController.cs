@@ -308,30 +308,33 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View(teacher);
 
             }
-            List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
-            foreach (int skillId in teacher.SkillIds)
+            if (teacher.TeacherSkills != null && teacher.TeacherSkills.Count() > 0)
             {
-                if (teacher.SkillIds.Where(t => t == skillId).Count() > 1)
-                {
-                    ModelState.AddModelError("SkillIds", "only one same skill can be chosen");
-                    return View(teacher);
-                }
-                if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
-                {
-                    ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
-                    return View(teacher);
-                }
-                TeacherSkill teacherSkill = new TeacherSkill
-                {
-                    UpdatedAt = DateTime.UtcNow.AddHours(4),
-                    UpdatedBy = "Me",
-                    IsDeleted = false,
-                    SkillId = skillId
-                };
-                teacherSkills.Add(teacherSkill);
-            }
-            teacher.TeacherSkills = teacherSkills;
 
+                List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
+                foreach (int skillId in teacher.SkillIds)
+                {
+                    if (teacher.SkillIds.Where(t => t == skillId).Count() > 1)
+                    {
+                        ModelState.AddModelError("SkillIds", "only one same skill can be chosen");
+                        return View(teacher);
+                    }
+                    if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
+                    {
+                        ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
+                        return View(teacher);
+                    }
+                    TeacherSkill teacherSkill = new TeacherSkill
+                    {
+                        UpdatedAt = DateTime.UtcNow.AddHours(4),
+                        UpdatedBy = "Me",
+                        IsDeleted = false,
+                        SkillId = skillId
+                    };
+                    teacherSkills.Add(teacherSkill);
+                }
+                teacher.TeacherSkills = teacherSkills;
+            }
             foreach (int positionId in teacher.PositionIds)
             {
                 if (!await _appDbContext.Positions.AnyAsync(t => t.Id == positionId))
@@ -361,11 +364,10 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbTeacher.TwitterUrl = teacher.TwitterUrl.Trim();
             dbTeacher.VUrl = teacher.VUrl.Trim();
             dbTeacher.PositionId = teacher.PositionId;
-            dbTeacher.SkillIds = teacher.SkillIds;
+            dbTeacher.TeacherSkills = teacher.TeacherSkills;
             dbTeacher.IsDeleted = false;
             dbTeacher.CreatedAt = DateTime.UtcNow.AddHours(4);
             dbTeacher.CreatedBy = "System";
-            await _appDbContext.Teachers.AddAsync(teacher);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -377,26 +379,12 @@ namespace EduHomeBack.Areas.Manage.Controllers
                .Include(c => c.TeacherSkills)
                .ThenInclude(b => b.Skill)
                .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
-            List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
-            foreach (int skillId in teacher.SkillIds)
-            {
-
-                if (teacher.SkillIds != null && teacher.SkillIds.Where(t => t == skillId).Count() > 0)
-                {
-                    TeacherSkill teacherSkill = new TeacherSkill
-                    {
-                        DeletedAt = DateTime.UtcNow.AddHours(4),
-                        DeletedBy = "Me",
-                        IsDeleted = true,
-                    };
-                    teacherSkills.Add(teacherSkill);
-                }
-            }
+         
             if (teacher == null)
             {
                 return NotFound("can not find teacher with this id");
             }
-            teacher.TeacherSkills = teacherSkills;
+          
             teacher.IsDeleted = true;
             teacher.DeletedAt = DateTime.UtcNow.AddHours(4);
             teacher.DeletedBy = "System";

@@ -33,6 +33,8 @@
     <Compile Remove="Migrations\20221217144952_someMinLength.Designer.cs" />
     <Compile Remove="Migrations\20221217145142_someMinLength.cs" />
     <Compile Remove="Migrations\20221217145142_someMinLength.Designer.cs" />
+    <Compile Remove="Migrations\20221218064550_Test.cs" />
+    <Compile Remove="Migrations\20221218064550_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

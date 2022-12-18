@@ -25,12 +25,12 @@ namespace EduHomeBack.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Index()
         {
-           IEnumerable<Course> courses = await _appDbContext.Courses
-                .Include(c => c.Category)
-                .Include(c => c.Teacher)
-                .Include(c => c.CourseTags)
-                .ThenInclude(c => c.Tag)
-                .Where(c => c.IsDeleted == false).ToListAsync();
+            IEnumerable<Course> courses = await _appDbContext.Courses
+                 .Include(c => c.Category)
+                 .Include(c => c.Teacher)
+                 .Include(c => c.CourseTags)
+                 .ThenInclude(c => c.Tag)
+                 .Where(c => c.IsDeleted == false).ToListAsync();
 
             return View(courses);
         }
@@ -38,8 +38,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = await _appDbContext.Categories.Where(c => c.IsDeleted==false).ToListAsync();
-            ViewBag.Teachers = await _appDbContext.Teachers.Where(c => c.IsDeleted ==false).ToListAsync();
+            ViewBag.Categories = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Teachers = await _appDbContext.Teachers.Where(c => c.IsDeleted == false).ToListAsync();
             ViewBag.Tags = await _appDbContext.Tags.Where(c => c.IsDeleted == false).ToListAsync();
 
             return View();
@@ -93,7 +93,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             }
             if (course.Description.Trim().Length < 80)
-            { 
+            {
                 ModelState.AddModelError("Description", "the field should have more than 80 words");
                 return View(course);
             }
@@ -138,7 +138,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Name", "Name already exists");
                 return View(course);
             }
-            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted==false && c.CategoryId == course.CategoryId))
+            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted == false && c.CategoryId == course.CategoryId))
             {
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(course);
@@ -151,7 +151,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             List<CourseTag> courseTags = new List<CourseTag>();
             foreach (int tagId in course.TagIds)
             {
-                if (course.TagIds.Where(t => t== tagId).Count()>1)
+                if (course.TagIds.Where(t => t == tagId).Count() > 1)
                 {
                     ModelState.AddModelError("TagIds", "only one same tag can be chosen");
                     return View(course);
@@ -233,7 +233,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (dbCourse == null) return NotFound("Not Found");
 
-              if (string.IsNullOrWhiteSpace(course.Name))
+            if (string.IsNullOrWhiteSpace(course.Name))
             {
                 ModelState.AddModelError("Name", "the field can not be empty");
                 return View(course);
@@ -269,7 +269,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             }
             if (course.Description.Trim().Length < 80)
-            { 
+            {
                 ModelState.AddModelError("Description", "the field should have more than 80 words");
                 return View(course);
             }
@@ -288,6 +288,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Language", "the field is required");
                 return View(course);
             }
+
             if (string.IsNullOrWhiteSpace(course.SkillLevel))
             {
                 ModelState.AddModelError("SkillLevel", "the field is required");
@@ -314,7 +315,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Name", "Name already exists");
                 return View(course);
             }
-            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted==false && c.CategoryId == course.CategoryId))
+            if (!await _appDbContext.Courses.AnyAsync(c => c.IsDeleted == false && c.CategoryId == course.CategoryId))
             {
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(course);
@@ -324,36 +325,41 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("TeacherId", "Teacher is not correctly chosen");
                 return View(course);
             }
-            List<CourseTag> courseTags = new List<CourseTag>();
-            foreach (int tagId in course.TagIds)
+            if (course.CourseTags != null && course.CourseTags.Count() > 0)
             {
-                if (course.TagIds.Where(t => t== tagId).Count()>1)
-                {
-                    ModelState.AddModelError("TagIds", "only one same tag can be chosen");
-                    return View(course);
-                }
-                if (!await _appDbContext.Tags.AnyAsync(t => t.IsDeleted == false && t.Id == tagId))
-                {
-                    ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
-                    return View(course);
-                }
-                CourseTag courseTag = new CourseTag
-                {
-                    UpdatedAt = DateTime.UtcNow.AddHours(4),
-                    UpdatedBy = "Me",
-                    IsDeleted = false,
-                    TagId = tagId
-                };
-                courseTags.Add(courseTag);
-            }
-            course.CourseTags = courseTags;
 
+                List<CourseTag> courseTags = new List<CourseTag>();
+                foreach (int tagId in course.TagIds)
+                {
+                    if (course.TagIds.Where(t => t == tagId).Count() > 1)
+                    {
+                        ModelState.AddModelError("TagIds", "only one same tag can be chosen");
+                        return View(course);
+                    }
+                    if (!await _appDbContext.Tags.AnyAsync(t => t.IsDeleted == false && t.Id == tagId))
+                    {
+                        ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
+                        return View(course);
+                    }
+                    CourseTag courseTag = new CourseTag
+                    {
+                        UpdatedAt = DateTime.UtcNow.AddHours(4),
+                        UpdatedBy = "Me",
+                        IsDeleted = false,
+                        TagId = tagId
+                    };
+                    courseTags.Add(courseTag);
+                }
+
+                course.CourseTags = courseTags;
+            }
 
             if (course.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
+
             dbCourse.Image = course.File.CreateFile(_env, "img", "course");
             dbCourse.Name = course.Name.Trim();
             dbCourse.About = course.About.Trim();
@@ -372,9 +378,10 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbCourse.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbCourse.UpdatedBy = "System";
             dbCourse.CourseTags = course.CourseTags;
-            dbCourse.Teacher = course.Teacher;
-            dbCourse.Category = course.Category;
-            await _appDbContext.Courses.AddAsync(course);
+            dbCourse.TeacherId = course.TeacherId;
+            dbCourse.IsDeleted = false;
+            dbCourse.CategoryId = course.CategoryId;
+
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -390,23 +397,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             {
                 return NotFound("can not find course with this id");
             }
-
-            List<CourseTag> courseTags = new List<CourseTag>();
-            foreach (int tagId in course.TagIds)
-            {
-
-                if (course.TagIds != null && course.TagIds.Where(t => t == tagId).Count() > 0)
-                {
-                    CourseTag courseTag = new CourseTag
-                    {
-                        DeletedAt = DateTime.UtcNow.AddHours(4),
-                        DeletedBy = "Me",
-                        IsDeleted = true,
-                    };
-                    courseTags.Add(courseTag);
-                }
-            }
-            course.CourseTags = courseTags;
+       
             course.IsDeleted = true;
             course.DeletedAt = DateTime.UtcNow.AddHours(4);
             course.DeletedBy = "System";

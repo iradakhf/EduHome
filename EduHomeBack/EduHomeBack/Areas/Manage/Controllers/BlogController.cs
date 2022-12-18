@@ -204,30 +204,33 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Title", "Alreade Exists");
                 return View();
             }
-            List<BlogTag> blogTags = new List<BlogTag>();
-            foreach (int tagId in blog.TagIds)
+            if (blog.BlogTags != null && blog.BlogTags.Count() > 0)
             {
-                if (blog.TagIds.Where(t => t == tagId).Count() > 1)
-                {
-                    ModelState.AddModelError("TagIds", "only one same tag can be chosen");
-                    return View(blog);
-                }
-                if (!await _appDbContext.Tags.AnyAsync(t => t.Id == tagId))
-                {
-                    ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
-                    return View(blog);
-                }
-                BlogTag blogTag = new BlogTag
-                {
-                    UpdatedAt = DateTime.UtcNow.AddHours(4),
-                    UpdatedBy = "Me",
-                    IsDeleted = false,
-                    TagId = tagId
-                };
-                blogTags.Add(blogTag);
-            }
-            blog.BlogTags = blogTags;
 
+                List<BlogTag> blogTags = new List<BlogTag>();
+                foreach (int tagId in blog.TagIds)
+                {
+                    if (blog.TagIds.Where(t => t == tagId).Count() > 1)
+                    {
+                        ModelState.AddModelError("TagIds", "only one same tag can be chosen");
+                        return View(blog);
+                    }
+                    if (!await _appDbContext.Tags.AnyAsync(t => t.Id == tagId))
+                    {
+                        ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
+                        return View(blog);
+                    }
+                    BlogTag blogTag = new BlogTag
+                    {
+                        UpdatedAt = DateTime.UtcNow.AddHours(4),
+                        UpdatedBy = "Me",
+                        IsDeleted = false,
+                        TagId = tagId
+                    };
+                    blogTags.Add(blogTag);
+                }
+                blog.BlogTags = blogTags;
+            }
             if (blog.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
@@ -243,7 +246,6 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbBlog.CreatedBy = "System";
             dbBlog.CategoryId = blog.CategoryId;
             dbBlog.BlogTags = blog.BlogTags;
-            await _appDbContext.Blogs.AddAsync(blog);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -259,22 +261,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             {
                 return NotFound("can not find blog with this id");
             }
-            List<BlogTag> blogTags = new List<BlogTag>();
-            foreach (int tagId in blog.TagIds)
-            {
-               
-                if (blog.TagIds != null && blog.TagIds.Where(t => t == tagId).Count() > 0)
-                {
-                    BlogTag blogTag = new BlogTag
-                    {
-                        DeletedAt = DateTime.UtcNow.AddHours(4),
-                        DeletedBy = "Me",
-                        IsDeleted = true,
-                    };
-                    blogTags.Add(blogTag);
-                }
-            }
-            blog.BlogTags = blogTags;
+      
             blog.IsDeleted = true;
             blog.DeletedAt = DateTime.UtcNow.AddHours(4);
             blog.DeletedBy = "System";

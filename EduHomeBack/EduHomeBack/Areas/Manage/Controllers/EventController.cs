@@ -254,52 +254,60 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(event1);
             }
-            List<EventTag> eventTags = new List<EventTag>();
-            foreach (int tagId in event1.TagIds)
+            if (event1.EventTags != null && event1.EventTags.Count() > 0)
             {
-                if (event1.TagIds.Where(t => t == tagId).Count() > 1)
+
+                List<EventTag> eventTags = new List<EventTag>();
+                foreach (int tagId in event1.TagIds)
                 {
-                    ModelState.AddModelError("TagIds", "only one same tag can be chosen");
-                    return View(event1);
+                    if (event1.TagIds.Where(t => t == tagId).Count() > 1)
+                    {
+                        ModelState.AddModelError("TagIds", "only one same tag can be chosen");
+                        return View(event1);
+                    }
+                    if (!await _appDbContext.Tags.AnyAsync(t => t.IsDeleted == false && t.Id == tagId))
+                    {
+                        ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
+                        return View(event1);
+                    }
+                    EventTag eventTag = new EventTag
+                    {
+                        UpdatedAt = DateTime.UtcNow.AddHours(4),
+                        UpdatedBy = "Me",
+                        IsDeleted = false,
+                        TagId = tagId
+                    };
+                    eventTags.Add(eventTag);
                 }
-                if (!await _appDbContext.Tags.AnyAsync(t => t.IsDeleted == false && t.Id == tagId))
-                {
-                    ModelState.AddModelError("TagIds", "Tag is not correctly chosen");
-                    return View(event1);
-                }
-                EventTag eventTag = new EventTag
-                {
-                   UpdatedAt = DateTime.UtcNow.AddHours(4),
-                    UpdatedBy = "Me",
-                    IsDeleted = false,
-                    TagId = tagId
-                };
-                eventTags.Add(eventTag);
+                event1.EventTags = eventTags;
             }
-            event1.EventTags = eventTags;
-            List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
-            foreach (int speakerId in event1.SpeakerIds)
+            if (event1.EventSpeakers != null && event1.EventSpeakers.Count() > 0)
             {
-                if (event1.SpeakerIds.Where(t => t == speakerId).Count() > 1)
+
+                List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
+                foreach (int speakerId in event1.SpeakerIds)
                 {
-                    ModelState.AddModelError("SpeakerIds", "only one same tag can be chosen");
-                    return View(event1);
+                    if (event1.SpeakerIds.Where(t => t == speakerId).Count() > 1)
+                    {
+                        ModelState.AddModelError("SpeakerIds", "only one same tag can be chosen");
+                        return View(event1);
+                    }
+                    if (!await _appDbContext.Speakers.AnyAsync(t => t.IsDeleted == false && t.Id == speakerId))
+                    {
+                        ModelState.AddModelError("SpeakerIds", "SpeakerIds is not correctly chosen");
+                        return View(event1);
+                    }
+                    EventSpeaker eventSpeaker = new EventSpeaker
+                    {
+                        UpdatedAt = DateTime.UtcNow.AddHours(4),
+                        UpdatedBy = "Me",
+                        IsDeleted = false,
+                        SpeakerId = speakerId
+                    };
+                    eventSpeakers.Add(eventSpeaker);
                 }
-                if (!await _appDbContext.Speakers.AnyAsync(t => t.IsDeleted == false && t.Id == speakerId))
-                {
-                    ModelState.AddModelError("SpeakerIds", "SpeakerIds is not correctly chosen");
-                    return View(event1);
-                }
-                EventSpeaker eventSpeaker = new EventSpeaker
-                {
-                    UpdatedAt = DateTime.UtcNow.AddHours(4),
-                    UpdatedBy = "Me",
-                    IsDeleted = false,
-                    SpeakerId = speakerId
-                };
-                eventSpeakers.Add(eventSpeaker);
+                event1.EventSpeakers = eventSpeakers;
             }
-            event1.EventSpeakers = eventSpeakers;
             if (event1.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
@@ -310,14 +318,13 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbEvent.Venue = event1.Venue.Trim();
             dbEvent.StartTime = event1.StartTime;
             dbEvent.EndTime = event1.EndTime;
-            dbEvent.Category = event1.Category;
+            dbEvent.CategoryId = event1.CategoryId;
             dbEvent.EventTags = event1.EventTags;
             dbEvent.EventSpeakers = event1.EventSpeakers;
             dbEvent.Description = event1.Description.Trim();
             dbEvent.IsDeleted = false;
             dbEvent.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbEvent.UpdatedBy = "System";
-            await _appDbContext.Events.AddAsync(dbEvent);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -335,38 +342,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             {
                 return NotFound("can not find event with this id");
             }
-            List<EventTag> eventTags = new List<EventTag>();
-            foreach (int tagId in event1.TagIds)
-            {
-
-                if (event1.TagIds != null && event1.TagIds.Where(t => t == tagId).Count() > 0)
-                {
-                    EventTag eventTag = new EventTag
-                    {
-                        DeletedAt = DateTime.UtcNow.AddHours(4),
-                        DeletedBy = "Me",
-                        IsDeleted = true,
-                    };
-                    eventTags.Add(eventTag);
-                }
-            }
-            List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
-            foreach (int speakerId in event1.SpeakerIds)
-            {
-
-                if (event1.SpeakerIds != null && event1.SpeakerIds.Where(t => t == speakerId).Count() > 0)
-                {
-                    EventSpeaker eventSpeaker = new EventSpeaker
-                    {
-                        DeletedAt = DateTime.UtcNow.AddHours(4),
-                        DeletedBy = "Me",
-                        IsDeleted = true,
-                    };
-                    eventSpeakers.Add(eventSpeaker);
-                }
-            }
-            event1.EventSpeakers = eventSpeakers;
-            event1.EventTags = eventTags;
+         
             event1.IsDeleted = true;
             event1.DeletedAt = DateTime.UtcNow.AddHours(4);
             event1.DeletedBy = "System";

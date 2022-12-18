@@ -38,25 +38,32 @@
                         @foreach (Course course in Model.Courses)
                         {
 
-                            @course.Name;
-                            
+                          @counter<span>. </span> @course.Name;
+                            <br>
+                            counter++;
                         }
 
                     </td>
 
-                        <td>
+                    <td>
+                            @(counter=1)
                         @foreach (Blog blog in Model.Blogs)
                         {
-                            @blog.Title;
-                            
-                    }
-                        </td>
-                            <td>
+                            @counter<span>. </span> @blog.Title;
+                            <br>
+                            counter++;
+
+                        }
+                    </td>
+                    <td>
+                            @(counter=1)
                         @foreach (Event event1 in Model.Events)
                         {
-                                @event1.Name;
+                            @counter<span>. </span> @event1.Name;
+                            <br>
+                            counter++;
                         }
-                            </td>
+                    </td>
 
 
                     </tr>
