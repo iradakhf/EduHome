@@ -11,7 +11,7 @@
 <h1 class="h3 mb-4 text-gray-800">Create Teacher</h1>
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label asp-for="Name">Name</label>
                 <input asp-for="Name" class="form-control" placeholder="Enter Name">
@@ -91,11 +91,15 @@
                 <label>Position</label>
                 <select asp-for="PositionId" class="form-control" asp-items="selectPositionListItems">
                 </select>
+                <span asp-validation-for="PositionId" class="text text-danger"></span>
+
             </div>
             <div id="parentList" class="form-group">
                 <label>Skill</label>
                 <select asp-for="SkillIds" class="form-control" asp-items="selectSkillListItems">
                 </select>
+                <span asp-validation-for="SkillIds" class="text text-danger"></span>
+
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>

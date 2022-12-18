@@ -1,6 +1,5 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
-using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -256,13 +255,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "file length should be less than 40k");
                 return View();
             }
-
-            if (blog.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbBlog.Image, "img", "blog");
-                dbBlog.Image = blog.File.CreateFile(_env, "img", "blog");
-            }
-            dbBlog.Image = blog.Image;
+            dbBlog.Image = blog.File.CreateFile(_env, "img", "blog");
             dbBlog.Title = blog.Title.Trim();
             dbBlog.Author = blog.Author.Trim();
             dbBlog.Date = blog.Date;
@@ -297,7 +290,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             IEnumerable<Blog> blogs = await _appDbContext.Blogs.Where(b => b.IsDeleted == false).ToListAsync();
             if (blogs.Count()<7)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             Blog blog = await _appDbContext.Blogs
                .Include(c => c.BlogTags)

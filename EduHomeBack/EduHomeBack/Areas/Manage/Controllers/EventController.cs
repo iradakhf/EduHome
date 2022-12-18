@@ -1,6 +1,5 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
-using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -348,11 +347,9 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (event1.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbEvent.Image, "img", "event");
+         
                 dbEvent.Image = event1.File.CreateFile(_env, "img", "event");
-            }
+           
          
             dbEvent.Name = event1.Name.Trim();
             dbEvent.Venue = event1.Venue.Trim();
@@ -391,7 +388,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             IEnumerable<Event> events = await _appDbContext.Events.Where(b => b.IsDeleted == false).ToListAsync();
             if (events.Count() < 7)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             Event event1 = await _appDbContext.Events
                .Include(c => c.EventTags)

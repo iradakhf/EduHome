@@ -1,6 +1,5 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
-using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -149,11 +148,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (slider.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbslider.Image, "img", "banner");
                 dbslider.Image = slider.File.CreateFile(_env, "img", "banner");
-            }
+            
        
             dbslider.Title = slider.Title.Trim();
             dbslider.Link = slider.Link.Trim();
@@ -172,7 +168,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             IEnumerable<Slider> sliders = await _appDbContext.Sliders.Where(b => b.IsDeleted == false).ToListAsync();
             if (sliders.Count() < 2)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             Slider slider  = await _appDbContext.Sliders
                .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);

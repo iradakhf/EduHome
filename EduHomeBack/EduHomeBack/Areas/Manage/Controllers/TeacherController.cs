@@ -1,6 +1,5 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
-using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -382,11 +381,10 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (teacher.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbTeacher.Image, "img", "teacher");
+          
+       
                 dbTeacher.Image = teacher.File.CreateFile(_env, "img", "teacher");
-            }
+   
     
             dbTeacher.Name = teacher.Name.Trim();
             dbTeacher.About = teacher.About.Trim();
@@ -431,7 +429,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             IEnumerable<Teacher> teachers = await _appDbContext.Teachers.Where(b => b.IsDeleted == false).ToListAsync();
             if (teachers.Count() < 7)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             Teacher teacher = await _appDbContext.Teachers
                .Include(c => c.TeacherSkills)

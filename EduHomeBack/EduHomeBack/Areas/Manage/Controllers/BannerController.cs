@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EduHomeBack.Helper;
 using Microsoft.AspNetCore.Hosting;
 using EduHomeBack.Extension;
 
@@ -85,11 +84,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (banner.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbBanner.Image, "img", "banner");
                 dbBanner.Image = banner.File.CreateFile(_env, "img", "banner");
-            }
+            
 
 
             dbBanner.Title = banner.Title.Trim();

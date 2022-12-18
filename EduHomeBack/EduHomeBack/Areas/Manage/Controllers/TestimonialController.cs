@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EduHomeBack.Helper;
 using Microsoft.AspNetCore.Hosting;
 using EduHomeBack.Extension;
 
@@ -107,14 +106,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (testimonial.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbTestimonial.Image, "img", "banner");
-                dbTestimonial.Image = testimonial.File.CreateFile(_env, "img", "banner");
-            }
-
-
-
+        
+            dbTestimonial.Image = testimonial.File.CreateFile(_env, "img", "banner");
             dbTestimonial.Author = testimonial.Author.Trim();
             dbTestimonial.Description = testimonial.Description.Trim();
             dbTestimonial.PositionId = testimonial.PositionId;

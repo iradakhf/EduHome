@@ -6,8 +6,8 @@
 <h1 class="h3 mb-4 text-gray-800">Update Slider</h1>
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <form method="post">
-            <div class="form-group">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group" >
                 <label asp-for="Title">Title</label>
                 <input asp-for="Title" class="form-control" placeholder="Enter Title">
                 <span asp-validation-for="Title" class="text text-danger"></span>

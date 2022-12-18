@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EduHomeBack.Helper;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
@@ -385,11 +384,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (course.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbCourse.Image, "img", "course");
-                dbCourse.Image = course.File.CreateFile(_env, "img", "course");
-            }
+            dbCourse.Image = course.File.CreateFile(_env, "img", "course");
             dbCourse.Name = course.Name.Trim();
             dbCourse.About = course.About.Trim();
             dbCourse.Assesments = course.Assesments.Trim();
@@ -437,7 +432,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             IEnumerable<Course> courses = await _appDbContext.Courses.Where(b => b.IsDeleted == false).ToListAsync();
             if (courses.Count() < 7)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             Course course = await _appDbContext.Courses
                .Include(c => c.CourseTags)

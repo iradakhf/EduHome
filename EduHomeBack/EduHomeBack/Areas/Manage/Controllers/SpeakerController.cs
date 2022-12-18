@@ -1,6 +1,5 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
-using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,12 +32,15 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Speaker speaker)
         {
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+
             if (!ModelState.IsValid)
             {
                 return View(speaker);
@@ -75,7 +77,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
           
             if (!await _appDbContext.Speakers.AnyAsync(c => c.IsDeleted == false && c.PositionId == speaker.PositionId))
             {
-                ModelState.AddModelError("Position", "Position is not correctly chosen");
+                ModelState.AddModelError("PositionId", "Position is not correctly chosen");
                 return View(speaker);
             }
             speaker.Image = speaker.File.CreateFile(_env, "img", "teacher");
@@ -92,6 +94,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
         public async Task<IActionResult> Update(int? id)
         {
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
             if (id == null)
             {
                 return BadRequest("id can not be null");
@@ -108,7 +111,12 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Speaker speaker)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return View(speaker);
+            }
+            if (id == null) return BadRequest("Bad Request");
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
             if (!ModelState.IsValid)
             {
                 return View(speaker);
@@ -116,7 +124,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (speaker.Id != id)
             {
-                return BadRequest("id can not be null");
+                return NotFound("id can not be found");
             }
             if (string.IsNullOrWhiteSpace(speaker.Name))
             {
@@ -144,7 +152,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (speaker.File.ContentType != "image/png")
             {
-                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                ModelState.AddModelError("File", "file type should be jpeg or jpg or png");
                 return View();
             }
             if (speaker.File.Length > 40000)
@@ -153,17 +161,15 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (speaker.File != null)
-            {
-                DeleteFileHelper.DeleteFile(_env, dbSpeaker.Image, "img", "teacher");
-                dbSpeaker.Image = speaker.File.CreateFile(_env, "img", "teacher");
-            }
+    
+            
             if (!await _appDbContext.Speakers.AnyAsync(c => c.IsDeleted == false && c.PositionId == speaker.PositionId))
             {
-                ModelState.AddModelError("Position", "Position is not correctly chosen");
+                ModelState.AddModelError("PositionId", "Position is not correctly chosen");
                 return View(speaker);
             }
   
+                dbSpeaker.Image = speaker.File.CreateFile(_env, "img", "teacher");
             dbSpeaker.Name = speaker.Name;
             dbSpeaker.Surname = speaker.Surname;
             dbSpeaker.PositionId = speaker.PositionId;

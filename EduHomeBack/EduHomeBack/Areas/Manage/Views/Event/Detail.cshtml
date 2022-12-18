@@ -60,7 +60,7 @@
                         @foreach (EventTag EventTag in Model.EventTags)
                         {
 
-                            @EventTag.Tag
+                            @EventTag.Tag.Name
                             <br>
                         }
 
@@ -69,7 +69,7 @@
                         @foreach (EventSpeaker eventSpeaker in Model.EventSpeakers)
                         {
 
-                            @eventSpeaker.Speaker
+                            @eventSpeaker.Speaker.Name
                             <br>
                         }
 
