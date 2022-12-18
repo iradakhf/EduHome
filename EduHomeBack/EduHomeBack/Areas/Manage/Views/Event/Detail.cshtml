@@ -19,19 +19,7 @@
                         Image
                     </th>
                     <th>
-                        Date
-                    </th>
-                    <th>
-                        StartTime
-                    </th>
-                    <th>
-                        EndTime
-                    </th>
-                    <th>
-                        Venue
-                    </th>
-                    <th>
-                        Description
+                        Details
                     </th>
                     <th>
                         Category
@@ -51,25 +39,22 @@
                         @Model.Name
                     </td>
                     <td>
-                        @Model.Image
+                        <img width="100" src="~/img/event/@Model.Image" />
+
                     </td>
                     <td>
-                        @Model.Date.ToString("dd/mm/yyyy")
+                        Date:  @Model.Date.ToString("dd/mm/yyyy")
+                        <br>
+                        StartTime:  @Model.StartTime.ToString("HH")
+                        <br>
+                        EndTime : @Model.EndTime.ToString("HH")
+                        <br>
+                        Venue : @Model.Venue
+                        <br>
+                        Description : @Model.Description
                     </td>
                     <td>
-                        @Model.StartTime.ToString("HH")
-                    </td>
-                    <td>
-                        @Model.EndTime.ToString("HH")
-                    </td>
-                    <td>
-                        @Model.Venue
-                    </td>
-                    <td>
-                        @Model.Description
-                    </td>
-                    <td>
-                        @Model.Category
+                        @Model.Category.Name
                     </td>
                     <td>
                         @foreach (EventTag EventTag in Model.EventTags)

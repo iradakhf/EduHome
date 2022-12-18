@@ -12,6 +12,9 @@
                 <tr>
 
                     <th>
+                        Image
+                    </th>
+                    <th>
                         Title
                     </th>
 
@@ -20,9 +23,6 @@
                     </th>
                     <th>
                         Date
-                    </th>
-                    <th>
-                        Image
                     </th>
                     <th>
                         Description
@@ -39,6 +39,10 @@
 
                 <tr>
                     <td>
+                        <img width="100" src="~/img/blog/@Model.Image" />
+
+                    </td>
+                    <td>
                         @Model.Title
                     </td>
                     <td>
@@ -48,19 +52,16 @@
                         @Model.Date.ToString("dd/mm/yyyy")
                     </td>
                     <td>
-                        @Model.Image
-                    </td>
-                    <td>
                         @Model.Description
                     </td>
                     <td>
-                        @Model.Category
+                        @Model.Category.Name
                     </td>
                     <td>
                             @foreach (BlogTag blogTag in Model.BlogTags)
                             {
 
-                                @blogTag.Tag
+                                @blogTag.Tag.Name
                                 <br>
                             }
                         

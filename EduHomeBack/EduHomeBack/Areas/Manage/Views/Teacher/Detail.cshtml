@@ -10,55 +10,26 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-
-                    <th>
-                        Name
-                    </th>
-
-                    <th>
-                        Surname
-                    </th>
                     <th>
                         Image
                     </th>
+
+                    <th>
+                        FullName
+                    </th>
+
                     <th>
                         About
                     </th>
+                    <th>Info</th>
                     <th>
-                        Degree
+                        Position
                     </th>
                     <th>
-                        Faculty
+                        Skills
                     </th>
                     <th>
-                        Experience
-                    </th>
-                    <th>
-                        Hobbies
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Phone
-                    </th>
-                    <th>
-                        Skype
-                    </th>
-                    <th>
-                        Facebook
-                    </th>
-                    <th>
-                        Twitter
-                    </th>
-                    <th>
-                        Vime
-                    </th>
-                    <th>
-                        Category
-                    </th>
-                    <th>
-                        Tag
+                        Tags
                     </th>
                 </tr>
             </thead>
@@ -66,49 +37,45 @@
 
                 <tr>
                     <td>
-                        @Model.Name
+                        <img width="100" src="~/img/teacher/@Model.Image" />
+
                     </td>
                     <td>
-                        @Model.Surname
+                        @Model.Name <span>  </span>  @Model.Surname
                     </td>
                     <td>
-                        @Model.Image
+                      @Model.About
                     </td>
                     <td>
-                        @Model.About
+                        
+                        Degree:  @Model.Degree
+                        <br>
+                        Faculty: @Model.Faculty
+                        <br>
+                        Experience :  @Model.Experience
+                        <br>
+                        Hobbies: @Model.Hobbies
+                        <br>
+                        Email : @Model.Email
+                        <br>
+                        Phone : @Model.PhoneNumber
+                        <br>
+                        Skype :  @Model.Skype
+                        <br>
+                        Facebook : @Model.FacebookUrl
+                        <br>
+                        Twitter :  @Model.TwitterUrl
+                        <br>
+                        V :  @Model.VUrl
                     </td>
                     <td>
-                        @Model.Degree
-                    </td>
-                    <td>@Model.Faculty</td>
-                    <td>
-                        @Model.Experience
-                    </td>
-                    <td>
-                        @Model.Hobbies
-                    </td>
-                    <td>@Model.Email</td>
-                    <td>
-                        @Model.PhoneNumber
-                    </td>
-                    <td>
-                        @Model.Skype
-                    </td>
-                    <td>@Model.FacebookUrl</td>
-                    <td>
-                        @Model.TwitterUrl
-                    </td>
-                    <td>
-                        @Model.VUrl
-                    </td>
-                    <td>
-                        @Model.Position
+                        @Model.Position.Name
                     </td>
                     <td>
                         @foreach (TeacherSkill TeacherSkill in Model.TeacherSkills)
                         {
 
-                            @TeacherSkill.Skill
+                            @TeacherSkill.Skill.Name
                             <br>
                         }
 

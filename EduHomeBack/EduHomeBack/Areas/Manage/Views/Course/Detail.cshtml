@@ -14,7 +14,9 @@
                     <th>
                         Name
                     </th>
-
+                    <th>
+                        Image
+                    </th>
                     <th>
                         About
                     </th>
@@ -25,33 +27,16 @@
                         Certification
                     </th>
                     <th>
-                        Starts
+                        Features
                     </th>
-                    <th>
-                        Duration
-                    </th>
-                    <th>
-                        ClassDuration
-                    </th>
-                    <th>
-                        SkillLevel
-                    </th>
-                    <th>Language</th>
-                    <th>StudentsCount</th>
-                    <th>Assesments</th>
-                    <th>Fee</th>
-                    <th>
-                        Image
-                    </th>
+
+
                     <th>
                         Description
                     </th>
 
                     <th>
-                        Category
-                    </th>
-                    <th>
-                        Teacher
+                        Category and Teacher
                     </th>
                     <th>
                         Tag
@@ -65,6 +50,10 @@
                         @Model.Name
                     </td>
                     <td>
+                        <img width="100" src="~/img/course/@Model.Image" />
+
+                    </td>
+                    <td>
                         @Model.About
                     </td>
                     <td>
@@ -74,39 +63,34 @@
                         @Model.Certification
                     </td>
                     <td>
-                        @Model.Starts?.ToString("dd/mm/yyyy")
+                        Starts : @Model.Starts?.ToString("dd/mm/yyyy")
+                        <br>
+                        Duration:  @Model.Duration
+                        <br>
+                        ClassDuration: @Model.ClassDuration
+                        <br>
+                        SkillLevel: @Model.SkillLevel
+                        <br>
+                        Language: @Model.Language
+                        <br>
+                        StudentsCount : @Model.StudentsCount
+                        <br>
+                        Assesment : @Model.Assesments
+                        <br>
+                        Fee: @Model.Fee
+                        <br>
+                        Description :  @Model.Description
                     </td>
                     <td>
-                        @Model.Duration
-                    </td>
-                    <td>
-                        @Model.ClassDuration
-                    </td>
-                    <td>
-                        @Model.SkillLevel
-                    </td>
-                    <td>@Model.Language</td>
-                    <td>@Model.StudentsCount</td>
-                    <td>@Model.Assesments</td>
-                    <td>@Model.Fee</td>
-
-                    <td>
-                        @Model.Image
-                    </td>
-                    <td>
-                        @Model.Description
-                    </td>
-                    <td>
-                        @Model.Category
-                    </td>
-                    <td>
-                        @Model.Teacher
+                      Category:  @Model.Category.Name
+                        <br>
+                       Teacher: @(Model.Teacher.Name + Model.Teacher.Surname)
                     </td>
                     <td>
                         @foreach (CourseTag CourseTag in Model.CourseTags)
                         {
 
-                            @CourseTag.Tag
+                            @CourseTag.Tag.Name
                             <br>
                         }
 

@@ -29,18 +29,7 @@
                     <th>
                         Date
                     </th>
-                    <th>
-                        StartTime - EndTime
-                    </th>
-                    <th>
-                        Venue
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Created at
-                    </th>
+                   
                     <th>
                         Setting
                     </th>
@@ -65,21 +54,9 @@
                             @event1.Date.ToString("dd/mm/yyyy");
                         </td>
                         <td>
-                            @event1.StartTime - @event1.EndTime
-                        </td>
-                        <td>
-                            @event1.Venue
-                        </td>
-                        <td>
-                            @event1.Description
-                        </td>
-                        <td>
-                            @event1.CreatedAt?.ToString("dd/mm/yyyy")
-                        </td>
-                        <td>
-                            <a class="btn btn-warning" asp-area="manage" style="width:70%; margin-bottom:20px" asp-controller="event" asp-action="update" asp-route-id="@event1.Id">Update</a>
-                            <a class="btn btn-warning" asp-area="manage" style="width: 70%; margin-bottom: 20px; background-color:red" asp-controller="event" asp-action="delete" asp-route-id="@event1.Id">Delete</a>
-                            <a class="btn btn-warning" asp-area="manage" style="width: 70%; margin-bottom: 20px; background-color: green " asp-controller="event" asp-action="detail" asp-route-id="@event1.Id">Detail</a>
+                            <a class="btn btn-warning" asp-area="manage" style=" margin-bottom:20px" asp-controller="event" asp-action="update" asp-route-id="@event1.Id">Update</a>
+                            <a class="btn btn-danger" asp-area="manage" style=" margin-bottom: 20px; " asp-controller="event" asp-action="delete" asp-route-id="@event1.Id">Delete</a>
+                            <a class="btn btn-success" asp-area="manage" style=" margin-bottom: 20px;  " asp-controller="event" asp-action="detail" asp-route-id="@event1.Id">Detail</a>
                         </td>
                     </tr>
                     counter++;

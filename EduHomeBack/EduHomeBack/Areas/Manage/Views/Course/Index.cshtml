@@ -55,8 +55,8 @@
                         </td>
                         <td>
                             <a class="btn btn-warning" asp-area="manage" style="width:70%; margin-bottom:20px" asp-controller="course" asp-action="update" asp-route-id="@course.Id">Update</a>
-                            <a class="btn btn-warning" asp-area="manage" style="width: 70%; margin-bottom: 20px; background-color:red" asp-controller="course" asp-action="delete" asp-route-id="@course.Id">Delete</a>
-                            <a class="btn btn-warning" asp-area="manage" style="width: 70%; margin-bottom: 20px; background-color: green " asp-controller="course" asp-action="detail" asp-route-id="@course.Id">Detail</a>
+                            <a class="btn btn-danger" asp-area="manage" style="width: 70%; margin-bottom: 20px; " asp-controller="course" asp-action="delete" asp-route-id="@course.Id">Delete</a>
+                            <a class="btn btn-success" asp-area="manage" style="width: 70%; margin-bottom: 20px;" asp-controller="course" asp-action="detail" asp-route-id="@course.Id">Detail</a>
                         </td>
                     </tr>
                 }

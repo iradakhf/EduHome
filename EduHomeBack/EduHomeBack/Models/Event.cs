@@ -47,7 +47,6 @@ namespace EduHomeBack.Models
 
         [NotMapped]
         public IFormFile File { get; set; }
-        [NotMapped]
         public IEnumerable<EventSpeaker> EventSpeakers { get; set; }
 
     }
