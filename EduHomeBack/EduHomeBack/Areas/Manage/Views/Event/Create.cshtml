@@ -5,6 +5,9 @@
     IEnumerable<Tag> tags = ViewBag.Tags;
     SelectList selectCategoryListItems = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
     SelectList selectTagListItems = new SelectList(tags, nameof(Tag.Id), nameof(Tag.Name));
+    IEnumerable<Speaker> speakers = ViewBag.Speakers;
+    SelectList selectSpeakerListItems = new SelectList(speakers, nameof(Speaker.Id), nameof(Speaker.Name));
+
 
 
 }
@@ -48,14 +51,19 @@
                 <input asp-for="File" class="form-control" placeholder="Image File">
                 <span asp-validation-for="File" class="text text-danger"></span>
             </div>
-            <div id="parentList" class="form-group">
+            <div class="form-group">
                 <label>Catgeory</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="selectCategoryListItems">
                 </select>
             </div>
-            <div id="parentList" class="form-group">
+            <div class="form-group">
                 <label>Tag</label>
                 <select asp-for="TagIds" multiple class="form-control" asp-items="selectTagListItems">
+                </select>
+            </div>
+            <div  class="form-group">
+                <label>Speaker</label>
+                <select asp-for="SpeakerIds" multiple class="form-control" asp-items="selectSpeakerListItems">
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>

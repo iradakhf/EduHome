@@ -1,0 +1,124 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "Detail";
+    int counter = 1;
+}
+
+<h1 class="h3 mb-4 text-gray-800"> Course Detail</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        About
+                    </th>
+                    <th>
+                        How to Apply
+                    </th>
+                    <th>
+                        Certification
+                    </th>
+                    <th>
+                        Starts
+                    </th>
+                    <th>
+                        Duration
+                    </th>
+                    <th>
+                        ClassDuration
+                    </th>
+                    <th>
+                        SkillLevel
+                    </th>
+                    <th>Language</th>
+                    <th>StudentsCount</th>
+                    <th>Assesments</th>
+                    <th>Fee</th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Description
+                    </th>
+
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Teacher
+                    </th>
+                    <th>
+                        Tag
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Model.Name
+                    </td>
+                    <td>
+                        @Model.About
+                    </td>
+                    <td>
+                        @Model.HowToApply
+                    </td>
+                    <td>
+                        @Model.Certification
+                    </td>
+                    <td>
+                        @Model.Starts?.ToString("dd/mm/yyyy")
+                    </td>
+                    <td>
+                        @Model.Duration
+                    </td>
+                    <td>
+                        @Model.ClassDuration
+                    </td>
+                    <td>
+                        @Model.SkillLevel
+                    </td>
+                    <td>@Model.Language</td>
+                    <td>@Model.StudentsCount</td>
+                    <td>@Model.Assesments</td>
+                    <td>@Model.Fee</td>
+
+                    <td>
+                        @Model.Image
+                    </td>
+                    <td>
+                        @Model.Description
+                    </td>
+                    <td>
+                        @Model.Category
+                    </td>
+                    <td>
+                        @Model.Teacher
+                    </td>
+                    <td>
+                        @foreach (CourseTag CourseTag in Model.CourseTags)
+                        {
+
+                            @CourseTag.Tag
+                            <br>
+                        }
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

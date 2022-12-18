@@ -249,6 +249,22 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Detail(int? id)
+        {
+
+            if (id == null) return BadRequest("bad request");
+
+            Blog blog = await _appDbContext.Blogs
+                .Include(c => c.BlogTags)
+                .ThenInclude(c => c.Tag)
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted == false);
+
+            if (blog == null) return NotFound("can not find");
+
+            return View(blog);
+        }
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");

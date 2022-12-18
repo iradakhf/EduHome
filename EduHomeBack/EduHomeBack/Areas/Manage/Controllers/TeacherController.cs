@@ -371,6 +371,22 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Detail(int? id)
+        {
+
+            if (id == null) return BadRequest("bad request");
+
+            Teacher teacher = await _appDbContext.Teachers
+                .Include(c => c.Position)
+                .Include(c => c.TeacherSkills)
+                .ThenInclude(c=>c.Skill)
+                .Include(t=>t.Courses)
+                .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted == false);
+
+            if (teacher == null) return NotFound("can not find");
+
+            return View(teacher);
+        }
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");

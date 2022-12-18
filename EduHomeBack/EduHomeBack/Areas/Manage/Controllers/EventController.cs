@@ -38,6 +38,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
             ViewBag.Categories = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             ViewBag.Tags = await _appDbContext.Tags.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Speakers = await _appDbContext.Speakers.Where(c => c.IsDeleted == false).ToListAsync();
+
 
             return View();
         }
@@ -47,6 +49,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
             ViewBag.Category = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             ViewBag.Tags = await _appDbContext.Tags.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Speakers = await _appDbContext.Speakers.Where(c => c.IsDeleted == false).ToListAsync();
+
 
             if (!ModelState.IsValid)
             {
@@ -177,6 +181,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
             ViewBag.Categories = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             ViewBag.Tags = await _appDbContext.Tags.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Speakers = await _appDbContext.Speakers.Where(c => c.IsDeleted == false).ToListAsync();
+
             if (id == null) return BadRequest("bad request");
             Event event1 = await _appDbContext.Events.FirstOrDefaultAsync(b => b.Id == id);
             if (event1 == null) return NotFound("not found");
@@ -189,6 +195,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
         {
             ViewBag.Categories = await _appDbContext.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             ViewBag.Tags = await _appDbContext.Tags.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Speakers = await _appDbContext.Speakers.Where(c => c.IsDeleted == false).ToListAsync();
+
             if (!ModelState.IsValid)
             {
                 return View(event1);
@@ -327,6 +335,23 @@ namespace EduHomeBack.Areas.Manage.Controllers
             dbEvent.UpdatedBy = "System";
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Detail(int? id)
+        {
+
+            if (id == null) return BadRequest("bad request");
+
+            Event event1 = await _appDbContext.Events
+                .Include(c => c.EventSpeakers)
+                .ThenInclude(c => c.Speaker)
+                 .Include(c => c.EventTags)
+                .ThenInclude(c => c.Tag)
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted == false);
+
+            if (event1 == null) return NotFound("can not find");
+
+            return View(event1);
         }
         public async Task<IActionResult> Delete(int? id)
         {

@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Detail";
     int counter = 1;
+    int counter2 = 1;
+    int counter3 = 1;
+
 }
 
 <h1 class="h3 mb-4 text-gray-800"> Category Detail</h1>
@@ -46,22 +49,22 @@
                     </td>
 
                     <td>
-                            @(counter=1)
+                         
                         @foreach (Blog blog in Model.Blogs)
                         {
-                            @counter<span>. </span> @blog.Title;
+                            @counter2<span>. </span> @blog.Title;
                             <br>
-                            counter++;
+                            counter2++;
 
                         }
                     </td>
                     <td>
-                            @(counter=1)
+                        
                         @foreach (Event event1 in Model.Events)
                         {
-                            @counter<span>. </span> @event1.Name;
+                            @counter3<span>. </span> @event1.Name;
                             <br>
-                            counter++;
+                            counter3++;
                         }
                     </td>
 

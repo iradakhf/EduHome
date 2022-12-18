@@ -82,6 +82,8 @@ namespace EduHomeBack.Models
         public List<int> PositionIds { get; set; }
 
         public IEnumerable<TeacherSkill> TeacherSkills { get; set; }
+        public IEnumerable<Course> Courses { get; set; }
+
 
     }
 }

@@ -221,3 +221,6 @@ C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\R
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Event\Update.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Teacher\Update.cshtml.g.cs
 C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Category\Detail.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Course\Detail.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Event\Detail.cshtml.g.cs
+C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Blog\Detail.cshtml.g.cs
