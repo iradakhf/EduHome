@@ -1,7 +1,102 @@
-﻿
+﻿@model Event
 @{
     ViewData["Title"] = "Detail";
+    int counter = 1;
 }
 
-<h1>Detail</h1>
+<h1 class="h3 mb-4 text-gray-800"> Event Detail</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
 
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        StartTime
+                    </th>
+                    <th>
+                        EndTime
+                    </th>
+                    <th>
+                        Venue
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Tag
+                    </th>
+                    <th>
+                        Speaker
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Model.Name
+                    </td>
+                    <td>
+                        @Model.Image
+                    </td>
+                    <td>
+                        @Model.Date.ToString("dd/mm/yyyy")
+                    </td>
+                    <td>
+                        @Model.StartTime.ToString("HH")
+                    </td>
+                    <td>
+                        @Model.EndTime.ToString("HH")
+                    </td>
+                    <td>
+                        @Model.Venue
+                    </td>
+                    <td>
+                        @Model.Description
+                    </td>
+                    <td>
+                        @Model.Category
+                    </td>
+                    <td>
+                        @foreach (EventTag EventTag in Model.EventTags)
+                        {
+
+                            @EventTag.Tag
+                            <br>
+                        }
+
+                    </td>
+                    <td>
+                        @foreach (EventSpeaker eventSpeaker in Model.EventSpeakers)
+                        {
+
+                            @eventSpeaker.Speaker
+                            <br>
+                        }
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

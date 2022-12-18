@@ -1,7 +1,135 @@
-﻿
+﻿@model Teacher
 @{
     ViewData["Title"] = "Detail";
+    int counter = 1;
 }
 
-<h1>Detail</h1>
+<h1 class="h3 mb-4 text-gray-800"> Teacher Detail</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
 
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Surname
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        About
+                    </th>
+                    <th>
+                        Degree
+                    </th>
+                    <th>
+                        Faculty
+                    </th>
+                    <th>
+                        Experience
+                    </th>
+                    <th>
+                        Hobbies
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Skype
+                    </th>
+                    <th>
+                        Facebook
+                    </th>
+                    <th>
+                        Twitter
+                    </th>
+                    <th>
+                        Vime
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Tag
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Model.Name
+                    </td>
+                    <td>
+                        @Model.Surname
+                    </td>
+                    <td>
+                        @Model.Image
+                    </td>
+                    <td>
+                        @Model.About
+                    </td>
+                    <td>
+                        @Model.Degree
+                    </td>
+                    <td>@Model.Faculty</td>
+                    <td>
+                        @Model.Experience
+                    </td>
+                    <td>
+                        @Model.Hobbies
+                    </td>
+                    <td>@Model.Email</td>
+                    <td>
+                        @Model.PhoneNumber
+                    </td>
+                    <td>
+                        @Model.Skype
+                    </td>
+                    <td>@Model.FacebookUrl</td>
+                    <td>
+                        @Model.TwitterUrl
+                    </td>
+                    <td>
+                        @Model.VUrl
+                    </td>
+                    <td>
+                        @Model.Position
+                    </td>
+                    <td>
+                        @foreach (TeacherSkill TeacherSkill in Model.TeacherSkills)
+                        {
+
+                            @TeacherSkill.Skill
+                            <br>
+                        }
+
+                    </td>
+                    <td>
+                        @foreach (Course course in Model.Courses)
+                        {
+
+                            @course.Name
+                            <br>
+                        }
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}
