@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
+using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -54,21 +55,33 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Surname", "the field can not be empty");
                 return View();
             }
-            
             if (speaker.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
+
+            if (speaker.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (speaker.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+          
             if (!await _appDbContext.Speakers.AnyAsync(c => c.IsDeleted == false && c.PositionId == speaker.PositionId))
             {
                 ModelState.AddModelError("Position", "Position is not correctly chosen");
                 return View(speaker);
             }
-            speaker.Image = speaker.File.CreateFile(_env, "img", "speaker");
+            speaker.Image = speaker.File.CreateFile(_env, "img", "teacher");
             speaker.Name = speaker.Name.Trim();
             speaker.Surname = speaker.Surname.Trim();
-            speaker.Position = speaker.Position;
+            speaker.PositionId = speaker.PositionId;
             speaker.CreatedAt = DateTime.UtcNow.AddHours(4);
             speaker.CreatedBy = "System";
             await _appDbContext.Speakers.AddAsync(speaker);
@@ -115,11 +128,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("Surname", "should not be empty");
                 return View(speaker);
             }
-            if (string.IsNullOrWhiteSpace(speaker.Surname))
-            {
-                ModelState.AddModelError("Surname", "should not be empty");
-                return View(speaker);
-            }
+         
             
             Speaker dbSpeaker = await _appDbContext.Speakers.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
 
@@ -127,9 +136,37 @@ namespace EduHomeBack.Areas.Manage.Controllers
             {
                 return NotFound("doesnt exist");
             }
+            if (speaker.File == null)
+            {
+                ModelState.AddModelError("File", "File is required");
+                return View();
+            }
+
+            if (speaker.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (speaker.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+            if (speaker.File != null)
+            {
+                DeleteFileHelper.DeleteFile(_env, speaker.Image, "img", "teacher");
+                dbSpeaker.Image = speaker.File.CreateFile(_env, "img", "teacher");
+            }
+            if (!await _appDbContext.Speakers.AnyAsync(c => c.IsDeleted == false && c.PositionId == speaker.PositionId))
+            {
+                ModelState.AddModelError("Position", "Position is not correctly chosen");
+                return View(speaker);
+            }
+  
             dbSpeaker.Name = speaker.Name;
             dbSpeaker.Surname = speaker.Surname;
-            dbSpeaker.Image = dbSpeaker.File.CreateFile(_env, "img", "teacher");
+            dbSpeaker.PositionId = speaker.PositionId;
             dbSpeaker.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbSpeaker.UpdatedBy = "System";
             await _appDbContext.SaveChangesAsync();

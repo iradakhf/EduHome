@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EduHomeBack.Helper;
 
 namespace EduHomeBack.Areas.Manage.Controllers
 {
@@ -178,6 +179,19 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
+
+            if (course.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (course.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+           
             course.Image = course.File.CreateFile(_env, "img", "course");
             course.Name = course.Name.Trim();
             course.About = course.About.Trim();
@@ -196,8 +210,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
             course.CreatedAt = DateTime.UtcNow.AddHours(4);
             course.CreatedBy = "System";
             course.CourseTags = course.CourseTags;
-            course.Teacher = course.Teacher;
-            course.Category = course.Category;
+            course.TeacherId = course.TeacherId;
+            course.CategoryId = course.CategoryId;
             await _appDbContext.Courses.AddAsync(course);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -360,7 +374,22 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            dbCourse.Image = course.File.CreateFile(_env, "img", "course");
+            if (course.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (course.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+            if (course.File != null)
+            {
+                DeleteFileHelper.DeleteFile(_env, course.Image, "img", "course");
+                dbCourse.Image = course.File.CreateFile(_env, "img", "course");
+            }
             dbCourse.Name = course.Name.Trim();
             dbCourse.About = course.About.Trim();
             dbCourse.Assesments = course.Assesments.Trim();

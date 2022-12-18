@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
+using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -160,18 +161,31 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
+
+            if (event1.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (event1.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+         
             event1.Image = event1.File.CreateFile(_env, "img", "event");
             event1.Name = event1.Name.Trim();
             event1.Venue = event1.Venue.Trim();
             event1.StartTime = event1.StartTime;
             event1.EndTime = event1.EndTime;
-            event1.Category = event1.Category;
+            event1.CategoryId = event1.CategoryId;
             event1.EventTags = event1.EventTags;
             event1.EventSpeakers = event1.EventSpeakers;
             event1.Description = event1.Description.Trim();
             event1.IsDeleted = false;
-            event1.UpdatedAt = DateTime.UtcNow.AddHours(4);
-            event1.UpdatedBy = "System";
+            event1.CreatedAt = DateTime.UtcNow.AddHours(4);
+            event1.CreatedBy = "System";
             await _appDbContext.Events.AddAsync(event1);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -321,7 +335,24 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            dbEvent.Image = event1.File.CreateFile(_env, "img", "event");
+
+            if (event1.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (event1.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+            if (event1.File != null)
+            {
+                DeleteFileHelper.DeleteFile(_env, event1.Image, "img", "event");
+                dbEvent.Image = event1.File.CreateFile(_env, "img", "event");
+            }
+         
             dbEvent.Name = event1.Name.Trim();
             dbEvent.Venue = event1.Venue.Trim();
             dbEvent.StartTime = event1.StartTime;

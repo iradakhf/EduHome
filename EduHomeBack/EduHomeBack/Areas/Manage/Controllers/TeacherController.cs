@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
+using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -135,30 +136,38 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View(teacher);
 
             }
-            List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
-            foreach (int skillId in teacher.SkillIds)
+           
+                if (teacher.TeacherSkills != null && teacher.TeacherSkills.Count() > 0)
             {
-                if (teacher.SkillIds.Where(t => t == skillId).Count() > 1)
+                List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
+                foreach (int skillId in teacher.SkillIds)
                 {
-                    ModelState.AddModelError("SkillIds", "only one same skill can be chosen");
-                    return View(teacher);
+                    if (teacher.SkillIds.Where(t => t == skillId).Count() > 1)
+                    {
+                        ModelState.AddModelError("SkillIds", "only one same skill can be chosen");
+                        return View(teacher);
+                    }
+                    if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
+                    {
+                        ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
+                        return View(teacher);
+                    }
+                    TeacherSkill teacherSkill = new TeacherSkill
+                    {
+                        CreatedAt = DateTime.UtcNow.AddHours(4),
+                        CreatedBy = "Me",
+                        IsDeleted = false,
+                        SkillId = skillId
+                    };
+                    teacherSkills.Add(teacherSkill);
                 }
-                if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
-                {
-                    ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
-                    return View(teacher);
-                }
-                TeacherSkill teacherSkill = new TeacherSkill
-                {
-                    CreatedAt = DateTime.UtcNow.AddHours(4),
-                    CreatedBy = "Me",
-                    IsDeleted = false,
-                    SkillId = skillId
-                };
-                teacherSkills.Add(teacherSkill);
+                teacher.TeacherSkills = teacherSkills;
             }
-            teacher.TeacherSkills = teacherSkills;
-
+            else
+            {
+                ModelState.AddModelError("SkillIds", "the field is required");
+                return View(teacher);
+            }
             foreach (int positionId in teacher.PositionIds)
             {
                 if (!await _appDbContext.Positions.AnyAsync(t => t.Id == positionId))
@@ -167,13 +176,26 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     return View(teacher);
                 }
             }
-          
+
             if (teacher.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            teacher.Image = teacher.File.CreateFile(_env, "img", "event");
+
+            if (teacher.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (teacher.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+
+            teacher.Image = teacher.File.CreateFile(_env, "img", "teacher");
             teacher.Name = teacher.Name.Trim();
             teacher.About = teacher.About.Trim();
             teacher.Degree = teacher.Degree.Trim();
@@ -182,13 +204,13 @@ namespace EduHomeBack.Areas.Manage.Controllers
             teacher.FacebookUrl = teacher.FacebookUrl.Trim();
             teacher.Faculty = teacher.Faculty.Trim();
             teacher.Hobbies = teacher.Hobbies.Trim();
+            teacher.TeacherSkills = teacher.TeacherSkills;
             teacher.PhoneNumber = teacher.PhoneNumber.Trim();
             teacher.PinterestUrl = teacher.PinterestUrl.Trim();
             teacher.Surname = teacher.Surname.Trim();
             teacher.TwitterUrl = teacher.TwitterUrl.Trim();
             teacher.VUrl = teacher.VUrl.Trim();
             teacher.PositionId = teacher.PositionId;
-            teacher.SkillIds = teacher.SkillIds;
             teacher.IsDeleted = false;
             teacher.CreatedAt = DateTime.UtcNow.AddHours(4);
             teacher.CreatedBy = "System";
@@ -343,13 +365,29 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     return View(teacher);
                 }
             }
-
             if (teacher.File == null)
             {
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            dbTeacher.Image = teacher.File.CreateFile(_env, "img", "event");
+
+            if (teacher.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (teacher.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+            if (teacher.File != null)
+            {
+                DeleteFileHelper.DeleteFile(_env, teacher.Image, "img", "teacher");
+                dbTeacher.Image = teacher.File.CreateFile(_env, "img", "teacher");
+            }
+    
             dbTeacher.Name = teacher.Name.Trim();
             dbTeacher.About = teacher.About.Trim();
             dbTeacher.Degree = teacher.Degree.Trim();

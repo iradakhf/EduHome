@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
+using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -80,66 +81,107 @@ namespace EduHomeBack.Areas.Manage.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest("id can not be null");
+            }
+            Slider slider = await _appDbContext.Sliders.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (slider == null)
+            {
+                return NotFound("slider not found");
+            }
+            return View(slider);
 
-        //public async Task<IActionResult> Update(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return BadRequest("id can not be null");
-        //    }
-        //    Skill skill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
-        //    if (skill == null)
-        //    {
-        //        return NotFound("skill not found");
-        //    }
-        //    return View(skill);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, Slider slider)
+        {
 
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Update(int? id, Skill skill)
-        //{
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(skill);
-        //    }
-
-        //    if (skill.Id != id)
-        //    {
-        //        return BadRequest("id can not be null");
-        //    }
-        //    if (string.IsNullOrWhiteSpace(skill.Name))
-        //    {
-        //        ModelState.AddModelError("Name", "Bosluq Olmamalidir");
-        //        return View(skill);
-        //    }
-        //    Skill dbSkill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
-
-        //    if (dbSkill == null)
-        //    {
-        //        return NotFound("doesnt exist");
-        //    }
-        //    if (dbSkill.Name.Trim().ToLower() == skill.Name.Trim().ToLower())
-        //    {
-        //        ModelState.AddModelError("Name", "please enter another name");
-        //        return View(skill);
-        //    }
-
-        //    if (await _appDbContext.Skills.AnyAsync(t => t.Id != id && t.Name.ToLower().Trim() == skill.Name.ToLower().Trim()))
-        //    {
-        //        ModelState.AddModelError("Name", "Already Exists");
-        //        return View(dbSkill);
-        //    }
-
-        //    dbSkill.Name = skill.Name;
-        //    teacher.Image = teacher.File.CreateFile(_env, "img", "event");
-        //    dbSkill.UpdatedAt = DateTime.UtcNow.AddHours(4);
-        //    dbSkill.UpdatedBy = "System";
-        //    await _appDbContext.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
+            if (!ModelState.IsValid)
+            {
+                return View(slider);
+            }
 
 
+            if (string.IsNullOrWhiteSpace(slider.Title))
+            {
+                ModelState.AddModelError("Title", "the field can not be empty");
+                return View();
+            }
+           
+            if (string.IsNullOrWhiteSpace(slider.Description))
+            {
+                ModelState.AddModelError("Description", "the field can not be empty");
+                return View();
+            }
+            Slider dbslider = await _appDbContext.Sliders.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (dbslider == null)
+            {
+                return NotFound("doesnt exist");
+            }
+            if (dbslider.Title.Trim().ToLower() == slider.Title.Trim().ToLower())
+            {
+                ModelState.AddModelError("Title", "please enter another name");
+                return View(slider);
+            }
+
+            if (await _appDbContext.Sliders.AnyAsync(t => t.Id != id && t.Title.ToLower().Trim() == slider.Title.ToLower().Trim()))
+            {
+                ModelState.AddModelError("Title", "Already Exists");
+                return View(dbslider);
+            }
+            if (slider.File == null)
+            {
+                ModelState.AddModelError("File", "File is required");
+                return View();
+            }
+            if (slider.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (slider.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+            if (slider.File != null)
+            {
+                DeleteFileHelper.DeleteFile(_env, dbslider.Image, "img", "banner");
+                dbslider.Image = slider.File.CreateFile(_env, "img", "banner");
+            }
+       
+            dbslider.Title = slider.Title.Trim();
+            dbslider.Link = slider.Link.Trim();
+            dbslider.Description = slider.Description.Trim();
+            dbslider.IsDeleted = false;
+            dbslider.UpdatedAt = DateTime.UtcNow.AddHours(4);
+            dbslider.UpdatedBy = "System";
+          
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest("id can not be null");
+
+            Slider slider  = await _appDbContext.Sliders
+               .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (slider == null)
+            {
+                return NotFound("can not find slider with this id");
+            }
+
+            slider.IsDeleted = true;
+            slider.DeletedAt = DateTime.UtcNow.AddHours(4);
+            slider.DeletedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

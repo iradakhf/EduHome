@@ -117,7 +117,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             dbTestimonial.Author = testimonial.Author.Trim();
             dbTestimonial.Description = testimonial.Description.Trim();
-            dbTestimonial.Image = testimonial.File.CreateFile(_env, "img", "event");
+            dbTestimonial.Image = 
             dbTestimonial.PositionId = testimonial.PositionId;
             dbTestimonial.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbTestimonial.UpdatedBy = "System";

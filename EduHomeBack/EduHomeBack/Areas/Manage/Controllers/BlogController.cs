@@ -1,5 +1,6 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Extension;
+using EduHomeBack.Helper;
 using EduHomeBack.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -118,13 +119,25 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
+         
+            if (blog.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (blog.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
             blog.Image = blog.File.CreateFile(_env, "img", "blog");
             blog.Title = blog.Title.Trim();
             blog.Author = blog.Author.Trim();
             blog.Date = blog.Date;
             blog.Description = blog.Description.Trim();
             blog.BlogTags = blog.BlogTags;
-            blog.Category = blog.Category;
+            blog.CategoryId = blog.CategoryId;
             blog.IsDeleted = false;
             blog.CreatedAt = DateTime.UtcNow.AddHours(4);
             blog.CreatedBy = "System";
@@ -236,14 +249,31 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            dbBlog.Image = blog.File.CreateFile(_env, "img", "blog");
+
+            if (blog.File.ContentType != "image/png")
+            {
+                ModelState.AddModelError("File", "file type should be jpeg or jpg");
+                return View();
+            }
+            if (blog.File.Length > 40000)
+            {
+                ModelState.AddModelError("File", "file length should be less than 40k");
+                return View();
+            }
+
+            if (blog.File != null)
+            {
+                DeleteFileHelper.DeleteFile(_env, blog.Image, "img", "blog");
+                dbBlog.Image = blog.File.CreateFile(_env, "img", "blog");
+            }
+            dbBlog.Image = blog.Image;
             dbBlog.Title = blog.Title.Trim();
             dbBlog.Author = blog.Author.Trim();
             dbBlog.Date = blog.Date;
             dbBlog.Description = blog.Description.Trim();
             dbBlog.IsDeleted = false;
-            dbBlog.CreatedAt = DateTime.UtcNow.AddHours(4);
-            dbBlog.CreatedBy = "System";
+            dbBlog.UpdatedAt = DateTime.UtcNow.AddHours(4);
+            dbBlog.UpdatedBy = "System";
             dbBlog.CategoryId = blog.CategoryId;
             dbBlog.BlogTags = blog.BlogTags;
             await _appDbContext.SaveChangesAsync();

@@ -91,7 +91,6 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 dbBanner.Image = banner.File.CreateFile(_env, "img", "banner");
             }
 
-           
 
             dbBanner.Title = banner.Title.Trim();
             dbBanner.UpdatedAt = DateTime.UtcNow.AddHours(4);
