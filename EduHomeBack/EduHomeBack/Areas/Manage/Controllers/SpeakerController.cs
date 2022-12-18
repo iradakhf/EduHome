@@ -155,7 +155,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (speaker.File != null)
             {
-                DeleteFileHelper.DeleteFile(_env, speaker.Image, "img", "teacher");
+                DeleteFileHelper.DeleteFile(_env, dbSpeaker.Image, "img", "teacher");
                 dbSpeaker.Image = speaker.File.CreateFile(_env, "img", "teacher");
             }
             if (!await _appDbContext.Speakers.AnyAsync(c => c.IsDeleted == false && c.PositionId == speaker.PositionId))

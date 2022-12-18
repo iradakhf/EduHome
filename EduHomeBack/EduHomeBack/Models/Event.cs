@@ -14,7 +14,7 @@ namespace EduHomeBack.Models
         [StringLength(100)]
         public string Name { get; set; }
 
-        [StringLength(50)]
+        [StringLength(2050)]
         public string Image { get; set; }
         [Required]
         public DateTime Date { get; set; }

@@ -169,7 +169,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");
-
+            IEnumerable<Slider> sliders = await _appDbContext.Sliders.Where(b => b.IsDeleted == false).ToListAsync();
+            if (sliders.Count() < 2)
+            {
+                return View();
+            }
             Slider slider  = await _appDbContext.Sliders
                .FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
             if (slider == null)

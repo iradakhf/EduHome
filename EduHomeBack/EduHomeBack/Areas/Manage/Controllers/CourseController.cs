@@ -387,7 +387,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (course.File != null)
             {
-                DeleteFileHelper.DeleteFile(_env, course.Image, "img", "course");
+                DeleteFileHelper.DeleteFile(_env, dbCourse.Image, "img", "course");
                 dbCourse.Image = course.File.CreateFile(_env, "img", "course");
             }
             dbCourse.Name = course.Name.Trim();
@@ -417,7 +417,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
         public async Task<IActionResult> Detail(int? id)
         {
-
+          
             if (id == null) return BadRequest("bad request");
 
             Course course = await _appDbContext.Courses
@@ -434,7 +434,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");
-
+            IEnumerable<Course> courses = await _appDbContext.Courses.Where(b => b.IsDeleted == false).ToListAsync();
+            if (courses.Count() < 7)
+            {
+                return View();
+            }
             Course course = await _appDbContext.Courses
                .Include(c => c.CourseTags)
                .ThenInclude(b => b.Tag)

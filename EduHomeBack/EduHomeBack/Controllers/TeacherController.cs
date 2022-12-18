@@ -22,7 +22,7 @@ namespace EduHomeBack.Controllers
         {
             if (id == null)
             {
-                return BadRequest();
+                return BadRequest("bad request");
             }
             Teacher teacher = await _context.Teachers.Include(T=>T.TeacherSkills)
                 .ThenInclude(t=>t.Skill)
@@ -31,7 +31,7 @@ namespace EduHomeBack.Controllers
 
             if (teacher == null)
             {
-                return NotFound();
+                return NotFound("not found");
             }
             return View(teacher);
         }

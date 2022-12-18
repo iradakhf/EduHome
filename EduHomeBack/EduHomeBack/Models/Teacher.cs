@@ -18,7 +18,7 @@ namespace EduHomeBack.Models
         [Required]
         public string Surname { get; set; }
 
-        [StringLength(50)]
+        [StringLength(5000)]
         public string Image { get; set; }
    
 

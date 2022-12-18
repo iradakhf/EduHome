@@ -384,7 +384,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (teacher.File != null)
             {
-                DeleteFileHelper.DeleteFile(_env, teacher.Image, "img", "teacher");
+                DeleteFileHelper.DeleteFile(_env, dbTeacher.Image, "img", "teacher");
                 dbTeacher.Image = teacher.File.CreateFile(_env, "img", "teacher");
             }
     
@@ -428,7 +428,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");
-
+            IEnumerable<Teacher> teachers = await _appDbContext.Teachers.Where(b => b.IsDeleted == false).ToListAsync();
+            if (teachers.Count() < 7)
+            {
+                return View();
+            }
             Teacher teacher = await _appDbContext.Teachers
                .Include(c => c.TeacherSkills)
                .ThenInclude(b => b.Skill)

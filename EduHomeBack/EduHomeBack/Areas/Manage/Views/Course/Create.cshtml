@@ -5,7 +5,7 @@
     IEnumerable<Teacher> teachers = ViewBag.Teachers;
     IEnumerable<Tag> tags = ViewBag.Tags;
     SelectList selectCategoryListItems = new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
-    SelectList selectTeacherListItems = new SelectList(teachers, nameof(Teacher.Id), nameof(Teacher.Name));
+    SelectList selectTeacherListItems = new SelectList(teachers, nameof(Teacher.Id), nameof(Teacher.Name), nameof(Teacher.Surname));
     SelectList selectTagListItems = new SelectList(tags, nameof(Tag.Id), nameof(Tag.Name));
 
 

@@ -183,6 +183,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             event1.EventTags = event1.EventTags;
             event1.EventSpeakers = event1.EventSpeakers;
             event1.Description = event1.Description.Trim();
+            event1.Date = event1.Date;
             event1.IsDeleted = false;
             event1.CreatedAt = DateTime.UtcNow.AddHours(4);
             event1.CreatedBy = "System";
@@ -349,7 +350,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (event1.File != null)
             {
-                DeleteFileHelper.DeleteFile(_env, event1.Image, "img", "event");
+                DeleteFileHelper.DeleteFile(_env, dbEvent.Image, "img", "event");
                 dbEvent.Image = event1.File.CreateFile(_env, "img", "event");
             }
          
@@ -387,7 +388,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");
-
+            IEnumerable<Event> events = await _appDbContext.Events.Where(b => b.IsDeleted == false).ToListAsync();
+            if (events.Count() < 7)
+            {
+                return View();
+            }
             Event event1 = await _appDbContext.Events
                .Include(c => c.EventTags)
                .ThenInclude(b => b.Tag)

@@ -212,11 +212,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(blog);
             }
-            if (await _appDbContext.Blogs.AnyAsync(b => b.Title.ToLower().Trim() == b.Title.ToLower().Trim() && b.Id != blog.Id))
-            {
-                ModelState.AddModelError("Title", "Alreade Exists");
-                return View();
-            }
+          
             if (blog.BlogTags != null && blog.BlogTags.Count() > 0)
             {
 
@@ -263,7 +259,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             if (blog.File != null)
             {
-                DeleteFileHelper.DeleteFile(_env, blog.Image, "img", "blog");
+                DeleteFileHelper.DeleteFile(_env, dbBlog.Image, "img", "blog");
                 dbBlog.Image = blog.File.CreateFile(_env, "img", "blog");
             }
             dbBlog.Image = blog.Image;
@@ -298,7 +294,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest("id can not be null");
-
+            IEnumerable<Blog> blogs = await _appDbContext.Blogs.Where(b => b.IsDeleted == false).ToListAsync();
+            if (blogs.Count()<7)
+            {
+                return View();
+            }
             Blog blog = await _appDbContext.Blogs
                .Include(c => c.BlogTags)
                .ThenInclude(b => b.Tag)

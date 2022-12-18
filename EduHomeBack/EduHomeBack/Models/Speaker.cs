@@ -18,7 +18,7 @@ namespace EduHomeBack.Models
         [Required]
         public string Surname { get; set; }
 
-        [StringLength(50)]
+        [StringLength(500)]
         public string Image { get; set; }
         [NotMapped]
         public IFormFile File { get; set; }

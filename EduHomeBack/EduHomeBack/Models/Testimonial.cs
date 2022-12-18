@@ -14,7 +14,7 @@ namespace EduHomeBack.Models
         [Required]
         public string Author { get; set; }
 
-        [StringLength(100)]
+        [StringLength(500)]
         public string Image { get; set; }
 
         [StringLength(1000)]
