@@ -174,7 +174,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (event1.File.ContentType != "image/png")
+            if (event1.File.ContentType != "image/jpeg")
             {
                 ModelState.AddModelError("File", "file type should be jpeg or jpg");
                 return View();
@@ -349,7 +349,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (event1.File.ContentType != "image/png")
+            if (event1.File.ContentType != "image/jpeg")
             {
                 ModelState.AddModelError("File", "file type should be jpeg or jpg");
                 return View();

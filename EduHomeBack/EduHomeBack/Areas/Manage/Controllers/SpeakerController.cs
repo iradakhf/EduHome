@@ -66,7 +66,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (speaker.File.ContentType != "image/png")
+            if (speaker.File.ContentType != "image/jpeg")
             {
                 ModelState.AddModelError("File", "file type should be jpeg or jpg");
                 return View();
@@ -153,9 +153,9 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (speaker.File.ContentType != "image/png")
+            if (speaker.File.ContentType != "image/jpeg")
             {
-                ModelState.AddModelError("File", "file type should be jpeg or jpg or png");
+                ModelState.AddModelError("File", "file type should be jpeg or jpg or jpeg");
                 return View();
             }
             if (speaker.File.Length > 40000)
