@@ -14,5 +14,7 @@ namespace EduHomeBack.ViewModels.AccountV
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+       
+        public bool RememberLater { get; set; }
     }
 }

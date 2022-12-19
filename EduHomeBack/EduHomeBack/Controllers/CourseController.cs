@@ -1,6 +1,7 @@
 ﻿using EduHomeBack.DAL;
 using EduHomeBack.Models;
 using EduHomeBack.ViewModels.CourseV;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +14,11 @@ namespace EduHomeBack.Controllers
     public class CourseController : Controller
     {
         private readonly AppDbContext _context;
-        public CourseController(AppDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+        public CourseController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +38,7 @@ namespace EduHomeBack.Controllers
                 Categories = await _context.Categories.Include(c => c.Courses)
                  .Where(c => c.IsDeleted == false &&
                  c.Events.Any(e => e.CategoryId == c.Id)).ToListAsync(),
-                Course = await _context.Courses.FirstOrDefaultAsync(b => b.IsDeleted == false && b.Id == id),
+                Course = await _context.Courses.Include(c=>c.Comments).FirstOrDefaultAsync(b => b.IsDeleted == false && b.Id == id),
                 Tags = await _context.Tags.Where(t => t.IsDeleted == false).Include(c => c.CourseTags)
                 .ThenInclude(t=>t.Course)
                  .Where(t => t.IsDeleted == false &&
@@ -61,6 +64,49 @@ namespace EduHomeBack.Controllers
             }).ToListAsync();
 
             return PartialView("_SearchCoursePartial",courses);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment(string Subject, string Message, int? CourseId)
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            };
+
+            if (string.IsNullOrWhiteSpace(Subject))
+            {
+                ModelState.AddModelError("Subject", "required");
+                return View();
+            }
+            if (string.IsNullOrWhiteSpace(Message))
+            {
+                ModelState.AddModelError("Message", "required");
+                return View();
+            }
+            if (CourseId == null)
+            {
+                return NotFound("could not find");
+            }
+            Comment comnent = new Comment
+            {
+                AppUserId = user.Id,
+                Name = user.Name,
+                CourseId = CourseId,
+                CreatedAt = DateTime.UtcNow.AddHours(4),
+                Message = Message,
+                Subject = Subject
+            };
+            _context.Comment.Add(comnent);
+            _context.SaveChanges();
+            IEnumerable<Course> courses = _context.Courses
+                .Include(b => b.Comments)
+                .Where(b => b.Id == CourseId);
+            return View();
+
+
         }
     }
 }

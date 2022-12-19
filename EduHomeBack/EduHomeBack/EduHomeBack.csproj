@@ -80,7 +80,6 @@
     <None Include="Views\Shared\_CoursePartial.cshtml" />
     <None Include="Views\Shared\_EventPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_LeaveReplyPartial.cshtml" />
     <None Include="Views\Shared\_SearchPartial.cshtml" />
     <None Include="Views\Shared\_TeacherPartial.cshtml" />
     <None Include="Views\Shared\_TestimonialPartial.cshtml" />

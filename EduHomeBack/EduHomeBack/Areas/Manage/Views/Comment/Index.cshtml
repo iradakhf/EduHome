@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Comment>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 1;
+}
+<div class="row justify-content-between">
+    <div class="col-lg-2">
+        <h1 class="h3 mb-4 text-gray-800">Comment Page</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        N:
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Subject
+                    </th>
+                    <th>
+                        Created at
+                    </th>
+                    <th>
+                        Setting
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Comment comment in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @counter
+                        </td>
+                        <td>
+                            @comment.Name
+                        </td>
+
+                        <td>
+                            @comment.Email 
+                        </td>
+                        <td>
+                            @comment.Subject
+                        </td>
+                        <td>
+                            @comment.CreatedAt?.ToString("dd/mm/yyyy")
+                        </td>
+                        <td>
+                            <a class="btn btn-success" asp-area="manage" asp-controller="comment" asp-action="CommentInDetail" asp-route-id="@comment.Id">Comment In Detail</a>
+
+                        </td>
+                    </tr>
+                    counter++;
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -20,6 +20,7 @@ namespace EduHomeBack.Services
 
         public async Task<IDictionary<string,string>> GetSettings()
         {
+         
             return await _context.Settings.ToDictionaryAsync(s => s.Key, s=>s.Value);
         }
     }

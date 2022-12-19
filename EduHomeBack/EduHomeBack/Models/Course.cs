@@ -72,6 +72,7 @@ namespace EduHomeBack.Models
         public Teacher Teacher { get; set; }
 
         public IEnumerable<CourseTag> CourseTags { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
 
         [NotMapped]
         public List<int> TagIds { get; set; }

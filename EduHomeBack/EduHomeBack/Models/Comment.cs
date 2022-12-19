@@ -6,9 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EduHomeBack.Models
 {
-    public class Comment
+    public class Comment : BaseEntity
     {
-        public int Id { get; set; }
         [StringLength(200)]
         [Required]
         public string Name { get; set; }
@@ -19,6 +18,17 @@ namespace EduHomeBack.Models
         public string Subject { get; set; }
         [StringLength(3000)]
         public string Message { get; set; }
+
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
+        public int? CourseId { get; set; }
+        public Course Course { get; set; }
+        public int? EventId { get; set; }
+        public Event Event { get; set; }
+
+        public int? BlogId { get; set; }
+
+        public Blog Blog { get; set; }
 
 
     }

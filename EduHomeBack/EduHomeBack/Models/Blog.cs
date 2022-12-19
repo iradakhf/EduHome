@@ -32,6 +32,8 @@ namespace EduHomeBack.Models
         public Category Category { get; set; }
 
         public IEnumerable<BlogTag> BlogTags { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+
 
         [NotMapped]
         public List<int> TagIds { get; set; }

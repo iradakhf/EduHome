@@ -48,7 +48,33 @@
                     </div>
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
-                     @(await Html.PartialAsync("_LeaveReplyPartial"))
+                        I must explain to you how all this a mistaken idea of ncing great explorer of the rut
+                        the is lder of human happinescias unde omnis iste natus error sit volptatem
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-action="AddComment" method="post">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <p id="subj">Subject</p>
+
+                                        <input asp-for="@Model.Course.Comments.FirstOrDefault().Subject">
+                                        <p id="message">Message</p>
+
+                                        <textarea asp-for="@Model.Course.Comments.FirstOrDefault().Message" cols="15" rows="10"></textarea>
+                                        <p id="eventid" style="display:none">@Model.Course.Id</p>
+
+                                        <input type="hidden" asp-for="@Model.Course.Comments.FirstOrDefault().EventId" value="@Model.Course.Id" />
+                                    </div>
+                                </div>
+                                <a asp-controller="Course" asp-action="AddComment" id="SendMessage">Send</a>
+
+
+                                <p class="form-messege"></p>
+                            </form>
+                           
+                        }
                     </div>
                 </div>
             </div>

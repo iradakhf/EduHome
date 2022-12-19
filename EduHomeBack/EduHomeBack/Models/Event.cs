@@ -38,6 +38,7 @@ namespace EduHomeBack.Models
 
   
         public IEnumerable<EventTag> EventTags { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
 
         [NotMapped]
         public IEnumerable<int> TagIds { get; set; }

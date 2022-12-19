@@ -1,0 +1,27 @@
+﻿@model Skill
+@{
+    ViewData["Title"] = "Update";
+    IEnumerable<Teacher> teachers = ViewBag.Teachers;
+    SelectList selectTeacherListItems = new SelectList(teachers, nameof(Teacher.Id), nameof(Teacher.Name));
+
+
+}
+
+<h1 class="h3 mb-4 text-gray-800">Add to Skill</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Blog</label>
+                <select asp-for="TeacherIds" class="form-control" asp-items="selectTeacherListItems">
+                </select>
+                <span asp-validation-for="TeacherIds" class="text text-danger"></span>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

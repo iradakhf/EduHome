@@ -1,0 +1,26 @@
+﻿@model Speaker
+@{
+    ViewData["Title"] = "Update";
+    IEnumerable<Event> events = ViewBag.Events;
+    SelectList selectEventListItems = new SelectList(events, nameof(Event.Id), nameof(Event.Name));
+
+}
+
+<h1 class="h3 mb-4 text-gray-800">Add to Tag</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Event</label>
+                <select asp-for="EventIds" class="form-control" asp-items="selectEventListItems">
+                </select>
+                <span asp-validation-for="EventIds" class="text text-danger"></span>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

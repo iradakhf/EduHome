@@ -22,7 +22,33 @@
                     </div>
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
-                       @(await Html.PartialAsync("_LeaveReplyPartial"))
+                        I must explain to you how all this a mistaken idea of ncing great explorer of the rut
+                        the is lder of human happinescias unde omnis iste natus error sit volptatem
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-action="AddComment" method="post">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <p id="subj">Subject</p>
+
+                                        <input asp-for="@Model.Blog.Comments.FirstOrDefault().Subject">
+                                        <p id="message">Message</p>
+
+                                        <textarea asp-for="@Model.Blog.Comments.FirstOrDefault().Message" cols="15" rows="10"></textarea>
+                                        <p id="eventid" style="display:none">@Model.Blog.Id</p>
+
+                                        <input type="hidden" asp-for="@Model.Blog.Comments.FirstOrDefault().EventId" value="@Model.Blog.Id" />
+                                    </div>
+                                </div>
+                                <a asp-controller="Blog" asp-action="AddComment" id="SendMessage">Send</a>
+
+
+                                <p class="form-messege"></p>
+                            </form>
+                          
+                        }
                     </div>
                 </div>
             </div>
@@ -37,8 +63,8 @@
                                     <span><i class="fa fa-search"></i></span>
                                 </button>
                             </form>
-                               <ul id="ListBlog" style="border: 1px solid; background-color:white; text-decoration:none; width: 100%; height: auto; position: absolute; z-index: 18;">
-                                </ul>
+                            <ul id="ListBlog" style="border: 1px solid; background-color:white; text-decoration:none; width: 100%; height: auto; position: absolute; z-index: 18;">
+                            </ul>
                         </div>
                     </div>
                     <div class="single-blog-widget mb-47">
@@ -47,13 +73,13 @@
                             @foreach (Category category in Model.Categories.Take(6))
                             {
 
-                            <li><a href="#">@category.Name (@category.Blogs.Count())</a></li>
+                                <li><a href="#">@category.Name (@category.Blogs.Count())</a></li>
                             }
-                         
+
                         </ul>
                     </div>
-                   
-                  @await Component.InvokeAsync("BlogBanner")
+
+                    @await Component.InvokeAsync("BlogBanner")
 
                     <div class="single-blog-widget mb-47">
                         <h3>latest post</h3>
@@ -68,15 +94,15 @@
                                         </div>
                                     </a>
                                 </div>
-               
+
                                 <div class="single-post-content">
                                     <h4><a asp-controller="blog" asp-action="detail" asp-route-id="@blog.Id">English Language Course for you</a></h4>
                                     <p>By @blog.Author  / @blog.Date.ToString("MMMM dd, yyyy")</p>
                                 </div>
                             }
-                            </div>
+                        </div>
 
-                        
+
                     </div>
                     <div class="single-blog-widget">
                         <h3>tags</h3>
@@ -84,9 +110,9 @@
                             @foreach (Tag tag in Model.Tags)
                             {
 
-                            <a asp-controller="blog" asp-action="detail" asp-route-id="@tag.Id" class="mr-10 mb-10">course</a>
+                                <a asp-controller="blog" asp-action="detail" asp-route-id="@tag.Id" class="mr-10 mb-10">course</a>
                             }
-                          
+
                         </div>
                     </div>
                 </div>
@@ -95,3 +121,4 @@
     </div>
 </div>
 <!-- Blog End -->
+
