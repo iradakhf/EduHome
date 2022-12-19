@@ -139,5 +139,69 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Add(int? id)
+        {
+            ViewBag.Teachers = await _appDbContext.Blogs.Where(c => c.IsDeleted == false).ToListAsync();
+            if (id == null)
+            {
+                return BadRequest("id can not be null");
+            }
+            Skill skill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (skill == null)
+            {
+                return NotFound("skill not found");
+            }
+            return View(skill);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(int? id, Skill skill)
+        {
+            ViewBag.Teachers = await _appDbContext.Blogs.Where(c => c.IsDeleted == false).ToListAsync();
+            Skill dbskill = await _appDbContext.Skills.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+
+            if (dbskill == null)
+            {
+                return NotFound("doesnt exist");
+            }
+
+
+            List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
+
+            if (skill.TeacherIds == null)
+            {
+                ModelState.AddModelError("TeacherIds", "the field is required");
+                return View(skill);
+            }
+            foreach (int skillId in skill.TeacherIds)
+            {
+                if (skill.TeacherIds.Where(t => t == skillId).Count() > 1)
+                {
+                    ModelState.AddModelError("TeacherIds", "only one same teacher can be chosen");
+                    return View(skill);
+                }
+                if (!await _appDbContext.Teachers.AnyAsync(t => t.Id == skillId))
+                {
+                    ModelState.AddModelError("TeacherIds", "Teacher is not correctly chosen");
+                    return View(skillId);
+                }
+                TeacherSkill teacherSkill = new TeacherSkill
+                {
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    CreatedBy = "Me",
+                    IsDeleted = false,
+                    SkillId = skillId
+                };
+                teacherSkills.Add(teacherSkill);
+            }
+            skill.TeacherSkills = teacherSkills;
+            
+            dbskill.TeacherSkills = skill.TeacherSkills;
+
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

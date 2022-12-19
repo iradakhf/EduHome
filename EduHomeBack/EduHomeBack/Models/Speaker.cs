@@ -22,7 +22,7 @@ namespace EduHomeBack.Models
         public string Image { get; set; }
         [NotMapped]
         public IFormFile File { get; set; }
-
+        public List<int> EventIds { get; set; }
 
         public int PositionId { get; set; }
         public Position Position { get; set; }

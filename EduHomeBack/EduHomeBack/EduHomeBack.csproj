@@ -35,6 +35,8 @@
     <Compile Remove="Migrations\20221217145142_someMinLength.Designer.cs" />
     <Compile Remove="Migrations\20221218064550_Test.cs" />
     <Compile Remove="Migrations\20221218064550_Test.Designer.cs" />
+    <Compile Remove="Migrations\20221218210304_CreatedUserTableForAdminPanel.cs" />
+    <Compile Remove="Migrations\20221218210304_CreatedUserTableForAdminPanel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

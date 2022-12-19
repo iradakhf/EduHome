@@ -7,6 +7,9 @@
     <div class="col-lg-2">
         <h1 class="h3 mb-4 text-gray-800">Tag Page</h1>
     </div>
+    <div class="col-lg-1">
+        <a asp-area="manage" asp-controller="speaker" asp-action="create" class="btn btn-primary">Create</a>
+    </div>
 </div>
 
 <div class="row">
@@ -49,6 +52,8 @@
                     </td>
                     <td>
                         <a class="btn btn-warning" asp-area="manage" asp-controller="tag" asp-action="update" asp-route-id="@tag.Id">Update</a>
+                        <a class="btn btn-success" asp-area="manage" asp-controller="tag" asp-action="Add" asp-route-id="@tag.Id">Add Blog Event or Course</a>
+         
 
                     </td>
                 </tr>

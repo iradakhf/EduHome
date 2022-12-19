@@ -39,16 +39,16 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Skill = await _appDbContext.Teachers.Where(c => c.IsDeleted == false).ToListAsync();
-            ViewBag.Position = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Skills = await _appDbContext.Skills.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Teacher teacher)
         {
-            ViewBag.Skill = await _appDbContext.Skills.Where(c => c.IsDeleted == false).ToListAsync();
-            ViewBag.Position = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Skills = await _appDbContext.Skills.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
 
             if (!ModelState.IsValid)
             {
@@ -139,9 +139,13 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
             }
 
-            if (teacher.TeacherSkills != null && teacher.TeacherSkills.Count() > 0)
+
+            if (teacher.SkillIds == null)
             {
-                List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
+                ModelState.AddModelError("SkillIds", "the field is required");
+                return View(teacher);
+            }
+            List<TeacherSkill> teacherSkills = new List<TeacherSkill>();
                 foreach (int skillId in teacher.SkillIds)
                 {
                     if (teacher.SkillIds.Where(t => t == skillId).Count() > 1)
@@ -151,7 +155,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     }
                     if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
                     {
-                        ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
+                        ModelState.AddModelError("SkillIds", "Skill is not correctly chosen");
                         return View(teacher);
                     }
                     TeacherSkill teacherSkill = new TeacherSkill
@@ -164,12 +168,8 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     teacherSkills.Add(teacherSkill);
                 }
                 teacher.TeacherSkills = teacherSkills;
-            }
-            else
-            {
-                ModelState.AddModelError("SkillIds", "the field is required");
-                return View(teacher);
-            }
+            
+          
 
             if (!await _appDbContext.Positions.AnyAsync(t => t.Id == teacher.PositionId))
             {
@@ -184,7 +184,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 return View();
             }
 
-            if (teacher.File.ContentType != "image/png")
+            if (teacher.File.ContentType != "image/jpeg")
             {
                 ModelState.AddModelError("File", "file type should be jpeg or jpg");
                 return View();
@@ -223,7 +223,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Update(int? id)
         {
             ViewBag.Skills = await _appDbContext.Skills.Where(c => c.IsDeleted == false).ToListAsync();
-            ViewBag.Position = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
 
             if (id == null) return BadRequest("bad request");
             Teacher teacher = await _appDbContext.Teachers.FirstOrDefaultAsync(b => b.Id == id);
@@ -236,7 +236,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
         public async Task<IActionResult> Update(int? id, Teacher teacher)
         {
             ViewBag.Skills = await _appDbContext.Skills.Where(c => c.IsDeleted == false).ToListAsync();
-            ViewBag.Position = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
 
             if (!ModelState.IsValid)
             {
@@ -344,7 +344,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     }
                     if (!await _appDbContext.Skills.AnyAsync(t => t.Id == skillId))
                     {
-                        ModelState.AddModelError("SkillId", "Skill is not correctly chosen");
+                        ModelState.AddModelError("SkillIds", "Skill is not correctly chosen");
                         return View(teacher);
                     }
                     TeacherSkill teacherSkill = new TeacherSkill
@@ -370,7 +370,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                     return View();
                 }
 
-                if (teacher.File.ContentType != "image/png")
+                if (teacher.File.ContentType != "image/jpeg")
                 {
                     ModelState.AddModelError("File", "file type should be jpeg or jpg");
                     return View();

@@ -92,6 +92,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(blog);
             }
+            if (blog.TagIds == null)
+            {
+                ModelState.AddModelError("BlogIds", "the field is required");
+                return View(blog);
+            }
             List<BlogTag> blogTags = new List<BlogTag>();
             foreach (int tagId in blog.TagIds)
             {

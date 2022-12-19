@@ -68,8 +68,15 @@ using EduHomeBack.ViewModels.EventV;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "C:\Users\irade\Desktop\EduHome\EduHomeBack\EduHomeBack\Views\_ViewImports.cshtml"
+using EduHomeBack.ViewModels.AccountV;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"05fccf44cdf4635cfa29c813c0e7680277964a32", @"/Views/Shared/_EventPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"03e784a6113a90c557e96cd9818916d58a6d6365", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"503ce10e2f742d5be5bdf71befc44bc56dc583ec", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__EventPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Event>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("alt", new global::Microsoft.AspNetCore.Html.HtmlString("event"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -102,9 +109,9 @@ using EduHomeBack.ViewModels.EventV;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<div class=\"col-md-4 col-sm-6 col-xs-12\">\r\n    <div class=\"single-event mb-35\">\r\n        <div class=\"event-img\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05fccf44cdf4635cfa29c813c0e7680277964a325915", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05fccf44cdf4635cfa29c813c0e7680277964a326117", async() => {
                 WriteLiteral("\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "05fccf44cdf4635cfa29c813c0e7680277964a326186", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "05fccf44cdf4635cfa29c813c0e7680277964a326388", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -167,7 +174,7 @@ AddHtmlAttributeValue("", 251, Model.Image, 251, 12, false);
 #line hidden
 #nullable disable
             WriteLiteral(" </h3>\r\n            </div>\r\n        </div>\r\n        <div class=\"event-content text-left\">\r\n            <h4>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05fccf44cdf4635cfa29c813c0e7680277964a3210528", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05fccf44cdf4635cfa29c813c0e7680277964a3210730", async() => {
                 WriteLiteral("ADVANCE PHP WORKSHOP");
             }
             );
@@ -224,7 +231,7 @@ AddHtmlAttributeValue("", 251, Model.Image, 251, 12, false);
 #line hidden
 #nullable disable
             WriteLiteral("</li>\r\n            </ul>\r\n            <div class=\"event-content-right\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05fccf44cdf4635cfa29c813c0e7680277964a3213947", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05fccf44cdf4635cfa29c813c0e7680277964a3214149", async() => {
                 WriteLiteral("join now");
             }
             );

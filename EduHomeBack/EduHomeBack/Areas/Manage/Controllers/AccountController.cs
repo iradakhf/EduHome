@@ -110,6 +110,12 @@ namespace EduHomeBack.Areas.Manage.Controllers
             return RedirectToAction("Index", "Dashboard", new { area = "manage" });
 
         }
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
         //public async Task<IActionResult> CreateSuperAdmin()
         //{
         //    AppUser appUser = new AppUser

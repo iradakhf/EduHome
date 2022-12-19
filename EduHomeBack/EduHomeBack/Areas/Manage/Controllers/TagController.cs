@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace EduHomeBack.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    [Authorize]
 
     public class TagController : Controller
     {
@@ -134,6 +133,138 @@ namespace EduHomeBack.Areas.Manage.Controllers
             tag.IsDeleted = true;
             tag.DeletedAt = DateTime.UtcNow.AddHours(4);
             tag.DeletedBy = "System";
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Add(int? id)
+        {
+            ViewBag.Blogs = await _appDbContext.Blogs.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Events = await _appDbContext.Events.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Courses = await _appDbContext.Courses.Where(c => c.IsDeleted == false).ToListAsync();
+            if (id == null)
+            {
+                return BadRequest("id can not be null");
+            }
+            Tag tag = await _appDbContext.Tags.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (tag == null)
+            {
+                return NotFound("tag not found");
+            }
+            return View(tag);
+      
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(int? id, Tag tag)
+        {
+            ViewBag.Blogs = await _appDbContext.Blogs.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Events = await _appDbContext.Events.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Courses = await _appDbContext.Courses.Where(c => c.IsDeleted == false).ToListAsync();
+            Tag dbTag = await _appDbContext.Tags.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+
+            if (dbTag == null)
+            {
+                return NotFound("doesnt exist");
+            }
+         
+           
+                List<BlogTag> blogTags = new List<BlogTag>();
+       
+            if (tag.BlogIds == null)
+            {
+                ModelState.AddModelError("BlogIds", "the field is required");
+                return View(tag);
+            }
+            foreach (int blogId in tag.BlogIds)
+                {
+                    if (tag.BlogIds.Where(t => t == blogId).Count() > 1)
+                    {
+                        ModelState.AddModelError("BlogIds", "only one same blog can be chosen");
+                        return View(tag);
+                    }
+                    if (!await _appDbContext.Blogs.AnyAsync(t => t.Id == blogId))
+                    {
+                        ModelState.AddModelError("BlogIds", "Blog is not correctly chosen");
+                        return View(tag);
+                    }
+                    BlogTag blogTag = new BlogTag
+                    {
+                        CreatedAt = DateTime.UtcNow.AddHours(4),
+                        CreatedBy = "Me",
+                        IsDeleted = false,
+                        BlogId = blogId
+                    };
+                    blogTags.Add(blogTag);
+                }
+                tag.BlogTags = blogTags;
+
+            
+            List<EventTag> eventTags = new List<EventTag>();
+            if (tag.EventIds ==null)
+            {
+                ModelState.AddModelError("EventIds", "the field is required");
+                return View(tag);
+            }
+            foreach (int eventId in (tag.EventIds))
+            {
+                if (tag.EventIds.Where(t => t == eventId).Count() > 1)
+                {
+                    ModelState.AddModelError("BlogIds", "only one same blog can be chosen");
+                    return View(tag);
+                }
+                if (!await _appDbContext.Events.AnyAsync(t => t.Id == eventId))
+                {
+                    ModelState.AddModelError("EventIds", "Event is not correctly chosen");
+                    return View(tag);
+                }
+                EventTag eventTag = new EventTag
+                {
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    CreatedBy = "Me",
+                    IsDeleted = false,
+                    EventId = eventId
+                };
+           
+                eventTags.Add(eventTag);
+            }
+            tag.EventTags = eventTags;
+           
+            List<CourseTag> courseTags = new List<CourseTag>();
+            if (tag.CourseIds == null)
+            {
+                ModelState.AddModelError("CourseIds", "the field is required");
+                return View(tag);
+            }
+            foreach (int courseId in tag.CourseIds)
+            {
+                if (tag.CourseIds.Where(t => t == courseId).Count() > 1)
+                {
+                    ModelState.AddModelError("CourseIds", "only one same blog can be chosen");
+                    return View(tag);
+                }
+                if (!await _appDbContext.Courses.AnyAsync(t => t.Id == courseId))
+                {
+                    ModelState.AddModelError("CourseIds", "Course is not correctly chosen");
+                    return View(tag);
+                }
+                CourseTag courseTag = new CourseTag
+                {
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    CreatedBy = "Me",
+                    IsDeleted = false,
+                    CourseId = courseId
+                };
+                courseTags.Add(courseTag);
+            }
+            tag.CourseTags = courseTags;
+
+          
+
+            dbTag.BlogTags = tag.BlogTags;
+                dbTag.CourseTags = tag.CourseTags;
+            dbTag.EventTags = tag.EventTags;
+           
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }

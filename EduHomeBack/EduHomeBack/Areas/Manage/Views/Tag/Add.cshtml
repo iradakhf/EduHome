@@ -1,0 +1,45 @@
+﻿@model Tag
+@{
+    ViewData["Title"] = "Update";
+    IEnumerable<Blog> blogs = ViewBag.Blogs;
+    IEnumerable<Event> events = ViewBag.Events;
+    IEnumerable<Course> courses = ViewBag.Courses;
+    SelectList selectBlogListItems = new SelectList(blogs, nameof(Blog.Id), nameof(Blog.Title));
+    SelectList selectEventListItems = new SelectList(events, nameof(Event.Id), nameof(Event.Name));
+    SelectList selectCourseListItems = new SelectList(courses, nameof(Course.Id), nameof(Course.Name));
+
+
+}
+
+<h1 class="h3 mb-4 text-gray-800">Add to Tag</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Blog</label>
+                <select asp-for="BlogIds" class="form-control" asp-items="selectBlogListItems">
+                </select>
+                <span asp-validation-for="BlogIds" class="text text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label>Event</label>
+                <select asp-for="EventIds" class="form-control" asp-items="selectEventListItems">
+                </select>
+                <span asp-validation-for="EventIds" class="text text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label>Course</label>
+                <select asp-for="CourseIds" class="form-control" asp-items="selectCourseListItems">
+                </select>
+                <span asp-validation-for="CourseIds" class="text text-danger"></span>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+@section script{
+    @await Html.PartialAsync("_ValidationPartial");
+}

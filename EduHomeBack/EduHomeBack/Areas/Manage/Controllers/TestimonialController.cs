@@ -34,7 +34,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
 
         public async Task<IActionResult> Update(int? id)
         {
-            ViewBag.Position = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
 
             if (id == null)
             {
@@ -54,7 +54,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Testimonial testimonial)
         {
-            ViewBag.Position = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
+            ViewBag.Positions = await _appDbContext.Positions.Where(c => c.IsDeleted == false).ToListAsync();
 
             if (!ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("File", "File is required");
                 return View();
             }
-            if (testimonial.File.ContentType != "image/png")
+            if (testimonial.File.ContentType != "image/jpeg")
             {
                 ModelState.AddModelError("File", "file type should be jpeg or jpg");
                 return View();
@@ -107,7 +107,7 @@ namespace EduHomeBack.Areas.Manage.Controllers
             }
 
         
-            dbTestimonial.Image = testimonial.File.CreateFile(_env, "img", "banner");
+            dbTestimonial.Image = testimonial.File.CreateFile(_env, "img", "testimonial");
             dbTestimonial.Author = testimonial.Author.Trim();
             dbTestimonial.Description = testimonial.Description.Trim();
             dbTestimonial.PositionId = testimonial.PositionId;

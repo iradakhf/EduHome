@@ -13,8 +13,13 @@ namespace EduHomeBack.Models
         [Required]
         public string Name { get; set; }
 
-        
 
+        [NotMapped]
+        public List<int> BlogIds { get; set; }
+        [NotMapped]
+        public List<int> EventIds { get; set; }
+        [NotMapped]
+        public List<int> CourseIds { get; set; }
         public IEnumerable<BlogTag> BlogTags { get; set; }
 
         public IEnumerable<EventTag> EventTags { get; set; }

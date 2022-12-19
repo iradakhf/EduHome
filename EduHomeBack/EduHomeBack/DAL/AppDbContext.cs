@@ -35,6 +35,8 @@ namespace EduHomeBack.DAL
         public DbSet<Subscribe> Subscribe { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<User> Users { get; set; }
+
 
     }
 }

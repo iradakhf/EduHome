@@ -183,13 +183,21 @@
                     </a>
                 </li>
             }
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="Manage" asp-controller="User" asp-action="index">
+                        <span>User</span>
+                    </a>
+                </li>
+            }
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
-              
-            </ul>
+
+        </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -396,7 +404,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" asp-area="manage" asp-controller="account" asp-action="Logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

@@ -112,6 +112,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("CategoryId", "Categoriya is not correctly chosen");
                 return View(event1);
             }
+            if (event1.TagIds == null)
+            {
+                ModelState.AddModelError("TagIds", "the field is required");
+                return View(event1);
+            }
             List<EventTag> eventTags = new List<EventTag>();
             foreach (int tagId in event1.TagIds)
             {
@@ -135,6 +140,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 eventTags.Add(eventTag);
             }
             event1.EventTags = eventTags;
+            if (event1.SpeakerIds == null)
+            {
+                ModelState.AddModelError("SpeakerIds", "the field is required");
+                return View(event1);
+            }
             List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
             foreach (int speakerId in event1.SpeakerIds)
             {

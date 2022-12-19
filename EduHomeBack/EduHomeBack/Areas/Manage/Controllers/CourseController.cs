@@ -151,6 +151,11 @@ namespace EduHomeBack.Areas.Manage.Controllers
                 ModelState.AddModelError("TeacherId", "Teacher is not correctly chosen");
                 return View(course);
             }
+            if (course.TagIds==null)
+            {
+                ModelState.AddModelError("TagIds", "the field is required");
+                return View(course);
+            }
             List<CourseTag> courseTags = new List<CourseTag>();
             foreach (int tagId in course.TagIds)
             {

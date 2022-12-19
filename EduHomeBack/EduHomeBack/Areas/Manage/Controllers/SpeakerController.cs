@@ -198,6 +198,70 @@ namespace EduHomeBack.Areas.Manage.Controllers
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Add(int? id)
+        {
+            ViewBag.Events = await _appDbContext.Events.Where(c => c.IsDeleted == false).ToListAsync();
+            if (id == null)
+            {
+                return BadRequest("id can not be null");
+            }
+            Speaker speaker = await _appDbContext.Speakers.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+            if (speaker == null)
+            {
+                return NotFound("speaker not found");
+            }
+            return View(speaker);
 
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(int? id, Speaker speaker)
+        {
+            ViewBag.Events = await _appDbContext.Events.Where(c => c.IsDeleted == false).ToListAsync();
+            Speaker dbspeaker = await _appDbContext.Speakers.FirstOrDefaultAsync(c => c.IsDeleted == false && c.Id == id);
+
+            if (dbspeaker == null)
+            {
+                return NotFound("doesnt exist");
+            }
+
+
+            List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
+
+            if (speaker.EventIds == null)
+            {
+                ModelState.AddModelError("EventIds", "the field is required");
+                return View(speaker);
+            }
+            foreach (int eventId in speaker.EventIds)
+            {
+                if (speaker.EventIds.Where(t => t == eventId).Count() > 1)
+                {
+                    ModelState.AddModelError("EventIds", "only one same event can be chosen");
+                    return View(speaker);
+                }
+                if (!await _appDbContext.Events.AnyAsync(t => t.Id == eventId))
+                {
+                    ModelState.AddModelError("EventIds", "Event is not correctly chosen");
+                    return View(speaker);
+                }
+                EventSpeaker eventSpeaker = new EventSpeaker
+                {
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    CreatedBy = "Me",
+                    IsDeleted = false,
+                    EventId = eventId
+                };
+                eventSpeakers.Add(eventSpeaker);
+            }
+            speaker.EventSpeakers = eventSpeakers;
+
+
+           
+            dbspeaker.EventSpeakers = speaker.EventSpeakers;
+
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
